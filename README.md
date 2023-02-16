@@ -17,7 +17,7 @@
 |    :---:     |     :---:     |     :---:       |
 | Heiu Ma      | hma8@sfsu.edu |     Hieu-Ma     |
 | Shauhin Pourshayegan      | spourshayegan@mail.sfsu.edu              | LimeSauc3                |
-| member3      |               |                 |
+| Lin Tun      |ltun1@mail.sfsu.edu| Geraldlin24 |
 | member4      |               |                 |
 | member5      |               |                 |
 | member6      |               |                 |
