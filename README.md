@@ -15,7 +15,7 @@
 
 | Student Name | Student Email | GitHub Username |
 |    :---:     |     :---:     |     :---:       |
-| member1      |               |                 |
+| member1      | hma8@sfsu.edu |     Hieu-Ma     |
 | member2      |               |                 |
 | member3      |               |                 |
 | member4      |               |                 |
