@@ -15,7 +15,7 @@
 
 | Student Name | Student Email | GitHub Username |
 |    :---:     |     :---:     |     :---:       |
-| Hieu Ma      | hma8@sfsu.edu |     Hieu-Ma     |
+| Hieu Ma      | hma8@sfsu.edu |     Hieu-Ma1    |
 | Shauhin Pourshayegan      | spourshayegan@mail.sfsu.edu              | LimeSauc3                |
 | Lin Tun      |ltun1@mail.sfsu.edu| Geraldlin24 |
 | Derrick Liang     | dliang5@mail.sfsu.edu              |    HaramPrince             |
