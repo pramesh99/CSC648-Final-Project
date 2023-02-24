@@ -1,15 +1,16 @@
 import React from 'react';
 import "./Navbar.css"
 import logo from "../../images/sfsuH.jpg"
+import { Link } from "react-router-dom"
+
 function Navbar (props) {
    return (
       <div id="navbar">
-         <a href=""><img src={logo} alt="Logo" id="logo" /></a>
-         {/* <div id="sfsu-logo">SAN FRANCISCO STATE UNIVERSITY</div> */}
+         <div id="home-icon">
+            <Link to="/" style={{ textDecoration: 'none' }}>Group 3</Link>
+         </div>
          <div id="right-buttons">
-            <div><a href="">Link 1</a></div>
-            <div><a href="">Link 2</a></div>
-            <div><a href="">About Us</a></div>
+            <Link to="/aboutUs" style={{ textDecoration: 'none' }}>About Us</Link>
          </div>
       </div>
    )
