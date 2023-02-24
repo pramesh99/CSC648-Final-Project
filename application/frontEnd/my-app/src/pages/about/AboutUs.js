@@ -4,6 +4,7 @@ import Hieu from "../../images/Hieu.jpg";
 import Shauhin from "../../images/Shauhin.jpg";
 import Preetham from "../../images/Preetham.jpg";
 import Lin from "../../images/Lin.jpg";
+import Derrick from '../../images/Derrick.jpg';
 import { Link } from "react-router-dom";
 
 
@@ -59,8 +60,7 @@ function AboutUs (props) {
                </div>
             </div>
             <div className={styles.profile}>
-               <div id={styles["empty-image"]}></div>
-               {/* <img src={Derrick} className={styles["profile-image"]}></img> */}
+               <img src={Derrick} className={styles["profile-image"]}></img>
                <div className={styles["profile-description"]}>
                   <div className={styles["profile-name"]}>Derrick</div>
                   <div className={styles["profile-title-link-container"]}>
