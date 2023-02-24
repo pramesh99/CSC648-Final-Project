@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;300;400;600;700&display=swap');
+
 .App {
-  font-family: 'Sabon LT Pro (Serif)';
+  font-family: 'Roboto Mono', monospace;
 }
+
 
 .App-header {
 }
