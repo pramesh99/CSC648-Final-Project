@@ -1,12 +1,11 @@
 import React from 'react';
-// import ProfilePic from "../../../images/Derrick.jpg";
+import ProfilePic from "../../images/Derrick.jpg";
 import styles from "./Profile.module.css";
 
 function Derrick(props) {
    return (
       <div id={styles["profile-container"]}>
-         {/* <img src={ProfilePic} id="profile-pic"></img> */}
-         <div id={styles["empty-profile"]}></div>
+         <img src={ProfilePic} id="profile-pic"></img>
          <div id={styles["description-container"]}>
             <div id={styles["name"]}>Derrick</div>
             <div id={styles["position"]}><b>Back-End Dev</b></div>
