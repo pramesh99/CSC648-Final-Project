@@ -11,7 +11,7 @@ function Hieu(props) {
             <div id={styles["position"]}><b>Front-End Dev</b></div>
             <div id={styles["about-me"]}>About Me: </div>
             <div id={styles["about-me-description"]}>
-               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged
+               Hello! I'm the Front-End Lead for this project! Currently most of the skills I developed are front-end oriented. I attended App Academy, A full-stack web development bootcamp, worked at a start-up that utilized react-native, and currently work for a company that utilizes angular! My responsibilities of this project include designing and react development.
             </div>
             <div id={styles["links"]}>
                <div>Github: <a href="https://github.com/Hieu-Ma1" target="_blank">https://github.com/Hieu-Ma1</a></div>
