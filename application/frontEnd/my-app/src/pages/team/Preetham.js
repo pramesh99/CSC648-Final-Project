@@ -12,13 +12,13 @@ function Preetham(props) {
             <div id={styles["about-me"]}>About Me: </div>
             <div id={styles["about-me-description"]}>
                {/* Paste Your Description Below, Remove Lorem Ipsum Statement */}
-               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged
+               Hi! I am the back-end lead for this project. I am currently an MS CS student at SF state. I got my neuroscience BS from UCSC in 2021 so I am fairly new to the world of app development. I look forward to working with everyone and learning a lot. Cheers! 
             </div>
                {/* Add links if available */}
             <div id={styles["links"]}>
-               <div>Github: "add github here<a href="Add link here"></a></div>
-               <div>Email: "add email here"</div>
-               <div>LinkedIn: "add linkedIn here"<a href="Add link here"></a>
+               <div>Github: "pramesh99<a href="https://github.com/pramesh99"></a></div>
+               <div>Email: "pramesh1@sfsu.edu"</div>
+               <div>LinkedIn: "pramesh99"<a href="www.linkedin.com/in/pramesh99"></a>
                </div>
             </div>
          </div>
