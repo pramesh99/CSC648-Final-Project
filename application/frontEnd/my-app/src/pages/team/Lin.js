@@ -7,21 +7,20 @@ function Lin(props) {
       <div id={styles["profile-container"]}>
          <img src={ProfilePic} id={styles["profile-image"]}></img>
          <div id={styles["description-container"]}>
-            <div id={styles["name"]}>Lin</div>
+            <div id={styles["name"]}>Lin Tun</div>
             <div id={styles["position"]}><b>Front-End Dev</b></div>
             <div id={styles["about-me"]}>About Me: </div>
             <div id={styles["about-me-description"]}>
                {/* Paste Your Description Below, Remove Lorem Ipsum Statement */}
-               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged
+               Hello, I'm the Front-End Developer for this project! My main responsibility is to assist my front-end lead with webpage design and development. Although I don't have extensive experience with front-end development, I am actively acquiring the necessary skills to become a proficient developer through my work on this project.
             </div>
                {/* Add links if available */}
             <div id={styles["links"]}>
-               <div>Github: 
-                  <a href="Add link here" target="_blank">"Add Link Here"</a>
+            <div>GitHub: 
+                  <a href="https://github.com/Geraldlin24" target="_blank">https://github.com/Geraldlin24</a>
                </div>
-               <div>Email: "add email here"</div>
-               <div>LinkedIn: 
-                  <a href="Add link here" target="_blank">"Add Link Here"</a>
+               <div>Email:
+                  <a href = "mailto: ltun1@mail.sfsu.edu">ltun1@mail.sfsu.edu</a>
                </div>
             </div>
          </div>
