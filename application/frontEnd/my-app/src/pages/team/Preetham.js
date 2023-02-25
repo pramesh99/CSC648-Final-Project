@@ -16,9 +16,9 @@ function Preetham(props) {
             </div>
                {/* Add links if available */}
             <div id={styles["links"]}>
-               <div>Github: "pramesh99<a href="https://github.com/pramesh99"></a></div>
-               <div>Email: "pramesh1@sfsu.edu"</div>
-               <div>LinkedIn: "pramesh99"<a href="www.linkedin.com/in/pramesh99"></a>
+               <div>Github: <a href="https://github.com/pramesh99">pramesh99</a></div>
+               <div>Email: <a href = "mailto: pramesh1@sfsu.edu">pramesh1@sfsu.edu</a></div>
+               <div>LinkedIn: <a href="www.linkedin.com/in/pramesh99">pramesh99</a>
                </div>
             </div>
          </div>
