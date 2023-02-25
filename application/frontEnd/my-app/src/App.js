@@ -27,15 +27,6 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Navbar />
-        <div style={{textAlign:"center"}}>
-          {(typeof serverData.users === "undefined") ? (
-            <p>Loading...</p>
-          ) : (
-            serverData.users.map((user, i) => (
-              <p key={i}>{user}</p>
-            ))
-          )}
-        </div>
       </header>
     </div>
     <Routes>
