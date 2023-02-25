@@ -24,6 +24,13 @@
    <br> Restaurant_App_Database
 8. Instructions on how to use the above information.
    <br> To use the information above, you must have a google account. To connect to our vm instance, you can input the SSH username and private key. To access our SQL database, you can enter the database username and password.
+   - To view our app: go to http://35.236.55.195:3001/
+   - To SSH into our VM, use the above credentials
+   - to start the server: \
+   &emsp;- cd to ~/csc648-03-sp23-team03/application/frontEnd/my-app \
+   &emsp;- run `npm run build` \
+   &emsp;- cd to ~/csc648-03-sp23-team03/application/backEnd/ \
+   &emsp;- run `npm start` or `forever start server.js` to ensure server persists after SSH connection is closed. \
 
 # Most important things to Remember
 ## These values need to kept update to date throughout the semester. <br>
