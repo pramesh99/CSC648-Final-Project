@@ -12,16 +12,19 @@ function Shauhin(props) {
             <div id={styles["about-me"]}>About Me: </div>
             <div id={styles["about-me-description"]}>
                {/* Paste Your Description Below, Remove Lorem Ipsum Statement */}
-               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged
+               I am a senior at San Francisco State University pursuing a B.S. in Computer Science. I have chosen to volunteer for the position of Team Lead, because I've had previous experience in the residential and comercial glass industry, leading and organizing teams. 
+               As team lead, my responsibility is to make sure everyone knows what to do. Facilitating meetings, recording meeting notes, organizing objectives for the rest of the team and much more.
             </div>
                {/* Add links if available */}
             <div id={styles["links"]}>
-               <div>Github: 
-                  <a href="Add link here" target="_blank">"Add Link Here"</a>
+               <div>GitHub: 
+                  <a href="https://www.github.com/LimeSauc3" target="_blank">https://github.com/LimeSauc3</a>
                </div>
-               <div>Email: "add email here"</div>
-               <div>LinkedIn: 
-                  <a href="Add link here" target="_blank">"Add Link Here"</a>
+               <div>Email: 
+                  <a href = "mailto: spourshayegan@mail.sfsu.edu">spourshayegan@mail.sfsu.edu</a>
+               </div>
+               <div>Shauhin's LinkedIn: 
+                  <a href="https://www.linkedin.com/in/shauhin-pourshayegan" target="_blank">https://www.linkedin.com/in/shauhin-pourshayegan</a>
                </div>
             </div>
          </div>

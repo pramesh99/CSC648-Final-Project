@@ -13,16 +13,16 @@ function Derrick(props) {
             
             <div id={styles["about-me-description"]}>
                {/* Paste Your Description Below, Remove Lorem Ipsum Statement */}
-               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged
+               Hello, I'm part of the back end development team. I'm a fourth year student at SFSU. This will be my first software development project. I'm hoping to gain some new experience with it. 
             </div>
                {/* Add links if available */}
             <div id={styles["links"]}>
                <div>Github: 
-                  <a href="Add link here" target="_blank">"Add Link Here"</a>
+                  <a href="https://github.com/HaramPrince" target="_blank">"https://github.com/HaramPrince"</a>
                </div>
-               <div>Email: "add email here"</div>
+               <div>Email: "dliang5@mail.sfsu.edu"</div>
                <div>LinkedIn: 
-                  <a href="Add link here" target="_blank">"Add Link Here"</a>
+                  <a href="https://www.linkedin.com/in/derrick-liang-a03047260/" target="_blank">"https://www.linkedin.com/in/derrick-liang-a03047260/"</a>
                </div>
             </div>
          </div>
