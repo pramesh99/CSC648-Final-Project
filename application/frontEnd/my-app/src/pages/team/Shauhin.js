@@ -5,7 +5,7 @@ import styles from "./Profile.module.css"
 function Shauhin(props) {
    return (
       <div id={styles["profile-container"]}>
-         <img src={ProfilePic} id={styles["profile-image"]}></img>
+         <img src={ProfilePic} id={styles["profile-image"]} alt="Shauhin"></img>
          <div id={styles["description-container"]}>
             <div id={styles["name"]}>Shauhin</div>
             <div id={styles["position"]}><b>Team Lead</b></div>
@@ -17,14 +17,9 @@ function Shauhin(props) {
             </div>
                {/* Add links if available */}
             <div id={styles["links"]}>
-               <div>GitHub: 
-                  <a href="https://www.github.com/LimeSauc3" target="_blank">https://github.com/LimeSauc3</a>
-               </div>
-               <div>Email: 
-                  <a href = "mailto: spourshayegan@mail.sfsu.edu">spourshayegan@mail.sfsu.edu</a>
-               </div>
-               <div>Shauhin's LinkedIn: 
-                  <a href="https://www.linkedin.com/in/shauhin-pourshayegan" target="_blank">https://www.linkedin.com/in/shauhin-pourshayegan</a>
+               <div>GitHub: <a href="https://www.github.com/LimeSauc3" target="_blank" rel="noreferrer">https://github.com/LimeSauc3</a></div>
+               <div>Email: <a href="mailto:spourshayegan@mail.sfsu.edu">spourshayegan@mail.sfsu.edu</a></div>
+               <div>Shauhin's LinkedIn: <a href="https://www.linkedin.com/in/shauhin-pourshayegan" target="_blank" rel="noreferrer">https://www.linkedin.com/in/shauhin-pourshayegan</a>
                </div>
             </div>
          </div>
