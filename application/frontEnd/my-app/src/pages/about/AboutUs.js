@@ -16,7 +16,7 @@ function AboutUs (props) {
          </div>
          <div id={styles["profiles-container"]}>
             <div className={styles["profile"]}>
-               <img src={Shauhin} alt="Shauhin" className={styles["profile-image"]}></img>
+               <Link to="/aboutUs/Shauhin"><img src={Shauhin} alt="About Us: Shauhin" className={styles["profile-image"]}></img></Link>
                <div className={styles["profile-description"]}>
                   <div className={styles["profile-name"]}>Shauhin</div>
                   <div className={styles["profile-title-link-container"]}>
@@ -27,7 +27,7 @@ function AboutUs (props) {
                </div>
             </div>
             <div className={styles.profile}>
-               <img src={Hieu} alt="Hieu" className={styles["profile-image"]}></img>
+               <Link to="/aboutUs/Hieu"><img src={Hieu} alt="About Us: Hieu" className={styles["profile-image"]}></img></Link>
                <div className={styles["profile-description"]}>
                   <div className={styles["profile-name"]}>Hieu Ma</div>
                   <div className={styles["profile-title-link-container"]}>
@@ -38,7 +38,7 @@ function AboutUs (props) {
                </div>
             </div>
             <div className={styles.profile}>
-               <img src={Preetham} alt="Preetham" className={styles["profile-image"]}></img>
+               <Link to="/aboutUs/Preetham"><img src={Preetham} alt="About Us: Preetham" className={styles["profile-image"]}></img></Link>
                <div className={styles["profile-description"]}>
                   <div className={styles["profile-name"]}>Preetham</div>
                   <div className={styles["profile-title-link-container"]}>
@@ -49,7 +49,7 @@ function AboutUs (props) {
                </div>
             </div>
             <div className={styles.profile}>
-               <img src={Lin} alt="Lin" className={styles["profile-image"]}></img>
+               <Link to="/aboutUs/Lin"><img src={Lin} alt="About Us: Lin" className={styles["profile-image"]}></img></Link>
                <div className={styles["profile-description"]}>
                   <div className={styles["profile-name"]}>Lin</div>
                   <div className={styles["profile-title-link-container"]}>
@@ -60,7 +60,7 @@ function AboutUs (props) {
                </div>
             </div>
             <div className={styles.profile}>
-               <img src={Derrick} className={styles["profile-image"]}></img>
+               <Link to="/aboutUs/Derrick"><img src={Derrick} alt="About Us: Derrick" className={styles["profile-image"]}></img></Link>
                <div className={styles["profile-description"]}>
                   <div className={styles["profile-name"]}>Derrick</div>
                   <div className={styles["profile-title-link-container"]}>

@@ -5,7 +5,7 @@ import styles from "./Profile.module.css"
 function Preetham(props) {
    return (
       <div id={styles["profile-container"]}>
-         <img src={ProfilePic} id={styles["profile-image"]}></img>
+         <img src={ProfilePic} id={styles["profile-image"]} alt="Preetham"></img>
          <div id={styles["description-container"]}>
             <div id={styles["name"]}>Preetham</div>
             <div id={styles["position"]}><b>Back-End Lead</b></div>
@@ -16,9 +16,9 @@ function Preetham(props) {
             </div>
                {/* Add links if available */}
             <div id={styles["links"]}>
-               <div>Github: <a href="https://github.com/pramesh99">pramesh99</a></div>
-               <div>Email: <a href = "mailto: pramesh1@sfsu.edu">pramesh1@sfsu.edu</a></div>
-               <div>LinkedIn: <a href="https://www.linkedin.com/in/pramesh99">pramesh99</a>
+               <div>Github: <a href="https://github.com/pramesh99" target="_blank" rel="noreferrer"> pramesh99</a></div>
+               <div>Email: <a href ="mailto:pramesh1@sfsu.edu"> pramesh1@sfsu.edu</a></div>
+               <div>LinkedIn: <a href="https://www.linkedin.com/in/pramesh99" target="_blank" rel="noreferrer"> pramesh99</a>
                </div>
             </div>
          </div>

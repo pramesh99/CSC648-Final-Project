@@ -5,7 +5,7 @@ import styles from "./Profile.module.css"
 function Lin(props) {
    return (
       <div id={styles["profile-container"]}>
-         <img src={ProfilePic} id={styles["profile-image"]}></img>
+         <img src={ProfilePic} id={styles["profile-image"]} alt="Lin"></img>
          <div id={styles["description-container"]}>
             <div id={styles["name"]}>Lin Tun</div>
             <div id={styles["position"]}><b>Front-End Dev</b></div>
@@ -16,12 +16,8 @@ function Lin(props) {
             </div>
                {/* Add links if available */}
             <div id={styles["links"]}>
-            <div>GitHub: 
-                  <a href="https://github.com/Geraldlin24" target="_blank">https://github.com/Geraldlin24</a>
-               </div>
-               <div>Email:
-                  <a href = "mailto: ltun1@mail.sfsu.edu">ltun1@mail.sfsu.edu</a>
-               </div>
+            <div>GitHub: <a href="https://github.com/Geraldlin24" target="_blank" rel="noreferrer">https://github.com/Geraldlin24</a></div>
+            <div>Email: <a href="mailto: ltun1@mail.sfsu.edu">ltun1@mail.sfsu.edu</a></div>
             </div>
          </div>
       </div>

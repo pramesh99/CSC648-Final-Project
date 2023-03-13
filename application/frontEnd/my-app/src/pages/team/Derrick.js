@@ -5,7 +5,7 @@ import styles from "./Profile.module.css";
 function Derrick(props) {
    return (
       <div id={styles["profile-container"]}>
-         <img src={ProfilePic} id="profile-pic"></img>
+         <img src={ProfilePic} id="profile-pic" alt="Derrick"></img>
          <div id={styles["description-container"]}>
             <div id={styles["name"]}>Derrick</div>
             <div id={styles["position"]}><b>Back-End Dev</b></div>
@@ -17,13 +17,9 @@ function Derrick(props) {
             </div>
                {/* Add links if available */}
             <div id={styles["links"]}>
-               <div>Github: 
-                  <a href="https://github.com/HaramPrince" target="_blank">"https://github.com/HaramPrince"</a>
-               </div>
-               <div>Email: "dliang5@mail.sfsu.edu"</div>
-               <div>LinkedIn: 
-                  <a href="https://www.linkedin.com/in/derrick-liang-a03047260/" target="_blank">"https://www.linkedin.com/in/derrick-liang-a03047260/"</a>
-               </div>
+               <div>Github: <a href="https://github.com/HaramPrince" target="_blank" rel="noreferrer">https://github.com/HaramPrince</a></div>
+               <div>Email: <a href="mailto:dliang5@mail.sfsu.edu">dliang5@mail.sfsu.edu </a></div>
+               <div>LinkedIn: <a href="https://www.linkedin.com/in/derrick-liang-a03047260/" target="_blank" rel="noreferrer">https://www.linkedin.com/in/derrick-liang-a03047260/</a></div>
             </div>
          </div>
       </div>
