@@ -8,14 +8,14 @@
 # Below is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
 1. Server URL or IP
-   <br> IP : 35.236.55.195  
+   <br> IP : 34.127.79.200   
 2. SSH username
    <br> derrickliang987  
 3. SSH password or key.
     <br> If a ssh key is used please upload the key to the credentials folder.
 4. Database URL or IP and port used.
     <br><strong> NOTE THIS DOES NOT MEAN YOUR DATABASE NEEDS A PUBLIC FACING PORT.</strong> But knowing the IP and port number will help with SSH tunneling into the database. The default port is more than sufficient for this class.
-    <br> IP: 35.224.34.185, Port #: 3036
+    <br> IP: 34.127.79.200 , Port #: 3036
 5. Database username
    <br> team03
 6. Database password
