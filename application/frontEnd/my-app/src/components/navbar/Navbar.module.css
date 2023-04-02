@@ -1,3 +1,8 @@
+#navbar-container {
+   display: flex;
+   flex-direction: column;
+}
+
 #navbar {
    display: flex;
    justify-content: space-between;
@@ -11,7 +16,7 @@
 
 #home-icon {
    font-size: 20px;
-   margin-left: 5%;
+   margin-left: 4%;
 }
 
 #icon-text {
@@ -21,22 +26,6 @@
 }
 
 #icon-text:active {
-   color:  #C99700;
-}
-
-#right-buttons {
-   font-size: 20px;
-   margin-right: 2%;
-   margin-right: 5%;
-}
-
-#right-buttons-text {
-   color: #E9D597;
-   text-decoration: none;
-   /* transition: color .3s; */
-}
-
-#right-buttons-text:active {
    color:  #C99700;
 }
 
@@ -78,7 +67,7 @@
    justify-content: center;
    align-items: center;
    background-color: #C99700;
-   height: 32px;
+   height: 33x;
    width: 60px;
    border-top-right-radius: 5px;
    border-bottom-right-radius: 5px;
@@ -90,6 +79,43 @@
 }
 
 #search-icon {
-   width: 30px;
-   height: 30px;
+   width: 32px;
+   height: 32px;
 }
+
+#profile-icon-container {
+
+}
+
+#profile-icon {
+   width: 50px;
+   height: 50px;
+   background-color: #E9D597;
+   border-radius: 50%;
+   margin-right: 4%;
+   cursor: pointer;
+}
+
+#tabs {
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   height: 26px;
+   width: 100%;
+   background-color: #E9D597;
+}
+
+#right-buttons {
+   font-size: 14px;
+   margin-right: 2%;
+}
+
+#right-buttons-text {
+   color: black;
+   text-decoration: none;
+   /* transition: color .3s; */
+}
+
+/* #right-buttons-text:active {
+   color: grey;
+} */
