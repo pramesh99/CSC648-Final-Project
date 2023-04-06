@@ -1,3 +1,7 @@
+#banner {
+   margin-left: 4%;
+}
+
 #navbar-container {
    display: flex;
    flex-direction: column;
@@ -113,7 +117,7 @@
 #right-buttons-text {
    color: black;
    text-decoration: none;
-   /* transition: color .3s; */
+   margin-left: 25px;
 }
 
 /* #right-buttons-text:active {

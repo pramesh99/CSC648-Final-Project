@@ -1,0 +1,24 @@
+#restaurant-menu-container {
+   width: 35vw;
+   height: 25vh;
+   background-color: rgb(216, 216, 216);
+   padding-top: 10px;
+   padding-left: 15px;
+}
+
+#restaurant-menu-title {
+   font-size: 20px;
+}
+
+#restaurant-menu {
+   display: grid;
+   grid-template-columns: 10rem 10rem 10rem;
+   grid-gap: 15px;
+   grid-auto-flow: row;
+}
+
+#restaurant-name {
+   font-weight: 600;
+   margin-top: 1%;
+   margin-bottom: 1%;
+}

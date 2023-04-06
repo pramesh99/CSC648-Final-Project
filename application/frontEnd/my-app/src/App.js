@@ -7,6 +7,7 @@ import Derrick from './pages/team/Derrick';
 import Shauhin from './pages/team/Shauhin';
 import Hieu from './pages/team/Hieu';
 import Lin from './pages/team/Lin';
+import Home from './pages/home/Home';
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
       </header>
     </div>
     <Routes>
+      <Route path="/" element={<Home />} />
       <Route path="/aboutUs" element={<AboutUs />} />
       <Route path="/aboutUs/Shauhin" element={<Shauhin />} />
       <Route path="/aboutUs/Hieu" element={<Hieu />} />

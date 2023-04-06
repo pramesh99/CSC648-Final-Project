@@ -5,6 +5,7 @@ import styles from "./Navbar.module.css";
 function Navbar(props) {
    return (
       <div id={styles["navbar-container"]}>
+         <div id={styles["banner"]}>SFSU Software Engineering Project CSC 648-848, Spring 2023. For Demonstration Only.</div>
          <div id={styles["navbar"]}>
             <div id={styles["home-icon"]}>
                <Link to="/" id={styles["icon-text"]}>Team 3 : Gator Grub</Link>
@@ -27,6 +28,8 @@ function Navbar(props) {
          </div>
          <div id={styles["tabs"]}>
             <div id={styles["right-buttons"]}>
+               <Link to="/aboutUs" id={styles["right-buttons-text"]}>Drivers</Link>
+               <Link to="/aboutUs" id={styles["right-buttons-text"]}>Restaurant Owners</Link>
                <Link to="/aboutUs" id={styles["right-buttons-text"]}>About Us</Link>
             </div>
          </div>

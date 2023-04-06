@@ -1,0 +1,35 @@
+#restaurant-card {
+   margin-right: 10px;
+}
+
+#restaurant-picture {
+   width: 400px;
+   height: 250px;
+   background-color: grey;
+}
+#restaurant-info-container {
+   margin-top: 3px;
+}
+
+#restaurant-card-container {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+}
+
+#restaurant-menu-container {
+   display: flex;
+   flex-direction: column;
+   width: 35vw;
+   height: 25vh;
+   background-color: grey;
+}
+
+#restaurant-menu-title {
+
+}
+
+#restaurant-menu {
+   display: flex;
+   flex-direction: column;
+}
