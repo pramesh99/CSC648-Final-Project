@@ -42,7 +42,7 @@ DB.getAllRestaurants = () => {
 
 DB.getRestByCuisine = (cuisine) => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT * FROM Restaurant WHERE RestaurantCuisine = ?',
+        pool.query('SELECT * FROM Restaurant WHERE SOUNDEX(RestaurantCuisine) = SOUNDEX(?)',
             [cuisine], //prevent SQL injection
             (err, results) => {
                 if (err) {
