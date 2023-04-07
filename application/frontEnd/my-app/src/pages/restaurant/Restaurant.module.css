@@ -10,15 +10,29 @@
    font-size: 20px;
 }
 
+#card-body {
+   display: flex;
+   justify-content: center;
+   padding: 12px;
+   overflow-y: scroll;
+}
+
 #restaurant-menu {
    display: grid;
-   grid-template-columns: 10rem 10rem 10rem;
-   grid-gap: 15px;
+   width: 100%;
+   grid-template-columns: 49% 49%;
    grid-auto-flow: row;
+   column-gap: 2%;
+   row-gap: 3%;
+
 }
 
 #restaurant-name {
    font-weight: 600;
    margin-top: 1%;
    margin-bottom: 1%;
+}
+
+#restaurant-description {
+   width: 35vw;
 }

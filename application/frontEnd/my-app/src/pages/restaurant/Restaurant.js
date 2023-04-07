@@ -13,27 +13,30 @@ function Restaurant(props) {
          <MenuItem name={item.name} description={item.description} price={item.price} />
       ))
    }
-   let variant = 'Light';
+   
    return (
       <div id={styles["restaurant-card"]}>
 
          <h2 id={styles["restaurant-name"]}>{props.name}</h2>
-
-         <Card
-            bg={'light'}
-            key={'light'}
-            text={'dark'}
-            style={{ width: '35vw', height: '50vh' }}
-            className="mb-2"
-         >
-            <Card.Header>Menu</Card.Header>
-            <Card.Body>
-               {/* <Card.Title>Dark Card Title</Card.Title> */}
-               <Card.Text id={styles["restaurant-menu"]}>
-                  {menuItems}
-               </Card.Text>
-            </Card.Body>
-         </Card>
+         <div>
+            <Card
+               bg={'light'}
+               key={'light'}
+               text={'dark'}
+               style={{ width: '35vw', height: '50vh' }}
+               className="mb-2"
+            >
+               <Card.Header>Menu</Card.Header>
+               <Card.Body id={styles["card-body"]}>
+                  <Card.Text id={styles["restaurant-menu"]}>
+                     {menuItems}
+                  </Card.Text>
+               </Card.Body>
+            </Card>
+            <Card id={styles['restaurant-description']}>
+               <Card.Body>Description: {props.description}</Card.Body>
+            </Card>
+         </div>
 
          {/* <div id={styles["restaurant-menu-container"]}>
             <div id={styles["restaurant-menu-title"]}>Menu:</div>

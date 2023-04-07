@@ -4,10 +4,25 @@
 
 #title {
    font-weight: 600;
-   margin-top: 1%;
-   margin-bottom: 1%;
+   margin-top: 2%;
+   margin-bottom: 2%;
+}
+
+#restaurant-and-map-container {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
 }
 
 #restaurant-card-container {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+}
 
+#map-container {
+   width: 35vw;
+   height: 75vh;
+   background-color: rgb(209, 209, 209);
+   margin-right: 5%;
 }
