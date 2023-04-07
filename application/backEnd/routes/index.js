@@ -49,4 +49,26 @@ router.get('/allCuisines', async (req, res, next) => {
     }
 });
 
+// query for search bar
+router.get('/search/:search_input', async (req, res, next) => {
+    try {
+        let results = await db.searchBarQueryNoCuisine(req.params.search_input);
+        res.json(results);
+    } catch(e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
+router.get('/search/:cuisine/:search_input', async (req, res, next) => {
+    try {
+        let results = await db.searchBarQueryWithCuisine(req.params.cuisine, req.params.search_input);
+        res.json(results);
+    } catch(e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
+
 module.exports = router;

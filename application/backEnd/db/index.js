@@ -4,6 +4,7 @@ Purpose: Store all database queries
 */
 
 const mysql = require('mysql');
+const Fuse = require('fuse.js');
 
 //pool maintains list of connections
 const pool = mysql.createPool({
@@ -42,8 +43,8 @@ DB.getAllRestaurants = () => {
 
 DB.getRestByCuisine = (cuisine) => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT * FROM Restaurant WHERE SOUNDEX(RestaurantCuisine) = SOUNDEX(?)',
-            [cuisine], //prevent SQL injection
+        pool.query('SELECT (SOUNDEX(RestaurantCuisine) - SOUNDEX(?)) FROM Restaurant WHERE RestaurantCuisine LIKE ?',
+            [cuisine, '%'.concat(cuisine, '%')], //prevent SQL injection
             (err, results) => {
                 if (err) {
                     return reject(err);
@@ -63,6 +64,35 @@ DB.getAllCuisines = () => {
                 }
 
                 return resolve(results);
+            });
+    });
+}
+
+DB.searchBarQueryNoCuisine = (search_input) => {
+    return new Promise((resolve, reject) => {
+        pool.query('SELECT * FROM Restaurant',
+            (err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                const fuse_dict = results;
+                const fuse = new Fuse(fuse_dict, {keys: ['RestaurantName', 'RestaurantCuisine', 'RestaurantDescription']});
+                return resolve(fuse.search(search_input));
+            });
+    });
+}
+
+DB.searchBarQueryWithCuisine = (cuisine, search_input) => {
+    return new Promise((resolve, reject) => {
+        pool.query('SELECT * FROM Restaurant WHERE RestaurantCuisine = ?',
+            [cuisine],
+            (err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                const fuse_dict = results;
+                const fuse = new Fuse(fuse_dict, {keys: ['RestaurantName', 'RestaurantDescription']});
+                return resolve(fuse.search(search_input));
             });
     });
 }
