@@ -1,0 +1,31 @@
+#home {
+   margin-left: 3%;
+}
+
+#title {
+   font-weight: 600;
+   margin-top: 2%;
+   margin-bottom: 2%;
+}
+
+#restaurant-and-map-container {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+}
+
+#restaurant-card-container {
+   display: grid;
+   width: 100%;
+   grid-template-columns: 30% 30% 30%;
+   grid-auto-flow: row;
+   column-gap: 2%;
+   row-gap: 3%;
+}
+
+#map-container {
+   width: 35vw;
+   height: 75vh;
+   background-color: rgb(209, 209, 209);
+   margin-right: 5%;
+}

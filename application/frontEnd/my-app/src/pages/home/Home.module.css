@@ -1,28 +1,65 @@
 #home {
-   margin-left: 3%;
-}
-
-#title {
-   font-weight: 600;
-   margin-top: 2%;
-   margin-bottom: 2%;
-}
-
-#restaurant-and-map-container {
    display: flex;
-   flex-direction: row;
    justify-content: space-between;
+   padding: 4%;
 }
 
-#restaurant-card-container {
+#explore-browse-container {
    display: flex;
-   flex-direction: row;
-   flex-wrap: wrap;
+   flex-direction: column;
 }
 
-#map-container {
-   width: 35vw;
-   height: 75vh;
-   background-color: rgb(209, 209, 209);
-   margin-right: 5%;
+.left-container {
+   display: flex; 
+   flex-direction: column;
+   margin-bottom: 10%;
+}
+
+.sub-title {
+   margin-top:2%;
+}
+
+#browse {
+   width: 20vw;
+   height: 20vh;
+   background-color: rgb(180, 180, 180);
+}
+
+#explore {
+   width: 20vw;
+   height: 20vh;
+   background-color: rgb(180, 180, 180);
+}
+
+#gator-grub {
+   width: 40vw;
+   height: 40vh;
+   background-color: rgb(180, 180, 180);
+}
+
+#gator-grub-text-container{
+   width:49%;
+   padding: 10px;
+}
+
+#register {
+   width: 20vw;
+   height: 60vh;
+   background-color: rgb(180, 180, 180);
+}
+
+#gator-grub-container {
+   display: flex; 
+   flex-direction: column;
+}
+
+#register {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-evenly;
+}
+
+#register-text {
+   text-align: center;
 }

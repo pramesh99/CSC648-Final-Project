@@ -12,9 +12,11 @@ function Navbar(props) {
             </div>
             <div id={styles["search-bar"]}>
                <select id={styles["search-dropdown"]}>
-                  <option value="italian">Italian</option>
-                  <option value="chinese">Chinese</option>
+               <option value="italian">All</option>
                   <option value="american">American</option>
+                  <option value="chinese">Chinese</option>
+                  <option value="american">Indian</option>
+                  <option value="italian">Italian</option>
                </select>
                <div id={styles["search-separator"]}></div>
                <input type="text" placeholder="search..." id={styles["search-input"]} name="search" maxLength="80" size="80" required />

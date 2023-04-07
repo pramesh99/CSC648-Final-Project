@@ -1,51 +1,50 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styles from "./Home.module.css";
 // import Restaurant from '../restaurant/Restaurant';
 // import { Link } from "react-router-dom";
 import RestaurantCard from '../../components/restaurantCard/RestaurantCard';
+import Button from 'react-bootstrap/Button';
 
 function Home(props) {
+   // console.log("restaurants passed down home", props.restaurants);
 
-   // let [count, setCount] = useState(0);
-   // function test() {
-   //    count = count + 3;
-   //    setCount(count);
-   //    console.log(count);
-   // }
-
-   // console.log("images data passed down", props)
-
-
-   let menu =
-      [
-         { name: "item 1", price: 2.4, description: "lorem ipsum" },
-         { name: "item 2", price: 5.3, description: "lorem ipsum" },
-         { name: "item 3", price: 3.4, description: "lorem ipsum" },
-         { name: "item 4", price: 8.1, description: "lorem ipsum" },
-         { name: "item 5", price: 4.2, description: "lorem ipsum" },
-         { name: "item 3", price: 3.4, description: "lorem ipsum" },
-         { name: "item 4", price: 8.1, description: "lorem ipsum" },
-         { name: "item 5", price: 4.2, description: "lorem ipsum" },
-         { name: "item 3", price: 3.4, description: "lorem ipsum" },
-         { name: "item 4", price: 8.1, description: "lorem ipsum" },
-         { name: "item 5", price: 4.2, description: "lorem ipsum" },
-      ];
+   // let restaurants = props.restaurants.map((restaurant) => (
+   //    <RestaurantCard name={restaurant.RestaurantName} img={restaurant.ImgUrl} />
+   // ))
 
    return (
       <div id={styles["home"]}>
-         <h2 id={styles["title"]}>Featured Restaurants</h2>
-         <div id={styles["restaurant-and-map-container"]}>
-            <div id={styles["restaurant-card-container"]}>
-               {/* <Restaurant name={"Restaurant 1"} description={"Lorem ipsum"} menu={menu}/> */}
-               <RestaurantCard name={"Restaurant 1"} description={"Lorem ipsum"} />
-               <RestaurantCard name={"Restaurant 2"} description={"Lorem ipsum"} />
-               <RestaurantCard name={"Restaurant 3"} description={"Lorem ipsum"} />
-               <RestaurantCard name={"Restaurant 2"} description={"Lorem ipsum"} />
-               <RestaurantCard name={"Restaurant 3"} description={"Lorem ipsum"} />
+         <div id={styles["explore-browse-container"]}>
+            <div className={styles["left-container"]}>
+               <div id={styles["browse"]}></div>
+               <div className={styles["sub-title"]}>Browse Popular Spots</div>
             </div>
-            <div id={styles["map-container"]}>
+            <div className={styles["left-container"]}>
+               <div id={styles["explore"]}></div>
+               <div className={styles["sub-title"]}>Explore Local Restaurants</div>
+            </div>
+         </div>
+         <div id={styles["gator-grub-container"]}>
+            <div id={styles["gator-grub-header"]}> What's GatorGrub?</div>
+            <div id={styles["gator-grub"]}>
+               <div id={styles["gator-grub-text-container"]}>
+                  <text>
+                     GatorGrub is where San Francisco State University students, faculty and staff get amazing deals on food which is delivered straight to them.
+                     Our discounts, class-to-class delivery, and safe pickup spots help us bring amazing food to your table... or the back of the lecture hall.
+                  </text>
+               </div>
+            </div>
+         </div>
+         <div id={styles["register"]}>
+            <h2>Register Now!</h2>
+            <text id={styles["register-text"]}>
+               SFSU Students, Faculty and Staff get exclusive discounts, pickup spots and more.
+               <br></br>
+               <br></br>
+               GatorGrub drivers and restaurant owners find new oportunities for satisfying customers and earning more profits!
+            </text>
+            <Button variant="secondary" style={{ width: "55%", height: "15%" }}>Sign Up</Button>{' '}
 
-            </div>
          </div>
       </div>
    )

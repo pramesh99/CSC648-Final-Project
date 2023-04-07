@@ -3,16 +3,17 @@ import styles from "./RestaurantCard.module.css";
 // import { Link } from "react-router-dom";
 
 function RestaurantCard(props) {
+   console.log(props.img);
    return (
       <div id={styles["restaurant-card"]}>
-         <div id={styles["restaurant-picture"]}></div>
+         <div style={{ backgroundImage: `url(${props.img})`, width: "20vw", height: "20vh",  backgroundSize: "cover"}}></div>
          <div id={styles["restaurant-info-container"]}>
             <div id={styles["restaurant-name"]}>
                Name: {props.name}
             </div>
-            <div id={styles["restaurant-description"]}>
+            {/* <div id={styles["restaurant-description"]}>
                Description: {props.description}
-            </div>
+            </div> */}
          </div>
       </div>
    )
