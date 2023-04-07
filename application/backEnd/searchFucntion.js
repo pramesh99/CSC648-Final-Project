@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const db = require ("../config/database");
+const mysql = require('mysql2');
+const db = require ("./config/database");
 
 function search(req, res, next)
 {
@@ -43,7 +44,7 @@ function search(req, res, next)
 
 app.get('/search', search, (req, res) => {
     var searchResult = req.searchResult;
-    res.send({
+    res.render({
         results: searchResult.length,
         searchTerm: req.searchTerm,
         searchResult: req.searchResult,
@@ -51,3 +52,5 @@ app.get('/search', search, (req, res) => {
     });
     console.log(searchResult);
 })
+
+module.exports = router;
