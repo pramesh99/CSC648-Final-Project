@@ -31,11 +31,14 @@ function getRestaurantImgs(setRestaurantImages) {
 }
 
 async function test() {
-  const res = await fetch("http://34.82.124.237:3001/api/rest_owners").then((r) => r.json()).then ((data) =>
+  let req1 = "/restaurants/:cuisine";
+  let req2 = "/allCuisines";
+  let req3 = "/allRestaurants";
+  let req4 = "/restOwners";
+  const res = await fetch("http://34.82.124.237:3001/api/restaurants/italian").then((r) => r.json()).then ((data) =>
     console.log(data)
   )
 }
-
 
 function App() {
 

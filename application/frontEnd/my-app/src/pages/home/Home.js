@@ -33,9 +33,6 @@ function Home(props) {
 
    return (
       <div id={styles["home"]}>
-         <button onClick={() => 
-            test()
-         }>click</button>
          <h2 id={styles["title"]}>Featured Restaurants</h2>
          <div id={styles["restaurant-and-map-container"]}>
             <div id={styles["restaurant-card-container"]}>

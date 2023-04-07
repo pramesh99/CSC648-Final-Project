@@ -16,7 +16,6 @@ function Restaurant(props) {
    
    return (
       <div id={styles["restaurant-card"]}>
-
          <h2 id={styles["restaurant-name"]}>{props.name}</h2>
          <div>
             <Card
