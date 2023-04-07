@@ -5,14 +5,17 @@ Purpose: Server for application.
 
 const path = require('path');
 const express = require('express');
+const cors = require('cors'); // for testing, allows all devs to access DB while running app locally
 const apiRouter = require('./routes');
 
 const app = express();
 
+app.use(cors()); 
+
 app.use(express.static(path.resolve(__dirname, '../frontEnd/my-app/build')));
 app.use(express.json()); // allows body to be json
 
-app.use('/api/', apiRouter); //root path
+app.use('/api/', cors(),  apiRouter); //root path
 
 
 app.get('/*', (req, res) => {

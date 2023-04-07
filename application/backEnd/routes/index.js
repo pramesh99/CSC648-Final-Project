@@ -1,8 +1,13 @@
+/*
+Author: Preetham Ramesh
+Purpose: API endpoint definitions.
+*/
+
 const express = require('express');
 const db = require('../db');
 const router = express.Router();
 
-router.get('/rest_owners', async (req,res,next) => { // route is appended to /api in server.js
+router.get('/restOwners', async (req,res,next) => { // route is appended to /api in server.js
     try {
         let results = await db.getAllOwners(); // params go here
         res.json(results);
@@ -15,6 +20,28 @@ router.get('/rest_owners', async (req,res,next) => { // route is appended to /ap
 router.get('/restaurants/:cuisine', async (req,res,next) => { // route is appended to /api in server.js
     try {
         let results = await db.getRestByCuisine(req.params.cuisine); // params go here
+        res.json(results);
+    } catch(e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
+// get all restaurants
+router.get('/allRestaurants', async (req, res, next) => {
+    try {
+        let results = await db.getAllRestaurants();
+        res.json(results);
+    } catch(e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
+// query to get all available cuisines
+router.get('/allCuisines', async (req, res, next) => {
+    try {
+        let results = await db.getAllCuisines();
         res.json(results);
     } catch(e) {
         console.log(e);
