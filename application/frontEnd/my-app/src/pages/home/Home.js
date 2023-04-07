@@ -1,10 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from "./Home.module.css";
-import Restaurant from '../restaurant/Restaurant';
-import RestaurantCard from '../../components/restaurantCard/RestaurantCard';
+// import Restaurant from '../restaurant/Restaurant';
 // import { Link } from "react-router-dom";
+import RestaurantCard from '../../components/restaurantCard/RestaurantCard';
 
 function Home(props) {
+
+   // let [count, setCount] = useState(0);
+   // function test() {
+   //    count = count + 3;
+   //    setCount(count);
+   //    console.log(count);
+   // }
+
+   // console.log("images data passed down", props)
+
+
    let menu =
       [
          { name: "item 1", price: 2.4, description: "lorem ipsum" },
@@ -22,6 +33,9 @@ function Home(props) {
 
    return (
       <div id={styles["home"]}>
+         <button onClick={() => 
+            test()
+         }>click</button>
          <h2 id={styles["title"]}>Featured Restaurants</h2>
          <div id={styles["restaurant-and-map-container"]}>
             <div id={styles["restaurant-card-container"]}>
