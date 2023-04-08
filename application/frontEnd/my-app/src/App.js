@@ -85,16 +85,32 @@ function App() {
       console.log("search restaurants use effect", r)
       setSearchRestaurants(r);
     });
-    
+
   }, [searchResult]);
+
+  // useEffect(() => {
+  //   let newRestaurants = restaurants;
+
+  //   if (restaurantImages) {
+  //     for (let i = 0; i < restaurants.length; i++) {
+  //       console.log(restaurantImages[i]["urls"]["regular"]);
+  //       newRestaurants[i]["ImgUrl"] = restaurantImages[i]["urls"]["regular"];
+  //     }
+  //   }
+
+  //   setRestaurants(newRestaurants);
+  // }, [restaurantImages, restaurants]);
 
   useEffect(() => {
     let newRestaurants = restaurants;
-
-    for (let i = 0; i < restaurants.length; i++) {
-      newRestaurants[i]["ImgUrl"] = restaurantImages[i].urls.regular;
+  
+    if (restaurantImages) {
+      for (let i = 0; i < restaurants.length; i++) {
+        // console.log(restaurantImages[i]?.urls?.regular); 
+        newRestaurants[i]["ImgUrl"] = restaurantImages[i]?.urls?.regular ?? '';
+      }
     }
-
+  
     setRestaurants(newRestaurants);
   }, [restaurantImages, restaurants]);
 

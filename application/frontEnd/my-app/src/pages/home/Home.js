@@ -30,21 +30,21 @@ function Home(props) {
             <div id={styles["gator-grub-header"]}> What's GatorGrub?</div>
             <div id={styles["gator-grub"]}>
                <div id={styles["gator-grub-text-container"]}>
-                  <text>
+                  <div>
                      GatorGrub is where San Francisco State University students, faculty and staff get amazing deals on food which is delivered straight to them.
                      Our discounts, class-to-class delivery, and safe pickup spots help us bring amazing food to your table... or the back of the lecture hall.
-                  </text>
+                  </div>
                </div>
             </div>
          </div>
          <div id={styles["register"]}>
             <h2>Register Now!</h2>
-            <text id={styles["register-text"]}>
+            <div id={styles["register-text"]}>
                SFSU Students, Faculty and Staff get exclusive discounts, pickup spots and more.
                <br></br>
                <br></br>
                GatorGrub drivers and restaurant owners find new oportunities for satisfying customers and earning more profits!
-            </text>
+            </div>
             <Button variant="secondary" style={{ width: "55%", height: "15%" }}>Sign Up</Button>{' '}
 
          </div>
