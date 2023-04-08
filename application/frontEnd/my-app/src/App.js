@@ -11,13 +11,16 @@ import Home from './pages/home/Home';
 import { useEffect, useState } from 'react';
 import { createApi } from 'unsplash-js';
 import Browse from './pages/browse/Browse';
+import Result from './pages/result/Result';
 // import fetch from 'node-fetch';
 
 function getRestaurantImgs(numOfRestaurants) {
+
+
   let search = {
     query: "restaurant",
     page: 1,
-    perPage: numOfRestaurants,
+    perPage: 7,
   };
 
   const unsplash = createApi({ accessKey: 'jDOS2lqNJPGXsFtYum8aF9gYL__rke79aCNl03SMwAU' });
@@ -38,6 +41,7 @@ async function getAllRestaurants() {
 
 function App() {
 
+  const [search, setSearch] = useState('');
   const [serverData, setServerData] = useState([{}]);
 
   const [restaurantImages, setRestaurantImages] = useState([]);
@@ -45,22 +49,14 @@ function App() {
 
 
   useEffect(() => {
-
     getAllRestaurants().then((r) => {
       setRestaurants(r);
-      // console.log("restaurantss", restaurants);
-      getRestaurantImgs(restaurants.length).then((r) => {
-        setRestaurantImages(r.response.results);
-        // console.log(restaurantImages);
-        for(let i = 0; i < restaurants.length; i++) {
-          restaurants[i]["ImgUrl"] = restaurantImages[i].urls.regular;
-        }
-        setRestaurants(restaurants);
-        // console.log(restaurants);
-      })
+      console.log("restaurantss", r);
     })
-
-
+    
+    getRestaurantImgs(restaurants.length).then((r) => {
+      setRestaurantImages(r.response.results);;
+    })
 
     fetch("/test").then(
       response => response.json()
@@ -71,16 +67,27 @@ function App() {
     )
   }, []);
 
+  useEffect(() => {
+    let newRestaurants = restaurants;
+
+    for (let i = 0; i < restaurants.length; i++) {
+      newRestaurants[i]["ImgUrl"] = restaurantImages[i].urls.regular;
+    }
+
+    setRestaurants(newRestaurants);
+  }, [restaurantImages, restaurants]);
+
   return (
     <>
       <div className="App">
         <header className="App-header">
-          <Navbar />
+          <Navbar search={search} setSearch={setSearch} />
         </header>
       </div>
       <Routes>
         <Route path="/" element={<Home restaurants={restaurants} />} />
-        <Route path="/Browse" element={<Browse restaurants={restaurants} />} />
+        <Route path="/browse" element={<Browse restaurants={restaurants} />} />
+        <Route path="/result" element={<Result restaurants={restaurants} search={search} />} />
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/aboutUs/Shauhin" element={<Shauhin />} />
         <Route path="/aboutUs/Hieu" element={<Hieu />} />

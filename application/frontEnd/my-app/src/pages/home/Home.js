@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styles from "./Home.module.css";
 // import Restaurant from '../restaurant/Restaurant';
-// import { Link } from "react-router-dom";
-import RestaurantCard from '../../components/restaurantCard/RestaurantCard';
+import { Link } from "react-router-dom";
+// import RestaurantCard from '../../components/restaurantCard/RestaurantCard';
 import Button from 'react-bootstrap/Button';
 
 function Home(props) {
@@ -15,10 +15,12 @@ function Home(props) {
    return (
       <div id={styles["home"]}>
          <div id={styles["explore-browse-container"]}>
-            <div className={styles["left-container"]}>
-               <div id={styles["browse"]}></div>
-               <div className={styles["sub-title"]}>Browse Popular Spots</div>
-            </div>
+            <Link to="/browse" id={styles["link"]}>
+               <div className={styles["left-container"]}>
+                  <div id={styles["browse"]}></div>
+                  <div className={styles["sub-title"]}>Browse Popular Spots</div>
+               </div>
+            </Link>
             <div className={styles["left-container"]}>
                <div id={styles["explore"]}></div>
                <div className={styles["sub-title"]}>Explore Local Restaurants</div>
