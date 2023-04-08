@@ -8,20 +8,20 @@
 # Below is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
 1. Server URL or IP
-   <br> IP : 34.127.79.200   
+   <br> IP : 34.82.124.237:3001   
 2. SSH username
-   <br> derrickliang987  
+   <br> pramesh  
 3. SSH password or key.
     <br> If a ssh key is used please upload the key to the credentials folder.
-4. Database URL or IP and port used.
+4. Database URL.
     <br><strong> NOTE THIS DOES NOT MEAN YOUR DATABASE NEEDS A PUBLIC FACING PORT.</strong> But knowing the IP and port number will help with SSH tunneling into the database. The default port is more than sufficient for this class.
-    <br> IP: 34.127.79.200 , Port #: 3036
+    <br> IP: 34.30.64.72
 5. Database username
-   <br> team03
+   <br> root
 6. Database password
-   <br> TEAMpass03
+   <br> team-03
 7. Database name (basically the name that contains all your tables)
-   <br> Restaurant_App_Database
+   <br> dbv1
 8. Instructions on how to use the above information.
    <br> To use the information above, you must have a google account. To connect to our vm instance, you can input the SSH username and private key. To access our SQL database, you can enter the database username and password.
    - To view our app: go to http://35.236.55.195:3001/
