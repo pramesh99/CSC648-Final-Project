@@ -1,15 +1,22 @@
+/*
+Author: Preetham Ramesh
+Purpose: Server for application.
+*/
+
 const path = require('path');
 const express = require('express');
+const cors = require('cors'); // for testing, allows all devs to access DB while running app locally
+const apiRouter = require('./routes');
+
 const app = express();
 
-const users = ['Preetham', 'Shauhin', 'Hieu', 'Derrick', 'Lin'];
+app.use(cors()); 
 
 app.use(express.static(path.resolve(__dirname, '../frontEnd/my-app/build')));
+app.use(express.json()); // allows body to be json
 
-app.get('/test', (req, res) => {
-    console.log('at test');
-    res.json({'users': users});
-})
+app.use('/api/', cors(),  apiRouter); //root path
+
 
 app.get('/*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../frontEnd/my-app/build', 'index.html'));
