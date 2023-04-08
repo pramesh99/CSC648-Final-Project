@@ -60,7 +60,7 @@ function AboutUs (props) {
                </div>
             </div>
             <div className={styles.profile}>
-               <Link to="/aboutUs/Derrick"><img src={Derrick} alt="About Us: Derrick" className={styles["profile-image"]}></img></Link>
+               <Link to="/aboutUs/Derrick"><img src={Derrick} alt="About Us: Derrick" className={styles["profile-image"]}></img></Link> 
                <div className={styles["profile-description"]}>
                   <div className={styles["profile-name"]}>Derrick</div>
                   <div className={styles["profile-title-link-container"]}>
