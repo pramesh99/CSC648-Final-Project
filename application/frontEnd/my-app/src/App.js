@@ -39,14 +39,26 @@ async function getAllRestaurants() {
   return resData;
 }
 
+
+async function getSearchRestaurants(search) {
+  let resData = [];
+  const res = await fetch(`http://34.82.124.237:3001/api/search/${search}`).then((r) => r.json()).then((data) =>
+    resData = data
+  )
+  return resData;
+}
+
 function App() {
 
   const [search, setSearch] = useState('');
+  const [searchResult, setSearchResult] = useState('');
+
   const [serverData, setServerData] = useState([{}]);
 
   const [restaurantImages, setRestaurantImages] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
 
+  const [searchRestaurants, setSearchRestaurants] = useState([]);
 
   useEffect(() => {
     getAllRestaurants().then((r) => {
@@ -55,17 +67,26 @@ function App() {
     })
 
     getRestaurantImgs(restaurants.length).then((r) => {
-      setRestaurantImages(r.response.results);;
+      setRestaurantImages(r.response.results);
     })
 
-    fetch("/test").then(
-      response => response.json()
-    ).then(
-      data => {
-        setServerData(data)
-      }
-    )
   }, []);
+
+  // Search Use Effect
+  useEffect(() => {
+    let newRestaurants = [];
+    console.log("GOT RESPONSE", searchResult);
+
+    getSearchRestaurants(searchResult).then((r) => {
+      console.log(r)
+      for (let i = 0; i < r.length; i++) {
+        r[i]["item"]["ImgUrl"] = restaurantImages[i].urls.regular;
+      }
+      console.log("search restaurants use effect", r)
+      setSearchRestaurants(r);
+    });
+    
+  }, [searchResult, searchRestaurants]);
 
   useEffect(() => {
     let newRestaurants = restaurants;
@@ -81,13 +102,13 @@ function App() {
     <>
       <div className="App">
         <header className="App-header">
-          <Navbar search={search} setSearch={setSearch} />
+          <Navbar search={search} setSearch={setSearch} setSearchResult={setSearchResult} />
         </header>
       </div>
       <Routes>
         <Route path="/" element={<Home restaurants={restaurants} />} />
         <Route path="/browse" element={<Browse restaurants={restaurants} />} />
-        <Route path="/result" element={<Result restaurants={restaurants} search={search} />} />
+        <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} />} />
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/aboutUs/Shauhin" element={<Shauhin />} />
         <Route path="/aboutUs/Hieu" element={<Hieu />} />

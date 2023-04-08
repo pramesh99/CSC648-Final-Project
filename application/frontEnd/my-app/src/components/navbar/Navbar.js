@@ -8,14 +8,16 @@ function Navbar(props) {
    const navigate = useNavigate();
    const search = props.search;
    const setSearch = props.setSearch;
-
+   const setSearchResult = props.setSearchResult;
    const handleChange = (event) => {
       setSearch(event.target.value);
+      console.log(event.target.value)
    };
 
    const handleClick = () => {
       navigate("/result");
-      // console.log(search);
+      console.log(search);
+      setSearchResult(search);
    };
 
    return (

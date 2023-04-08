@@ -16,15 +16,18 @@ const center = {
 function Result(props) {
 
    let search = props.search;
+   let restaurants;
+   if(props.restaurants){
+      restaurants = props.restaurants.map((restaurant) => (
+         <RestaurantCard name={restaurant.item.RestaurantName} img={restaurant.item.ImgUrl} />
+      ))
 
-   let restaurants = props.restaurants.map((restaurant) => (
-      <RestaurantCard name={restaurant.RestaurantName} img={restaurant.ImgUrl} />
-   ))
+   }
 
    let markerPositions = [];
 
    for (let i = 0; i < props.restaurants.length; i++) {
-      let coordinates = props.restaurants[i].RestaurantCoordinates;
+      let coordinates = props.restaurants[i].item.RestaurantCoordinates;
       coordinates = coordinates.split(",");
       coordinates[0] = Number(coordinates[0]);
       coordinates[1] = Number(coordinates[1]);
