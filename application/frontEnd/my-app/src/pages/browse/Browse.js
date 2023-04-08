@@ -1,9 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import styles from "./Browse.module.css";
-// import Restaurant from '../restaurant/Restaurant';
-// import { Link } from "react-router-dom";
 import RestaurantCard from '../../components/restaurantCard/RestaurantCard';
-import { Loader } from "@googlemaps/js-api-loader";
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
 const containerStyle = {
@@ -18,9 +15,13 @@ const center = {
 
 function Browse(props) {
 
+   let restaurants = props.restaurants.map((restaurant) => (
+      <RestaurantCard name={restaurant.RestaurantName} img={restaurant.ImgUrl} description={restaurant.RestaurantDescription} />
+   ))
+
    let markerPositions = [];
 
-   for(let i = 0; i < props.restaurants.length; i++) {
+   for (let i = 0; i < props.restaurants.length; i++) {
       let coordinates = props.restaurants[i].RestaurantCoordinates;
       coordinates = coordinates.split(",");
       coordinates[0] = Number(coordinates[0]);
@@ -29,16 +30,12 @@ function Browse(props) {
          lat: coordinates[0],
          lng: coordinates[1]
       })
-   } 
+   }
 
    let markers = markerPositions.map((position) => (
-      <Marker 
+      <Marker
          position={position}
       />
-   ))
-
-   let restaurants = props.restaurants.map((restaurant) => (
-      <RestaurantCard name={restaurant.RestaurantName} img={restaurant.ImgUrl} description={restaurant.RestaurantDescription} />
    ))
 
    // Google Maps Implementation
@@ -73,17 +70,17 @@ function Browse(props) {
             </div>
             <div id={styles["map-container"]}>
                {isLoaded ? (
-               <GoogleMap
-                  mapContainerStyle={containerStyle}
-                  center={center}
-                  zoom={14}
-                  onLoad={onLoad}
-                  onUnmount={onUnmount}
-               >
-                  {markers}
-                  { /* Child components, such as markers, info windows, etc. */}
-                  <></>
-               </GoogleMap>
+                  <GoogleMap
+                     mapContainerStyle={containerStyle}
+                     center={center}
+                     zoom={14}
+                     onLoad={onLoad}
+                     onUnmount={onUnmount}
+                  >
+                     {markers}
+                     { /* Child components, such as markers, info windows, etc. */}
+                     <></>
+                  </GoogleMap>
                ) : <></>}
             </div>
          </div>

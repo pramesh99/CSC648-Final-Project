@@ -15,7 +15,7 @@ function Navbar(props) {
 
    const handleClick = () => {
       navigate("/result");
-      console.log(search);
+      // console.log(search);
    };
 
    return (

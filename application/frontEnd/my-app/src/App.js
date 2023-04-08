@@ -51,9 +51,9 @@ function App() {
   useEffect(() => {
     getAllRestaurants().then((r) => {
       setRestaurants(r);
-      console.log("restaurantss", r);
+      // console.log("restaurantss", r);
     })
-    
+
     getRestaurantImgs(restaurants.length).then((r) => {
       setRestaurantImages(r.response.results);;
     })
