@@ -12,10 +12,11 @@
 2. SSH username
    <br> pramesh  
 3. SSH password or key.
-    <br> If a ssh key is used please upload the key to the credentials folder.
-4. Database URL.
+   <br> We used an SSH Key.
+   <br> If a ssh key is used please upload the key to the credentials folder.
+4. Database URL or IP and port used.
     <br><strong> NOTE THIS DOES NOT MEAN YOUR DATABASE NEEDS A PUBLIC FACING PORT.</strong> But knowing the IP and port number will help with SSH tunneling into the database. The default port is more than sufficient for this class.
-    <br> IP: 34.30.64.72
+    <br> IP: 34.30.64.72, Port #: 3306
 5. Database username
    <br> root
 6. Database password
@@ -24,7 +25,7 @@
    <br> dbv1
 8. Instructions on how to use the above information.
    <br> To use the information above, you must have a google account. To connect to our vm instance, you can input the SSH username and private key. To access our SQL database, you can enter the database username and password.
-   - To view our app: go to http://35.236.55.195:3001/
+   - To view our app: go to http://34.82.124.237:3001/
    - To SSH into our VM, use the above credentials
    - to start the server: \
    &emsp;- cd to ~/csc648-03-sp23-team03/application/frontEnd/my-app \
