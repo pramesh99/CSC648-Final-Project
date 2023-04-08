@@ -86,7 +86,7 @@ function App() {
       setSearchRestaurants(r);
     });
     
-  }, [searchResult, searchRestaurants]);
+  }, [searchResult]);
 
   useEffect(() => {
     let newRestaurants = restaurants;
