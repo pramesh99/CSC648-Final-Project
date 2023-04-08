@@ -6,9 +6,7 @@ import styles from "./Result.module.css";
 import RestaurantCard from '../../components/restaurantCard/RestaurantCard';
 
 function Result(props) {
-
-   // console.log("restaurants passed down to result", props.restaurants);
-   // console.log("search word", props);
+   
    let search = props.search;
    
    let restaurants = props.restaurants.map((restaurant) => (
