@@ -41,7 +41,7 @@ function Navbar(props) {
                   <option value="all">All</option>
                   <option value="american">American</option>
                   <option value="chinese">Chinese</option>
-                  <option value="american">Indian</option>
+                  <option value="indian">Indian</option>
                   <option value="italian">Italian</option>
                </select>
                <div id={styles["search-separator"]}></div>
