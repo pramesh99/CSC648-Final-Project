@@ -20,7 +20,7 @@ function getRestaurantImgs(numOfRestaurants) {
   let search = {
     query: "restaurant",
     page: 1,
-    perPage: 7,
+    perPage: 8,
   };
 
   const unsplash = createApi({ accessKey: 'jDOS2lqNJPGXsFtYum8aF9gYL__rke79aCNl03SMwAU' });
@@ -32,6 +32,10 @@ async function getAllRestaurants() {
   // let req2 = "/allCuisines";
   // let req3 = "/allRestaurants";
   // let req4 = "/restOwners";
+  // const cuisines = await fetch("http://34.82.124.237:3001/api/allCuisines").then((r) => r.json()).then((data) =>
+  //   console.log(data)
+  // )
+
   let resData = [];
   const res = await fetch("http://34.82.124.237:3001/api/allRestaurants").then((r) => r.json()).then((data) =>
     resData = data
@@ -48,10 +52,19 @@ async function getSearchRestaurants(search) {
   return resData;
 }
 
+async function getSearchRestaurantsWithCategory(search, category) {
+  let resData = [];
+  const res = await fetch(`http://34.82.124.237:3001/api/search/${category}/${search}`).then((r) => r.json()).then((data) =>
+    resData = data
+  )
+  return resData;
+}
+
 function App() {
 
   const [search, setSearch] = useState('');
   const [searchResult, setSearchResult] = useState('');
+  const [searchResultCategory, setSearchResultCategory] = useState('');
 
   const [serverData, setServerData] = useState([{}]);
 
@@ -67,7 +80,7 @@ function App() {
     })
 
     getRestaurantImgs(restaurants.length).then((r) => {
-      setRestaurantImages(r.response.results);
+      setRestaurantImages(r?.response?.results);
     })
 
   }, []);
@@ -75,18 +88,35 @@ function App() {
   // Search Use Effect
   useEffect(() => {
     let newRestaurants = [];
-    console.log("GOT RESPONSE", searchResult);
+    if(searchResultCategory !== 'all') {
+      getSearchRestaurantsWithCategory(searchResult, searchResultCategory).then((r) => {
+        for (let i = 0; i < r.length; i++) {
+          r[i]["item"]["ImgUrl"] = restaurantImages[i]?.urls?.regular;
+        }
+        console.log("search restaurants use effect", r)
+        setSearchRestaurants(r);
+      });
+    } else if (searchResultCategory === 'all' && searchResult === '') {
+      getAllRestaurants().then((r) => {
+        let newRestaurants = [];
+        for(let i = 0; i < r.length; i++) {
+          newRestaurants.push({item: r[i]});
+        }
+        for (let i = 0; i < newRestaurants.length; i++) {
+          newRestaurants[i]["item"]["ImgUrl"] = restaurantImages[i]?.urls?.regular;
+        }
+        setSearchRestaurants(newRestaurants);
+      })
+    } else {
+      getSearchRestaurants(searchResult).then((r) => {
+        for (let i = 0; i < r.length; i++) {
+          r[i]["item"]["ImgUrl"] = restaurantImages[i]?.urls?.regular;
+        }
+        setSearchRestaurants(r);
+      });
+    }
 
-    getSearchRestaurants(searchResult).then((r) => {
-      console.log(r)
-      for (let i = 0; i < r.length; i++) {
-        r[i]["item"]["ImgUrl"] = restaurantImages[i].urls.regular;
-      }
-      console.log("search restaurants use effect", r)
-      setSearchRestaurants(r);
-    });
-
-  }, [searchResult]);
+  }, [searchResult, searchResultCategory]);
 
   // useEffect(() => {
   //   let newRestaurants = restaurants;
@@ -104,12 +134,11 @@ function App() {
   useEffect(() => {
     let newRestaurants = restaurants;
   
-    if (restaurantImages) {
+    // if (restaurantImages) {
       for (let i = 0; i < restaurants.length; i++) {
-        // console.log(restaurantImages[i]?.urls?.regular); 
-        newRestaurants[i]["ImgUrl"] = restaurantImages[i]?.urls?.regular ?? '';
+        newRestaurants[i]["ImgUrl"] = restaurantImages[i]?.urls?.regular ?? 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80';
       }
-    }
+    // }
   
     setRestaurants(newRestaurants);
   }, [restaurantImages, restaurants]);
@@ -118,7 +147,7 @@ function App() {
     <>
       <div className="App">
         <header className="App-header">
-          <Navbar search={search} setSearch={setSearch} setSearchResult={setSearchResult} />
+          <Navbar search={search} setSearch={setSearch} setSearchResult={setSearchResult} setSearchResultCategory={setSearchResultCategory} />
         </header>
       </div>
       <Routes>
