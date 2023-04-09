@@ -5,19 +5,24 @@ import { useNavigate } from 'react-router-dom';
 import Result from '../../pages/result/Result';
 
 function Navbar(props) {
+
+   const [category, setCategory] = useState('all');
+
    const navigate = useNavigate();
    const search = props.search;
    const setSearch = props.setSearch;
    const setSearchResult = props.setSearchResult;
+   const setSearchResultCategory = props.setSearchResultCategory;
+
    const handleChange = (event) => {
       setSearch(event.target.value);
-      console.log(event.target.value)
+      // console.log(event.target.value)
    };
 
    const handleClick = () => {
-      navigate("/result");
-      console.log(search);
       setSearchResult(search);
+      setSearchResultCategory(category);
+      navigate("/result");
    };
 
    return (
@@ -28,8 +33,12 @@ function Navbar(props) {
                <Link to="/" id={styles["icon-text"]}>Team 3 : Gator Grub</Link>
             </div>
             <div id={styles["search-bar"]}>
-               <select id={styles["search-dropdown"]}>
-                  <option value="italian">All</option>
+               <select
+                  id={styles["search-dropdown"]}
+                  value={category}
+                  onChange={e => setCategory(e.target.value)}
+               >
+                  <option value="all">All</option>
                   <option value="american">American</option>
                   <option value="chinese">Chinese</option>
                   <option value="american">Indian</option>

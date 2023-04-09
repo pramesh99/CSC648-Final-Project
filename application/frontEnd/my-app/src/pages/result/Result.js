@@ -21,7 +21,6 @@ function Result(props) {
       restaurants = props.restaurants.map((restaurant) => (
          <RestaurantCard name={restaurant.item.RestaurantName} img={restaurant.item.ImgUrl} />
       ))
-
    }
 
    let markerPositions = [];
