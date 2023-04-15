@@ -12,6 +12,8 @@ import { useEffect, useState } from 'react';
 import { createApi } from 'unsplash-js';
 import Browse from './pages/browse/Browse';
 import Result from './pages/result/Result';
+import Register from './pages/Login&Register/Register';
+import Login from './pages/Login&Register/Login';
 // import fetch from 'node-fetch';
 
 function getRestaurantImgs(numOfRestaurants) {
@@ -55,6 +57,14 @@ async function getSearchRestaurants(search) {
 async function getSearchRestaurantsWithCategory(search, category) {
   let resData = [];
   const res = await fetch(`http://34.82.124.237:3001/api/search/${category}/${search}`).then((r) => r.json()).then((data) =>
+    resData = data
+  )
+  return resData;
+}
+
+async function getSearchRestaurantsByOnlyCategory(category) {
+  let resData = [];
+  const res = await fetch(`http://34.82.124.237:3001/api/search/${category}`).then((r) => r.json()).then((data) =>
     resData = data
   )
   return resData;
@@ -152,6 +162,8 @@ function App() {
       </div>
       <Routes>
         <Route path="/" element={<Home restaurants={restaurants} />} />
+        <Route path="/register" element={<Register> </Register>}/>
+        <Route path="/login" element={<Login> </Login>}/>
         <Route path="/browse" element={<Browse restaurants={restaurants} />} />
         <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} />} />
         <Route path="/aboutUs" element={<AboutUs />} />
