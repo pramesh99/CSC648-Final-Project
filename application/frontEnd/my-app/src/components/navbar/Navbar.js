@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import { useNavigate } from 'react-router-dom';
+import Register from '../../pages/Login&Register/Register';
 import Result from '../../pages/result/Result';
 
 function Navbar(props) {
@@ -68,6 +69,8 @@ function Navbar(props) {
          </div>
          <div id={styles["tabs"]}>
             <div id={styles["right-buttons"]}>
+               <Link to="/register" id={styles["right-buttons-text"]}>Register</Link>
+               <Link to="/login" id={styles["right-buttons-text"]}>Login</Link>
                <Link to="/aboutUs" id={styles["right-buttons-text"]}>Drivers</Link>
                <Link to="/aboutUs" id={styles["right-buttons-text"]}>Restaurant Owners</Link>
                <Link to="/aboutUs" id={styles["right-buttons-text"]}>About Us</Link>
