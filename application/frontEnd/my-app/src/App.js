@@ -39,7 +39,7 @@ async function getAllRestaurants() {
   // )
 
   let resData = [];
-  const res = await fetch("http://34.82.124.237:3001/api/allRestaurants").then((r) => r.json()).then((data) =>
+  await fetch("http://34.82.124.237:3001/api/allRestaurants").then((r) => r.json()).then((data) =>
     resData = data
   )
   return resData;
@@ -48,7 +48,7 @@ async function getAllRestaurants() {
 
 async function getSearchRestaurants(search) {
   let resData = [];
-  const res = await fetch(`http://34.82.124.237:3001/api/search/${search}`).then((r) => r.json()).then((data) =>
+  await fetch(`http://34.82.124.237:3001/api/search/${search}`).then((r) => r.json()).then((data) =>
     resData = data
   )
   return resData;
@@ -56,7 +56,7 @@ async function getSearchRestaurants(search) {
 
 async function getSearchRestaurantsWithCategory(search, category) {
   let resData = [];
-  const res = await fetch(`http://34.82.124.237:3001/api/search/${category}/${search}`).then((r) => r.json()).then((data) =>
+  await fetch(`http://34.82.124.237:3001/api/search/${category}/${search}`).then((r) => r.json()).then((data) =>
     resData = data
   )
   return resData;
@@ -64,7 +64,7 @@ async function getSearchRestaurantsWithCategory(search, category) {
 
 async function getSearchRestaurantsByOnlyCategory(category) {
   let resData = [];
-  const res = await fetch(`http://34.82.124.237:3001/api/search/${category}`).then((r) => r.json()).then((data) =>
+  await fetch(`http://34.82.124.237:3001/api/search/${category}`).then((r) => r.json()).then((data) =>
     resData = data
   )
   return resData;
@@ -98,7 +98,7 @@ function App() {
   // Search Use Effect
   useEffect(() => {
     let newRestaurants = [];
-    if(searchResultCategory !== 'all') {
+    if (searchResultCategory !== 'all') {
       getSearchRestaurantsWithCategory(searchResult, searchResultCategory).then((r) => {
         for (let i = 0; i < r.length; i++) {
           r[i]["item"]["ImgUrl"] = restaurantImages[i]?.urls?.regular;
@@ -109,8 +109,8 @@ function App() {
     } else if (searchResultCategory === 'all' && searchResult === '') {
       getAllRestaurants().then((r) => {
         let newRestaurants = [];
-        for(let i = 0; i < r.length; i++) {
-          newRestaurants.push({item: r[i]});
+        for (let i = 0; i < r.length; i++) {
+          newRestaurants.push({ item: r[i] });
         }
         for (let i = 0; i < newRestaurants.length; i++) {
           newRestaurants[i]["item"]["ImgUrl"] = restaurantImages[i]?.urls?.regular;
@@ -143,13 +143,13 @@ function App() {
 
   useEffect(() => {
     let newRestaurants = restaurants;
-  
+
     // if (restaurantImages) {
-      for (let i = 0; i < restaurants.length; i++) {
-        newRestaurants[i]["ImgUrl"] = restaurantImages[i]?.urls?.regular ?? 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80';
-      }
+    for (let i = 0; i < restaurants.length; i++) {
+      newRestaurants[i]["ImgUrl"] = restaurantImages[i]?.urls?.regular ?? 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80';
+    }
     // }
-  
+
     setRestaurants(newRestaurants);
   }, [restaurantImages, restaurants]);
 
@@ -162,8 +162,8 @@ function App() {
       </div>
       <Routes>
         <Route path="/" element={<Home restaurants={restaurants} />} />
-        <Route path="/register" element={<Register> </Register>}/>
-        <Route path="/login" element={<Login> </Login>}/>
+        <Route path="/register" element={<Register> </Register>} />
+        <Route path="/login" element={<Login> </Login>} />
         <Route path="/browse" element={<Browse restaurants={restaurants} />} />
         <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} />} />
         <Route path="/aboutUs" element={<AboutUs />} />

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Forminput from "./Forminput"
-import "./Register.css"
+import styles from "./Register.module.css";
 
 const Register = () => {
     const [values,setValues] = useState({
@@ -95,7 +95,7 @@ const Register = () => {
     console.log(values)
 
     return (
-        <div className="Register">
+        <div className={styles["Register"]}>
             <form onSubmit={handleSubmit}>
                 <h1>GatorGrub</h1>
                 <h2>Register</h2>
