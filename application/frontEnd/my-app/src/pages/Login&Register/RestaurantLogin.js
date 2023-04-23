@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Forminput from "./Forminput"
-import styles from "./Login.module.css";
-import "./Register"
+import styles from "./RestaurantLogin.module.css";
+import "./RestaurantRegister"
 import Button from "react-bootstrap/esm/Button"
 
 const Login = () => {
@@ -18,7 +18,7 @@ const Login = () => {
             placeholder: "Email",
             errorMessage: "It should be a vaild SFSU email, such as example@sfsu.edu",
             label: "Email",
-            pattern: "[a-z0-9._%+-]+@sfsu.edu$",
+            pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$",
             required: true,
         },
         {
@@ -47,7 +47,7 @@ const Login = () => {
         <div className={styles["Login"]}>
             <form onSubmit={handleSubmit}>
             <div className={styles["Title"]}>
-                Start the day
+                Open the day
             </div>
             <div className={styles["Title2"]}>
                 with GatorGrub!
@@ -59,7 +59,7 @@ const Login = () => {
                 <a href="/forgotpassword">Forgot the password?</a>
             </div>
             <div className={styles["Registerpath"]}>
-                Need to register?<a href="http://localhost:3000/register">Sign Up!</a>
+                Need to register?<a href="http://localhost:3000/Restaurant-register">Sign Up!</a>
             </div>
             </form>
         </div>

@@ -7,7 +7,7 @@
         rgba(255,255,255,0.7)
         rgba(255,255,255,0.3)
     );
-    background-image: url("https://images.rawpixel.com/image_1000/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2lzMTYwNjItaW1hZ2Uta3d2eWZrd3IuanBn.jpg?auto=compress&cs=tinysrgb&dpr=2&w=500");
+    background-image: url("https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&dpr=1");
     background-size: cover;
     background-position: center;
 }
@@ -18,13 +18,25 @@ form{
     border-radius: 10px;
 }
 
-h1{
-    color: rgb(77,1,77);
+.Title {
+    color: rgb(77, 1, 77);
+    font-weight: bold;
     text-align: center;
+    font-size: 40px;
+    padding-top: 5px;
 }
-h2{
-    color: rgb(77,1,77);
+
+.Title2 {
+    color: rgb(77, 1, 77);
+    font-weight: bold;
     text-align: center;
+    font-size: 35px;
+    padding-bottom: 5px;
+}
+
+.Registerpath{
+    text-align: 10px;
+    padding: 5px;
 }
 
 button{

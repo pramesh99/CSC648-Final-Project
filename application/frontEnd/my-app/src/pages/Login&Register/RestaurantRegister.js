@@ -1,9 +1,10 @@
 import { useState } from "react"
 import Forminput from "./Forminput"
-import styles from "./Register.module.css";
+import styles from "./RestaurantRegister.module.css";
 
 const Register = () => {
     const [values,setValues] = useState({
+        restaurent:"",
         email:"",
         firstname:"",
         lastname:"",
@@ -15,34 +16,43 @@ const Register = () => {
     const inputs = [
         {
             id:1,
-            name:"firstname",
+            name:"restaurentname",
             type:"text",
-            placeholder:"First Name",
+            placeholder:"Restaurent Name",
             errorMessage:" ",
-            label:"First Name",
+            label:"Restaurent Name",
             required: true,
         },
         {
             id:2,
-            name:"lastname",
+            name:"ownerfirstname",
             type:"text",
-            placeholder:"Last Name",
+            placeholder:"First Name",
             errorMessage:" ",
-            label:"Last Name",
+            label:"Owner First Name",
             required: true,
         },
         {
             id:3,
-            name:"email",
-            type:"email",
-            placeholder:"Email",
-            errorMessage:"It should be a vaild SFSU email, such as example@sfsu.edu",
-            label:"Email",
-            pattern: "[a-z0-9._%+-]+@sfsu.edu$",
+            name:"ownerlastname",
+            type:"text",
+            placeholder:"Last Name",
+            errorMessage:" ",
+            label:"Owner Last Name",
             required: true,
         },
         {
             id:4,
+            name:"email",
+            type:"email",
+            placeholder:"Email",
+            errorMessage:"Please put the vaild email",
+            label:"Email",
+            pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$",
+            required: true,
+        },
+        {
+            id:5,
             name:"phone",
             type:"tel",
             placeholder:"Phone Number",
@@ -52,7 +62,7 @@ const Register = () => {
             required: true,
         },
         {
-            id:5,
+            id:6,
             name:"password",
             type:"password",
             placeholder:"Password",
@@ -62,13 +72,22 @@ const Register = () => {
             required: true,
         },
         {
-            id:6,
+            id:7,
             name:"confirmPassword",
             type:"password",
             placeholder:"Confirm Password",
             errorMessage:"Password don't match!",
             label:"Confirm Password",
             pattern: values.password,
+            required: true,
+        },
+        {
+            id:8,
+            name:"Resturent Document",
+            type:"file",
+            placeholder:"Document",
+            errorMessage:"Please upload the document picture!",
+            label:"Please Upload the Resturant Register Form",
             required: true,
         }
     ]
@@ -87,20 +106,20 @@ const Register = () => {
         <div className={styles["Register"]}>
             <form onSubmit={handleSubmit}>
                 <div className={styles["Title"]}>
-                    GatorGrub 
+                    GatorGrub
                 </div>
                 <div className={styles["Title2"]}>
-                    Be our Member! 
+                    Be our Business
                 </div>
                 {inputs.map((input)=>(
                 <Forminput key={input.id} {...input} value={values[input.name]} onChange = {onChange}></Forminput>))}
                 <div className="Agreement" >
-                <input type="checkbox" id="agree-checkbox" name="agree-checkbox" required={true} ></input>
-                <label for="agree-checkbox"> I agree to the <a href="/terms-and-conditions" target="_blank" rel="noopener">terms and conditions</a>.</label>
+                    <input type="checkbox" id="agree-checkbox" name="agree-checkbox" required={true} ></input>
+                    <label for="agree-checkbox"> I agree to the <a href="/terms-and-conditions" target="_blank" rel="noopener">terms and conditions</a>.</label>
                 </div>
                 <button className="Submit" type = "submit">Sign Up</button>
                 <div className={styles["Loginpath"]}>
-                Already have an account?<a href="http://localhost:3000/login">Log in</a>
+                Already have an account?<a href="http://localhost:3000/Restaurant-login">Log in</a>
                 </div>
             </form>
         </div>

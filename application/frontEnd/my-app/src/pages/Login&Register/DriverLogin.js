@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Forminput from "./Forminput"
-import styles from "./Login.module.css";
-import "./Register"
+import styles from "./DriverLogin.module.css";
+import "./DriverRegister"
 import Button from "react-bootstrap/esm/Button"
 
 const Login = () => {
@@ -47,7 +47,7 @@ const Login = () => {
         <div className={styles["Login"]}>
             <form onSubmit={handleSubmit}>
             <div className={styles["Title"]}>
-                Start the day
+                Ride the day
             </div>
             <div className={styles["Title2"]}>
                 with GatorGrub!
@@ -59,7 +59,7 @@ const Login = () => {
                 <a href="/forgotpassword">Forgot the password?</a>
             </div>
             <div className={styles["Registerpath"]}>
-                Need to register?<a href="http://localhost:3000/register">Sign Up!</a>
+                Want to be our Team?<a href="http://localhost:3000/Driver-register">Sign Up!</a>
             </div>
             </form>
         </div>
