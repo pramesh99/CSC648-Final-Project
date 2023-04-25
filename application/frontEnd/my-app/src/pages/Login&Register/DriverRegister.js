@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Forminput from "./Forminput"
-import styles from "./Register.module.css";
+import styles from "./DriverRegister.module.css";
 
 const Register = () => {
     const [values,setValues] = useState({
@@ -70,6 +70,15 @@ const Register = () => {
             label:"Confirm Password",
             pattern: values.password,
             required: true,
+        },
+        {
+            id:7,
+            name:"Driver ID",
+            type:"file",
+            placeholder:"Document",
+            errorMessage:"Please upload your ID!",
+            label:"Please Upload the ID",
+            required: true,
         }
     ]
     
@@ -90,17 +99,17 @@ const Register = () => {
                     GatorGrub 
                 </div>
                 <div className={styles["Title2"]}>
-                    Be our Member! 
+                    Be our Team! 
                 </div>
                 {inputs.map((input)=>(
                 <Forminput key={input.id} {...input} value={values[input.name]} onChange = {onChange}></Forminput>))}
                 <div className="Agreement" >
-                <input type="checkbox" id="agree-checkbox" name="agree-checkbox" required={true} ></input>
-                <label for="agree-checkbox"> I agree to the <a href="/terms-and-conditions" target="_blank" rel="noopener">terms and conditions</a>.</label>
+                    <input type="checkbox" id="agree-checkbox" name="agree-checkbox" required={true} ></input>
+                    <label for="agree-checkbox"> I agree to the <a href="/terms-and-conditions" target="_blank" rel="noopener">terms and conditions</a>.</label>
                 </div>
                 <button className="Submit" type = "submit">Sign Up</button>
                 <div className={styles["Loginpath"]}>
-                Already have an account?<a href="http://localhost:3000/login">Log in</a>
+                Already have an account?<a href="http://localhost:3000/Driver-login">Log in</a>
                 </div>
             </form>
         </div>

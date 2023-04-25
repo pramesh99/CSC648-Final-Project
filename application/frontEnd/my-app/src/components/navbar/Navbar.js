@@ -71,8 +71,10 @@ function Navbar(props) {
             <div id={styles["right-buttons"]}>
                <Link to="/register" id={styles["right-buttons-text"]}>Register</Link>
                <Link to="/login" id={styles["right-buttons-text"]}>Login</Link>
-               <Link to="/aboutUs" id={styles["right-buttons-text"]}>Drivers</Link>
-               <Link to="/aboutUs" id={styles["right-buttons-text"]}>Restaurant Owners</Link>
+               <Link to="/Driver-register" id={styles["right-buttons-text"]}>Driver Register</Link>
+               <Link to="/Driver-login" id={styles["right-buttons-text"]}>Driver Login</Link>
+               <Link to="/Restaurant-register" id={styles["right-buttons-text"]}>Restaurant Register</Link>
+               <Link to="/Restaurant-login" id={styles["right-buttons-text"]}>Restaurant Login</Link>
                <Link to="/aboutUs" id={styles["right-buttons-text"]}>About Us</Link>
             </div>
          </div>

@@ -13,8 +13,12 @@ import { createApi } from 'unsplash-js';
 import Browse from './pages/browse/Browse';
 import Result from './pages/result/Result';
 import Register from './pages/Login&Register/Register';
+import DriverRegister from './pages/Login&Register/DriverRegister'
+import RestaurantRegister from './pages/Login&Register/RestaurantRegister'
 import Login from './pages/Login&Register/Login';
 import Restaurant from './pages/restaurant/Restaurant';
+import DriverLogin from './pages/Login&Register/DriverLogin'
+import RestaurantLogin from './pages/Login&Register/RestaurantLogin'
 // import fetch from 'node-fetch';
 
 function getRestaurantImgs(numOfRestaurants) {
@@ -163,6 +167,10 @@ function App() {
         <Route path="/" element={<Home restaurants={restaurants} />} />
         <Route path="/register" element={<Register> </Register>} />
         <Route path="/login" element={<Login> </Login>} />
+        <Route path="/Driver-register" element={<DriverRegister/> } />
+        <Route path="/Driver-login" element={<DriverLogin />} />
+        <Route path="/Restaurant-register" element={<RestaurantRegister> </RestaurantRegister>} />
+        <Route path="/Restaurant-login" element={<RestaurantLogin /> } />
         <Route path="/browse" element={<Browse restaurants={restaurants} />} />
         <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} />} />
         <Route path="/restaurant" element={<Restaurant/>}/>
