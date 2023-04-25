@@ -14,10 +14,10 @@ import Browse from './pages/browse/Browse';
 import Result from './pages/result/Result';
 import Register from './pages/Login&Register/Register';
 import Login from './pages/Login&Register/Login';
+import Restaurant from './pages/restaurant/Restaurant';
 // import fetch from 'node-fetch';
 
 function getRestaurantImgs(numOfRestaurants) {
-
 
   let search = {
     query: "restaurant",
@@ -44,7 +44,6 @@ async function getAllRestaurants() {
   )
   return resData;
 }
-
 
 async function getSearchRestaurants(search) {
   let resData = [];
@@ -166,6 +165,7 @@ function App() {
         <Route path="/login" element={<Login> </Login>} />
         <Route path="/browse" element={<Browse restaurants={restaurants} />} />
         <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} />} />
+        <Route path="/restaurant" element={<Restaurant/>}/>
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/aboutUs/Shauhin" element={<Shauhin />} />
         <Route path="/aboutUs/Hieu" element={<Hieu />} />
