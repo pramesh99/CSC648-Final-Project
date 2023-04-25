@@ -6,17 +6,22 @@ import Card from 'react-bootstrap/Card';
 // import { Link } from "react-router-dom";
 
 function Restaurant(props) {
+   console.log("selected restaurant", props.restaurant);
+
+   let restaurant = props.restaurant;
+
    let menu = props.menu;
    let menuItems;
+
    if (menu) {
       menuItems = menu.map((item) => (
          <MenuItem name={item.name} description={item.description} price={item.price} />
       ))
    }
-   
+
    return (
       <div id={styles["restaurant-card"]}>
-         <h2 id={styles["restaurant-name"]}>{props.name}</h2>
+         <h2 id={styles["restaurant-name"]}>{restaurant.RestaurantName}</h2>
          <div>
             <Card
                bg={'light'}
@@ -33,7 +38,7 @@ function Restaurant(props) {
                </Card.Body>
             </Card>
             <Card id={styles['restaurant-description']}>
-               <Card.Body>Description: {props.description}</Card.Body>
+               <Card.Body>Description: {restaurant.RestaurantDescription}</Card.Body>
             </Card>
          </div>
 

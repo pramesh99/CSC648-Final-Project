@@ -84,6 +84,8 @@ function App() {
   const [restaurantImages, setRestaurantImages] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
 
+  const [selectedRestaurant, setSelectedRestaurant] = useState([]);
+
   const [searchRestaurants, setSearchRestaurants] = useState([]);
 
   useEffect(() => {
@@ -171,9 +173,9 @@ function App() {
         <Route path="/Driver-login" element={<DriverLogin />} />
         <Route path="/Restaurant-register" element={<RestaurantRegister> </RestaurantRegister>} />
         <Route path="/Restaurant-login" element={<RestaurantLogin /> } />
-        <Route path="/browse" element={<Browse restaurants={restaurants} />} />
-        <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} />} />
-        <Route path="/restaurant" element={<Restaurant/>}/>
+        <Route path="/browse" element={<Browse restaurants={restaurants} setSelectedRestaurant={setSelectedRestaurant}/>} />
+        <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} setSelectedRestaurant={setSelectedRestaurant}/>} />
+        <Route path="/restaurant" element={<Restaurant restaurant={selectedRestaurant}/>}/>
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/aboutUs/Shauhin" element={<Shauhin />} />
         <Route path="/aboutUs/Hieu" element={<Hieu />} />
