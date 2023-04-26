@@ -19,7 +19,7 @@ function Result(props) {
    let restaurants;
    if(props.restaurants){
       restaurants = props.restaurants.map((restaurant) => (
-         <RestaurantCard name={restaurant.item.RestaurantName} img={restaurant.item.ImgUrl} description={restaurant.item.RestaurantDescription}/>
+         <RestaurantCard restaurant ={restaurant} name={restaurant.item.RestaurantName} img={restaurant.item.ImgUrl} description={restaurant.item.RestaurantDescription} setSelectedRestaurant={props.setSelectedRestaurant}/>
       ))
    }
 

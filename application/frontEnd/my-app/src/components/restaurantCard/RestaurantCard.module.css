@@ -1,6 +1,7 @@
 #restaurant-card {
    margin-right: 25px;
    margin-bottom: 20px;
+   cursor: pointer;
 }
 
 #restaurant-picture {
@@ -33,4 +34,9 @@
 #restaurant-menu {
    display: flex;
    flex-direction: column;
+}
+
+#link-style {
+   text-decoration: none;
+   color: black;
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import { useNavigate } from 'react-router-dom';
+import Register from '../../pages/Login&Register/Register';
 import Result from '../../pages/result/Result';
 
 function Navbar(props) {
@@ -13,7 +14,8 @@ function Navbar(props) {
    const setSearch = props.setSearch;
    const setSearchResult = props.setSearchResult;
    const setSearchResultCategory = props.setSearchResultCategory;
-
+   const userName = props.userName;
+   console.log(props);
    const handleChange = (event) => {
       setSearch(event.target.value);
       // console.log(event.target.value)
@@ -63,13 +65,20 @@ function Navbar(props) {
 
             </div>
             {/* <div id={styles["profile-icon-container"]}> */}
-            <div id={styles["profile-icon"]}></div>
+            <div id={styles["profile-icon-container"]}>
+               <div id={styles["user-name"]}>{userName}</div>
+               <div id={styles["profile-icon"]}></div>
+            </div>
             {/* </div> */}
          </div>
          <div id={styles["tabs"]}>
             <div id={styles["right-buttons"]}>
-               <Link to="/aboutUs" id={styles["right-buttons-text"]}>Drivers</Link>
-               <Link to="/aboutUs" id={styles["right-buttons-text"]}>Restaurant Owners</Link>
+               <Link to="/register" id={styles["right-buttons-text"]}>Register</Link>
+               <Link to="/login" id={styles["right-buttons-text"]}>Login</Link>
+               <Link to="/Driver-register" id={styles["right-buttons-text"]}>Driver Register</Link>
+               <Link to="/Driver-login" id={styles["right-buttons-text"]}>Driver Login</Link>
+               <Link to="/Restaurant-register" id={styles["right-buttons-text"]}>Restaurant Register</Link>
+               <Link to="/Restaurant-login" id={styles["right-buttons-text"]}>Restaurant Login</Link>
                <Link to="/aboutUs" id={styles["right-buttons-text"]}>About Us</Link>
             </div>
          </div>

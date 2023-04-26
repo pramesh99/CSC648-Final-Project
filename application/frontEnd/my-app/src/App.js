@@ -12,10 +12,16 @@ import { useEffect, useState } from 'react';
 import { createApi } from 'unsplash-js';
 import Browse from './pages/browse/Browse';
 import Result from './pages/result/Result';
+import Register from './pages/Login&Register/Register';
+import DriverRegister from './pages/Login&Register/DriverRegister'
+import RestaurantRegister from './pages/Login&Register/RestaurantRegister'
+import Login from './pages/Login&Register/Login';
+import Restaurant from './pages/restaurant/Restaurant';
+import DriverLogin from './pages/Login&Register/DriverLogin'
+import RestaurantLogin from './pages/Login&Register/RestaurantLogin'
 // import fetch from 'node-fetch';
 
 function getRestaurantImgs(numOfRestaurants) {
-
 
   let search = {
     query: "restaurant",
@@ -37,16 +43,15 @@ async function getAllRestaurants() {
   // )
 
   let resData = [];
-  const res = await fetch("http://34.82.124.237:3001/api/allRestaurants").then((r) => r.json()).then((data) =>
+  await fetch("http://34.82.124.237:3001/api/allRestaurants").then((r) => r.json()).then((data) =>
     resData = data
   )
   return resData;
 }
 
-
 async function getSearchRestaurants(search) {
   let resData = [];
-  const res = await fetch(`http://34.82.124.237:3001/api/search/${search}`).then((r) => r.json()).then((data) =>
+  await fetch(`http://34.82.124.237:3001/api/search/${search}`).then((r) => r.json()).then((data) =>
     resData = data
   )
   return resData;
@@ -54,7 +59,15 @@ async function getSearchRestaurants(search) {
 
 async function getSearchRestaurantsWithCategory(search, category) {
   let resData = [];
-  const res = await fetch(`http://34.82.124.237:3001/api/search/${category}/${search}`).then((r) => r.json()).then((data) =>
+  await fetch(`http://34.82.124.237:3001/api/search/${category}/${search}`).then((r) => r.json()).then((data) =>
+    resData = data
+  )
+  return resData;
+}
+
+async function getSearchRestaurantsByOnlyCategory(category) {
+  let resData = [];
+  await fetch(`http://34.82.124.237:3001/api/search/${category}`).then((r) => r.json()).then((data) =>
     resData = data
   )
   return resData;
@@ -79,7 +92,12 @@ function App() {
   const [restaurantImages, setRestaurantImages] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
 
+  const [selectedRestaurant, setSelectedRestaurant] = useState([]);
+
   const [searchRestaurants, setSearchRestaurants] = useState([]);
+
+  // User DSata
+  const [userName, setUserName] = useState('');
 
   useEffect(() => {
     getAllRestaurants().then((r) => {
@@ -96,7 +114,7 @@ function App() {
   // Search Use Effect
   useEffect(() => {
     let newRestaurants = [];
-    if(searchResultCategory !== 'all') {
+    if (searchResultCategory !== 'all') {
       getSearchRestaurantsWithCategory(searchResult, searchResultCategory).then((r) => {
         for (let i = 0; i < r.length; i++) {
           r[i]["item"]["ImgUrl"] = restaurantImages[i]?.urls?.regular;
@@ -107,8 +125,8 @@ function App() {
     } else if (searchResultCategory === 'all' && searchResult === '') {
       getAllRestaurants().then((r) => {
         let newRestaurants = [];
-        for(let i = 0; i < r.length; i++) {
-          newRestaurants.push({item: r[i]});
+        for (let i = 0; i < r.length; i++) {
+          newRestaurants.push({ item: r[i] });
         }
         for (let i = 0; i < newRestaurants.length; i++) {
           newRestaurants[i]["item"]["ImgUrl"] = restaurantImages[i]?.urls?.regular;
@@ -141,13 +159,13 @@ function App() {
 
   useEffect(() => {
     let newRestaurants = restaurants;
-  
+
     // if (restaurantImages) {
-      for (let i = 0; i < restaurants.length; i++) {
-        newRestaurants[i]["ImgUrl"] = restaurantImages[i]?.urls?.regular ?? 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80';
-      }
+    for (let i = 0; i < restaurants.length; i++) {
+      newRestaurants[i]["ImgUrl"] = restaurantImages[i]?.urls?.regular ?? 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80';
+    }
     // }
-  
+
     setRestaurants(newRestaurants);
   }, [restaurantImages, restaurants]);
 
@@ -155,13 +173,25 @@ function App() {
     <>
       <div className="App">
         <header className="App-header">
-          <Navbar search={search} setSearch={setSearch} setSearchResult={setSearchResult} setSearchResultCategory={setSearchResultCategory} />
+          <Navbar
+            search={search}
+            setSearch={setSearch}
+            setSearchResult={setSearchResult}
+            setSearchResultCategory={setSearchResultCategory}
+            userName={userName} />
         </header>
       </div>
       <Routes>
         <Route path="/" element={<Home restaurants={restaurants} />} />
-        <Route path="/browse" element={<Browse restaurants={restaurants} />} />
-        <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} />} />
+        <Route path="/login" element={<Login setUserName={setUserName}> </Login>} />
+        <Route path="/Driver-login" element={<DriverLogin setUserName={setUserName}/>} />
+        <Route path="/Restaurant-login" element={<RestaurantLogin setUserName={setUserName}/>} />
+        <Route path="/register" element={<Register> </Register>} />
+        <Route path="/Driver-register" element={<DriverRegister />} />
+        <Route path="/Restaurant-register" element={<RestaurantRegister> </RestaurantRegister>} />
+        <Route path="/browse" element={<Browse restaurants={restaurants} setSelectedRestaurant={setSelectedRestaurant} />} />
+        <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} setSelectedRestaurant={setSelectedRestaurant} />} />
+        <Route path="/restaurant" element={<Restaurant restaurant={selectedRestaurant} />} />
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/aboutUs/Shauhin" element={<Shauhin />} />
         <Route path="/aboutUs/Hieu" element={<Hieu />} />

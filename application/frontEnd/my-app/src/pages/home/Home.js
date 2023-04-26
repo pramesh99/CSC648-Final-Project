@@ -45,7 +45,7 @@ function Home(props) {
                <br></br>
                GatorGrub drivers and restaurant owners find new oportunities for satisfying customers and earning more profits!
             </div>
-            <Button variant="secondary" style={{ width: "55%", height: "15%" }}>Sign Up</Button>{' '}
+            <Button variant="secondary" href="http://localhost:3000/login"style={{ width: "25%", height: "8%" }}>Sign Up</Button>{' '}
 
          </div>
       </div>

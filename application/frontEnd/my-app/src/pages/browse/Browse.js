@@ -15,8 +15,10 @@ const center = {
 
 function Browse(props) {
 
+   // console.log(props);
+
    let restaurants = props.restaurants.map((restaurant) => (
-      <RestaurantCard name={restaurant.RestaurantName} img={restaurant.ImgUrl} description={restaurant.RestaurantDescription} />
+      <RestaurantCard restaurant ={restaurant} name={restaurant.RestaurantName} img={restaurant.ImgUrl} description={restaurant.RestaurantDescription} setSelectedRestaurant={props.setSelectedRestaurant}/>
    ))
 
    let markerPositions = [];
