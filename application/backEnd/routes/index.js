@@ -17,7 +17,8 @@ router.get('/restOwners', async (req,res,next) => { // route is appended to /api
     }
 });
 
-router.get('/restaurants/:cuisine', async (req,res,next) => { // route is appended to /api in server.js
+// get restuarants by category
+router.get('/search/:cuisine', async (req,res,next) => { // route is appended to /api in server.js
     try {
         let results = await db.getRestByCuisine(req.params.cuisine); // params go here
         res.json(results);
@@ -28,7 +29,7 @@ router.get('/restaurants/:cuisine', async (req,res,next) => { // route is append
 });
 
 // get all restaurants
-router.get('/allRestaurants', async (req, res, next) => {
+router.get('/search/allRestaurants', async (req, res, next) => {
     try {
         let results = await db.getAllRestaurants();
         res.json(results);
@@ -38,8 +39,8 @@ router.get('/allRestaurants', async (req, res, next) => {
     }
 });
 
-// query to get all available cuisines
-router.get('/allCuisines', async (req, res, next) => {
+// query to get all available cuisines for dropdown
+router.get('/search/allCuisines', async (req, res, next) => {
     try {
         let results = await db.getAllCuisines();
         res.json(results);

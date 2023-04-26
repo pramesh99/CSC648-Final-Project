@@ -43,8 +43,8 @@ DB.getAllRestaurants = () => {
 
 DB.getRestByCuisine = (cuisine) => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT (SOUNDEX(RestaurantCuisine) - SOUNDEX(?)) FROM Restaurant WHERE RestaurantCuisine LIKE ?',
-            [cuisine, '%'.concat(cuisine, '%')], //prevent SQL injection
+        pool.query('SELECT * FROM Restaurant WHERE RestaurantCuisine = ?',
+            [cuisine], //prevent SQL injection
             (err, results) => {
                 if (err) {
                     return reject(err);
@@ -76,7 +76,8 @@ DB.searchBarQueryNoCuisine = (search_input) => {
                     return reject(err);
                 }
                 const fuse_dict = results;
-                const fuse = new Fuse(fuse_dict, {keys: ['RestaurantName', 'RestaurantCuisine', 'RestaurantDescription']});
+                const fuse = new Fuse(fuse_dict, {threshold: 0.4, keys: ['RestaurantName', 'RestaurantCuisine', 'RestaurantDescription']});
+                console.log(fuse.search(search_input))
                 return resolve(fuse.search(search_input));
             });
     });
@@ -91,7 +92,7 @@ DB.searchBarQueryWithCuisine = (cuisine, search_input) => {
                     return reject(err);
                 }
                 const fuse_dict = results;
-                const fuse = new Fuse(fuse_dict, {keys: ['RestaurantName', 'RestaurantDescription']});
+                const fuse = new Fuse(fuse_dict, {threshold: 0.4, keys: ['RestaurantName', 'RestaurantDescription']});
                 return resolve(fuse.search(search_input));
             });
     });
