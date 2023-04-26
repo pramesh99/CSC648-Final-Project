@@ -31,7 +31,7 @@ router.get('/search/:cuisine', async (req,res,next) => { // route is appended to
 });
 
 // get all restaurants
-router.get('/search/allRestaurants', async (req, res, next) => {
+router.get('/allRestaurants', async (req, res, next) => {
     try {
         let results = await db.getAllRestaurants();
         res.json(results);
@@ -42,7 +42,7 @@ router.get('/search/allRestaurants', async (req, res, next) => {
 });
 
 // query to get all available cuisines for dropdown
-router.get('/search/allCuisines', async (req, res, next) => {
+router.get('/allCuisines', async (req, res, next) => {
     try {
         let results = await db.getAllCuisines();
         res.json(results);
