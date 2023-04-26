@@ -28,8 +28,16 @@ VALUES ("Nathan Luu", "nathanluu@gmail.com", "1231231234", "password8!"),
     ("Catrina Oliver", "catrinaoliver@gmail.com", "1231231234", "password8!")
 ;
 
+INSERT INTO SFSUCustomer (SFSUCustomerID, SFSUCustomerName, SFSUCustomerEmail, SFSUCustomerPhone, SFSUCustomerPassword)
+VALUES (1, "Balthazar McSquishy", "mcsquishb@sfsu.edu", "1231231234", "password8!"),
+       (2, "Gertrude Puddlesworth", "puddle.gert@sfsu.edu", "1231231234", "password8!"),
+       (3, "Barnaby McFluffernutter", "nutfluff@sfsu.edu", "1231231234", "password8!"),
+       (4, "Hortense Snickerdoodle", "hors@sfsu.edu", "1231231234", "password8!"),
+       (5, "Chuckleberry Finnegan", "chuck.finn@sfsu.edu", "1231231234", "password8!")
+;
+
 INSERT INTO Restaurant (RestaurantOwnerID, RestaurantRegistered, RestaurantName, RestaurantPhone, RestaurantPassword, 
-						RestaurantAddress, RestaurantCuisine, RestaurantPriceTier, RestaurantHours, RestaurantPrepTime RestaurantImage RestaurantCoordinates) 
+						RestaurantAddress, RestaurantCuisine, RestaurantPriceTier, RestaurantHours, RestaurantPrepTime, RestaurantImage, RestaurantCoordinates) 
 VALUES (1, 1, "Eating Place", "1234567890", "password1", "155 Winston Dr, San Francisco, CA 94132", "American", "3", "", "25", "./src/images/restaurant/12345", '37.7266,-122.4744'),
 		(2, 1, "Eating Location", "1234567890", "password2", "155 Winston Dr, San Francisco, CA 94132", "American", "5", "", "25", "./src/images/restaurant/12345", '37.7266,-122.4744'),
         (3, 1, "Feasting Area", "1234567890", "password3", "155 Winston Dr, San Francisco, CA 94132", "Italian", "1", "", "25", "./src/images/restaurant/12345", '37.7266,-122.4744'),
@@ -38,4 +46,3 @@ VALUES (1, 1, "Eating Place", "1234567890", "password1", "155 Winston Dr, San Fr
         (6, 1, "Gobbling Garden", "1234567890", "password6", "155 Winston Dr, San Francisco, CA 94132", "Indian", "4", "", "25", "./src/images/restaurant/12345", '37.7266,-122.4744'),
         (7, 1, "Stuffing Square", "1234567890", "password7", "155 Winston Dr, San Francisco, CA 94132", "Indian", "2", "", "25", "./src/images/restaurant/12345", '37.7266,-122.4744')
 ;
-

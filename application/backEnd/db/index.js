@@ -98,4 +98,85 @@ DB.searchBarQueryWithCuisine = (cuisine, search_input) => {
     });
 }
 
+DB.SFSUCustomerReg = (name, email, phone, password) => {
+    return new Promise ((resolve, reject) => {
+        // let q = 'INSERT INTO SFSUCustomer (SFSUCustomerID, SFSUCustomerName, SFSUCustomerEmail, SFSUCustomerPhone, SFSUCustomerPassword) VALUES ("Balthazar McSquishy", "mcsquishb@sfsu.edu", "1231231234", "password8!")';
+        pool.query('INSERT INTO SFSUCustomer (SFSUCustomerName, SFSUCustomerEmail, SFSUCustomerPhone, SFSUCustomerPassword) VALUES (?, ?, ?, ?)',
+            [name, email, phone, password],
+            (err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(results);
+            });
+    });
+}
+
+DB.DriverReg = (name, email, phone, password) => {
+    return new Promise ((resolve, reject) => {
+        // let q = 'INSERT INTO SFSUCustomer (SFSUCustomerID, SFSUCustomerName, SFSUCustomerEmail, SFSUCustomerPhone, SFSUCustomerPassword) VALUES ("Balthazar McSquishy", "mcsquishb@sfsu.edu", "1231231234", "password8!")';
+        pool.query('INSERT INTO Driver (DriverName, DriverEmail, DriverPhone, DriverPassword) VALUES (?, ?, ?, ?)',
+            [name, email, phone, password],
+            (err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(results);
+            });
+    });
+}
+
+DB.RestaurantOwnerReg = (name, email, phone, password) => {
+    return new Promise ((resolve, reject) => {
+        // let q = 'INSERT INTO SFSUCustomer (SFSUCustomerID, SFSUCustomerName, SFSUCustomerEmail, SFSUCustomerPhone, SFSUCustomerPassword) VALUES ("Balthazar McSquishy", "mcsquishb@sfsu.edu", "1231231234", "password8!")';
+        pool.query('INSERT INTO RestaurantOwner (RestaurantOwnerName, RestaurantOwnerEmail, RestaurantOwnerPhone, RestaurantOwnerPassword) VALUES (?, ?, ?, ?)',
+            [name, email, phone, password],
+            (err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(results);
+            });
+    });
+}
+
+DB.getSFSUCustomer = (email) => {
+    return new Promise ((resolve, reject) => {
+        pool.query('SELECT * FROM SFSUCustomer WHERE SFSUCustomerEmail = ?',
+        [email],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+
+DB.getDriver = (email) => {
+    return new Promise ((resolve, reject) => {
+        pool.query('SELECT * FROM Driver WHERE DriverEmail = ?',
+        [email],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+
+DB.getRestaurantOwner = (email) => {
+    return new Promise ((resolve, reject) => {
+        pool.query('SELECT * FROM RestaurantOwner WHERE RestaurantOwnerEmail = ?',
+        [email],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+
 module.exports = DB;
