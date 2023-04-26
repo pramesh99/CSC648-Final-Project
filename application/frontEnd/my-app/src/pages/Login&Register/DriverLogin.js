@@ -4,7 +4,7 @@ import styles from "./DriverLogin.module.css";
 import "./DriverRegister"
 import Button from "react-bootstrap/esm/Button"
 
-const Login = () => {
+const Login = (props) => {
     const [values, setValues] = useState({
         email: "",
         password: "",
@@ -28,12 +28,34 @@ const Login = () => {
             placeholder: "Password",
             errorMessage: "Your email or password was incorrect",
             label: "Password",
-            pattern: "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$",
+            // pattern: "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$",
             required: true,
         }
     ]
 
+    async function login() {
+        let resData = [];
+        fetch(`http://34.82.124.237:3001/api/login`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                r_type: "Driver",
+                email: values.email,
+                password: values.password,
+            })
+        })
+        .then(response => response.json())
+        .then(response => console.log(JSON.stringify(response)))
+        
+        return resData;
+    }
+
+    
     const handleSubmit = (e) => {
+        login();
         e.preventDefault();
     }
 

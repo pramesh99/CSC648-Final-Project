@@ -89,7 +89,12 @@
 }
 
 #profile-icon-container {
-
+   display: flex;
+   flex-direction: row;
+   width: 12rem;
+   align-items: center;
+   padding-right: 25px;
+   justify-content: space-between;
 }
 
 #profile-icon {
@@ -120,6 +125,11 @@
    text-decoration: none;
    margin-left: 25px;
 }
+
+#user-name {
+   color: white;
+}
+
 
 /* #right-buttons-text:active {
    color: grey;

@@ -14,7 +14,8 @@ function Navbar(props) {
    const setSearch = props.setSearch;
    const setSearchResult = props.setSearchResult;
    const setSearchResultCategory = props.setSearchResultCategory;
-
+   const userName = props.userName;
+   console.log(props);
    const handleChange = (event) => {
       setSearch(event.target.value);
       // console.log(event.target.value)
@@ -64,7 +65,10 @@ function Navbar(props) {
 
             </div>
             {/* <div id={styles["profile-icon-container"]}> */}
-            <div id={styles["profile-icon"]}></div>
+            <div id={styles["profile-icon-container"]}>
+               <div id={styles["user-name"]}>{userName}</div>
+               <div id={styles["profile-icon"]}></div>
+            </div>
             {/* </div> */}
          </div>
          <div id={styles["tabs"]}>

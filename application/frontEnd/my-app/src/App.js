@@ -88,6 +88,9 @@ function App() {
 
   const [searchRestaurants, setSearchRestaurants] = useState([]);
 
+  // User DSata
+  const [userName, setUserName] = useState('');
+
   useEffect(() => {
     getAllRestaurants().then((r) => {
       setRestaurants(r);
@@ -162,20 +165,25 @@ function App() {
     <>
       <div className="App">
         <header className="App-header">
-          <Navbar search={search} setSearch={setSearch} setSearchResult={setSearchResult} setSearchResultCategory={setSearchResultCategory} />
+          <Navbar
+            search={search}
+            setSearch={setSearch}
+            setSearchResult={setSearchResult}
+            setSearchResultCategory={setSearchResultCategory}
+            userName={userName} />
         </header>
       </div>
       <Routes>
         <Route path="/" element={<Home restaurants={restaurants} />} />
+        <Route path="/login" element={<Login setUserName={setUserName}> </Login>} />
+        <Route path="/Driver-login" element={<DriverLogin setUserName={setUserName}/>} />
+        <Route path="/Restaurant-login" element={<RestaurantLogin setUserName={setUserName}/>} />
         <Route path="/register" element={<Register> </Register>} />
-        <Route path="/login" element={<Login> </Login>} />
-        <Route path="/Driver-register" element={<DriverRegister/> } />
-        <Route path="/Driver-login" element={<DriverLogin />} />
+        <Route path="/Driver-register" element={<DriverRegister />} />
         <Route path="/Restaurant-register" element={<RestaurantRegister> </RestaurantRegister>} />
-        <Route path="/Restaurant-login" element={<RestaurantLogin /> } />
-        <Route path="/browse" element={<Browse restaurants={restaurants} setSelectedRestaurant={setSelectedRestaurant}/>} />
-        <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} setSelectedRestaurant={setSelectedRestaurant}/>} />
-        <Route path="/restaurant" element={<Restaurant restaurant={selectedRestaurant}/>}/>
+        <Route path="/browse" element={<Browse restaurants={restaurants} setSelectedRestaurant={setSelectedRestaurant} />} />
+        <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} setSelectedRestaurant={setSelectedRestaurant} />} />
+        <Route path="/restaurant" element={<Restaurant restaurant={selectedRestaurant} />} />
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/aboutUs/Shauhin" element={<Shauhin />} />
         <Route path="/aboutUs/Hieu" element={<Hieu />} />

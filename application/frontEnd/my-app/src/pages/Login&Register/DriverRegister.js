@@ -81,8 +81,27 @@ const Register = () => {
             required: true,
         }
     ]
-    
+    const register = () => {
+        fetch('http://34.82.124.237:3001/api/submit/registration_form', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                r_type: "Driver",
+                name: values.firstname,
+                email: values.email,
+                phone: values.phone,
+                password: values.password,
+            })
+        })
+            .then(response => response.json())
+            .then(response => console.log(JSON.stringify(response)))
+    }
+
     const handleSubmit = (e)=>{
+        register();
         e.preventDefault();
     }
 
