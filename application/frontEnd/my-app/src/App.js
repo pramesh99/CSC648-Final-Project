@@ -65,14 +65,6 @@ async function getSearchRestaurantsWithCategory(search, category) {
   return resData;
 }
 
-async function getSearchRestaurantsByOnlyCategory(category) {
-  let resData = [];
-  await fetch(`http://34.82.124.237:3001/api/search/${category}`).then((r) => r.json()).then((data) =>
-    resData = data
-  )
-  return resData;
-}
-
 function App() {
 
   const [search, setSearch] = useState('');
