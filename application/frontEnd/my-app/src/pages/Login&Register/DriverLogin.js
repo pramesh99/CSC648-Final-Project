@@ -63,7 +63,7 @@ const Login = (props) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
 
-    console.log(values)
+    // console.log(values)
 
     return (
         <div className={styles["Login"]}>

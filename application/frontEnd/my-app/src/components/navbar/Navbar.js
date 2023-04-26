@@ -15,7 +15,7 @@ function Navbar(props) {
    const setSearchResult = props.setSearchResult;
    const setSearchResultCategory = props.setSearchResultCategory;
    const userName = props.userName;
-   console.log(props);
+   
    const handleChange = (event) => {
       setSearch(event.target.value);
       // console.log(event.target.value)

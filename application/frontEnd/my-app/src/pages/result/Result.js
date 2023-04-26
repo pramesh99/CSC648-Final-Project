@@ -14,8 +14,8 @@ const center = {
 };
 
 function Result(props) {
-
    let search = props.search;
+   console.log("results page", props);
    let restaurants;
    if(props.restaurants){
       restaurants = props.restaurants.map((restaurant) => (
