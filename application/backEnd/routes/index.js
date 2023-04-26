@@ -99,7 +99,7 @@ router.post('/submit/registration_form', async (req, res, next) => {
     }
 });
 
-router.get('/login', async (req, res, next) => {
+router.post('/login', async (req, res, next) => {
     try {
         const formData = req.body;
         let results;
