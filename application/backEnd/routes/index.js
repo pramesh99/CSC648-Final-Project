@@ -99,5 +99,41 @@ router.post('/submit/registration_form', async (req, res, next) => {
     }
 });
 
+router.get('/login', async (req, res, next) => {
+    try {
+        const formData = req.body;
+        let results;
+        if (formData.r_type === 'SFSUCustomer'){
+            results = await db.getSFSUCustomer(formData.email);
+            if (results.length === 0){throw "email"}
+            if (formData.password != results[0].SFSUCustomerPassword){
+                throw "password";
+            }
+        } else if (formData.r_type === 'Driver') {
+            results = await db.getDriver(formData.email);
+            if (results.length === 0){throw "email"}
+            if (formData.password != results[0].DriverPassword){
+                throw "password";
+            }
+        } else if (formData.r_type === 'RestaurantOwner'){
+            results = await db.getRestaurantOwner(formData.email);
+            if (results.length === 0){throw "email"}
+            if (formData.password != results[0].RestaurantOwnerPassword){
+                throw "password";
+            }
+        }
+        res.json(results);
+    } catch(e){
+        // handle invalid login
+        if (e === "email"){
+            res.status(401).send("Invalid credentials: Email does not exist in database.");
+        } else if (e === "password") {
+            res.status(401).send("Invalid credentials: Password is incorrect.");
+        } else {
+            console.log(e);
+            res.sendStatus(500);
+        }
+    }
+});
 
 module.exports = router;

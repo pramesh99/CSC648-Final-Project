@@ -140,4 +140,43 @@ DB.RestaurantOwnerReg = (name, email, phone, password) => {
     });
 }
 
+DB.getSFSUCustomer = (email) => {
+    return new Promise ((resolve, reject) => {
+        pool.query('SELECT * FROM SFSUCustomer WHERE SFSUCustomerEmail = ?',
+        [email],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+
+DB.getDriver = (email) => {
+    return new Promise ((resolve, reject) => {
+        pool.query('SELECT * FROM Driver WHERE DriverEmail = ?',
+        [email],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+
+DB.getRestaurantOwner = (email) => {
+    return new Promise ((resolve, reject) => {
+        pool.query('SELECT * FROM RestaurantOwner WHERE RestaurantOwnerEmail = ?',
+        [email],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+
 module.exports = DB;
