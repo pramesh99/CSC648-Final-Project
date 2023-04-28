@@ -29,10 +29,7 @@ function SelectedItem(props) {
          console.log("DECREMENTED", newSelectedItems[props.name].amount);
 
          if (newSelectedItems[props.name].amount <= 0) {
-            newSelectedItems[props.name].amount = 0;
-            setAmount(newSelectedItems[props.name].amount);
-            setSelectedItems(newSelectedItems);
-            updateTotalCost();
+            removeItem();
          } else {
             newSelectedItems[props.name].amount -= 1;
             setAmount(newSelectedItems[props.name].amount);

@@ -18,7 +18,7 @@ function Restaurant(props) {
    let menuItems;
 
    const [checked, setChecked] = useState(false);
-   const [radioValue, setRadioValue] = useState('1');
+   const [radioValue, setRadioValue] = useState('Delivery');
 
    const [selectedItems, setSelectedItems] = useState({});
    const [total, setTotal] = useState(0);
@@ -35,8 +35,8 @@ function Restaurant(props) {
    }
 
    const radios = [
-      { name: 'Pickup', value: '1' },
-      { name: 'Delivery', value: '2' },
+      { name: 'Pickup', value: 'Pickup' },
+      { name: 'Delivery', value: 'Delivery' },
    ];
 
    if (menu) {
@@ -141,12 +141,11 @@ function Restaurant(props) {
                   style={{ width: '20vw', height: '23vh' }}
                   className="mb-2"
                >
-                  <Card.Header></Card.Header>
+                  <Card.Header>{radioValue}</Card.Header>
                   <Card.Body className={styles["card-body"]}>
                      <Card.Text className={styles["restaurant-menu-items"]}>
-
+                        
                      </Card.Text>
-
                   </Card.Body>
                </Card>
                <Button variant="secondary" size="sm">Order</Button>
