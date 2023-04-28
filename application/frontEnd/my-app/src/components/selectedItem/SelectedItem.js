@@ -6,19 +6,18 @@ import Button from 'react-bootstrap/Button';
 function SelectedItem(props) {
    let selectedItems = props.selectedItems;
    let setSelectedItems = props.setSelectedItems;
-   let total = props.total;
-   let setTotal = props.setTotal;
-   
+   let updateTotalCost = props.updateTotalCost;
+
    let [amount, setAmount] = useState(1);
 
    let incrementItem = () => {
       let newSelectedItems = { ...selectedItems };
-      let currTotal = total;
       newSelectedItems[props.name].amount += 1;
-
+      
       setAmount(newSelectedItems[props.name].amount);
-
       setSelectedItems(newSelectedItems);
+      updateTotalCost();
+
       console.log("INCREMENTED ITEM AMOUNT", newSelectedItems[props.name].amount);
    }
 
@@ -27,18 +26,18 @@ function SelectedItem(props) {
    
       if (props.name in newSelectedItems) {
          newSelectedItems[props.name].amount -= 1;
-         let currTotal = total;
-
          console.log("DECREMENTED", newSelectedItems[props.name].amount);
 
-         if (newSelectedItems[props.name].amount < 0) {
-            setAmount(0);
+         if (newSelectedItems[props.name].amount <= 0) {
             newSelectedItems[props.name].amount = 0;
+            setAmount(newSelectedItems[props.name].amount);
             setSelectedItems(newSelectedItems);
+            updateTotalCost();
          } else {
             newSelectedItems[props.name].amount -= 1;
             setAmount(newSelectedItems[props.name].amount);
             setSelectedItems(newSelectedItems);
+            updateTotalCost();
          }
       }
    }
@@ -48,6 +47,7 @@ function SelectedItem(props) {
       if (props.name in newSelectedItems) {
          delete newSelectedItems[props.name];
          setSelectedItems(newSelectedItems);
+         updateTotalCost();
       }
    }
 

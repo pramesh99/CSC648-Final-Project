@@ -24,7 +24,14 @@ function Restaurant(props) {
    const [total, setTotal] = useState(0);
 
    let updateTotalCost = () => {
-      
+      let selectedItemsArr = Object.values(selectedItems);
+      let total = 0;
+      if(selectedItemsArr.length) {
+         for(let i = 0; i < selectedItemsArr.length; i++) {
+            total += (selectedItemsArr[i].price * selectedItemsArr[i].amount);
+         }
+      }
+      return setTotal(total);
    }
 
    const radios = [
@@ -95,13 +102,14 @@ function Restaurant(props) {
                               selectedItems={selectedItems}
                               setSelectedItems={setSelectedItems} 
                               setTotal={setTotal}
+                              updateTotalCost={updateTotalCost}
                               />
                         ))}
                      </Card.Text>
                   </Card.Body>
                </Card>
                <Card style={{ width: '30vw'}}>
-                  <Card.Body>Total: {total}</Card.Body>
+                  <Card.Body>Total: ${total}</Card.Body>
                </Card>
             </div>
             <div id={styles["restaurant-order-option-container"]}>
