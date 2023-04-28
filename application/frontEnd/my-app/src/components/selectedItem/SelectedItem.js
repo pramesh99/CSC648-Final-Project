@@ -47,7 +47,6 @@ function SelectedItem(props) {
       if (props.name in newSelectedItems) {
          delete newSelectedItems[props.name];
          setSelectedItems(newSelectedItems);
-         updateTotalCost();
       }
    }
 

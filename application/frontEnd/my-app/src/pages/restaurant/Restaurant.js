@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from "./Restaurant.module.css";
 import MenuItem from '../../components/menuItem/MenuItem';
 import SelectedItem from '../../components/selectedItem/SelectedItem';
@@ -41,7 +41,7 @@ function Restaurant(props) {
 
    if (menu) {
       menuItems = menu.map((item) => (
-         <MenuItem name={item.name} description={item.description} price={item.price} />
+         <MenuItem name={item.name} description={item.description} price={item.price} updateTotalCost={updateTotalCost}/>
       ))
    } else {
       let fakeItems = [
@@ -59,6 +59,10 @@ function Restaurant(props) {
          />
       ))
    }
+
+   useEffect(() => {
+      updateTotalCost();
+   }, [selectedItems])
 
    return (
       <div id={styles["restaurant-card"]}>

@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 function MenuItem(props) {
    let selectedItems = props.selectedItems;
    let setSelectedItems = props.setSelectedItems;
+   let updateTotalCost = props.updateTotalCost;
 
    let addItem = () => {
       let newSelectedItems = { ...selectedItems };
@@ -18,7 +19,7 @@ function MenuItem(props) {
          }
          setSelectedItems(newSelectedItems);
          console.log("ADDED NEW ITEM", newSelectedItems)
-
+         
       }
    }
 
