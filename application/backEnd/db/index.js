@@ -41,6 +41,19 @@ DB.getAllRestaurants = () => {
     });
 }
 
+DB.getRestaurantByName = (name) => {
+    return new Promise((resolve, reject) => {
+        pool.query('SELECT * FROM Restaurant WHERE RestaurantName = ?',
+            [name],
+            (err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(results);
+            });
+    });
+}
+
 DB.getRestByCuisine = (cuisine) => {
     return new Promise((resolve, reject) => {
         pool.query('SELECT * FROM Restaurant WHERE RestaurantCuisine = ?',
@@ -51,7 +64,7 @@ DB.getRestByCuisine = (cuisine) => {
                 }
 
                 return resolve(results);
-        });
+            });
     });
 }
 

@@ -41,6 +41,16 @@ router.get('/allRestaurants', async (req, res, next) => {
     }
 });
 
+router.get('/restaurant/:name', async (req, res, next) => {
+    try {
+        let results = await db.getRestaurantByName(req.params.name);
+        res.json(results);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
 // query to get all available cuisines for dropdown
 router.get('/allCuisines', async (req, res, next) => {
     try {
