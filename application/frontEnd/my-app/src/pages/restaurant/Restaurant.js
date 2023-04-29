@@ -6,7 +6,8 @@ import Card from 'react-bootstrap/Card';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Button from 'react-bootstrap/Button';
-
+import Pickup from '../../components/pickup/Pickup';
+import Delivery from '../../components/delivery/Delivery';
 // import { Link } from "react-router-dom";
 
 function Restaurant(props) {
@@ -18,30 +19,19 @@ function Restaurant(props) {
    let menuItems;
 
    const [checked, setChecked] = useState(false);
-   const [radioValue, setRadioValue] = useState('Delivery');
+   const [radioValue, setRadioValue] = useState('Set Pickup Location:');
 
    const [selectedItems, setSelectedItems] = useState({});
    const [total, setTotal] = useState(0);
 
-   let updateTotalCost = () => {
-      let selectedItemsArr = Object.values(selectedItems);
-      let total = 0;
-      if(selectedItemsArr.length) {
-         for(let i = 0; i < selectedItemsArr.length; i++) {
-            total += (selectedItemsArr[i].price * selectedItemsArr[i].amount);
-         }
-      }
-      return setTotal(total);
-   }
-
    const radios = [
-      { name: 'Pickup', value: 'Pickup' },
-      { name: 'Delivery', value: 'Delivery' },
+      { name: 'Pickup', value: 'Set Pickup Location:' },
+      { name: 'Delivery', value: 'Set Delivery Location:' },
    ];
 
    if (menu) {
       menuItems = menu.map((item) => (
-         <MenuItem name={item.name} description={item.description} price={item.price} updateTotalCost={updateTotalCost}/>
+         <MenuItem name={item.name} description={item.description} price={item.price} updateTotalCost={updateTotalCost} />
       ))
    } else {
       let fakeItems = [
@@ -59,6 +49,30 @@ function Restaurant(props) {
          />
       ))
    }
+
+   let updateTotalCost = () => {
+      let selectedItemsArr = Object.values(selectedItems);
+      let total = 0;
+      if (selectedItemsArr.length) {
+         for (let i = 0; i < selectedItemsArr.length; i++) {
+            total += (selectedItemsArr[i].price * selectedItemsArr[i].amount);
+         }
+      }
+      return setTotal(total);
+   }
+
+   let renderDeliveryOption = () => {
+      if (radioValue === 'Set Pickup Location:') {
+         return (
+            <Pickup />
+         )
+      } else {
+         return (
+            <Delivery />
+         )
+      }
+   }
+
 
    useEffect(() => {
       updateTotalCost();
@@ -104,15 +118,15 @@ function Restaurant(props) {
                               description={item.description}
                               price={item.price}
                               selectedItems={selectedItems}
-                              setSelectedItems={setSelectedItems} 
+                              setSelectedItems={setSelectedItems}
                               setTotal={setTotal}
                               updateTotalCost={updateTotalCost}
-                              />
+                           />
                         ))}
                      </Card.Text>
                   </Card.Body>
                </Card>
-               <Card style={{ width: '30vw'}}>
+               <Card style={{ width: '30vw' }}>
                   <Card.Body>Total: ${total}</Card.Body>
                </Card>
             </div>
@@ -144,7 +158,7 @@ function Restaurant(props) {
                   <Card.Header>{radioValue}</Card.Header>
                   <Card.Body className={styles["card-body"]}>
                      <Card.Text className={styles["restaurant-menu-items"]}>
-                        
+                        {renderDeliveryOption()}
                      </Card.Text>
                   </Card.Body>
                </Card>
