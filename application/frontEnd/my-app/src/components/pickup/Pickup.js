@@ -42,7 +42,7 @@ function Pickup(props) {
             className={styles["pickup-option"]}
             id="toggle-check1"
             type="checkbox"
-            variant="outline-primary"
+            variant="outline-secondary"
             value={options[0]}
             checked={restaurantPickup}
             onChange={(e) => {
@@ -59,7 +59,7 @@ function Pickup(props) {
             className={styles["pickup-option"]}
             id="toggle-check2"
             type="checkbox"
-            variant="outline-primary"
+            variant="outline-secondary"
             value={options[1]}
             checked={chavezPickup}
             onChange={(e) => {
@@ -76,7 +76,7 @@ function Pickup(props) {
             className={styles["pickup-option"]}
             id="toggle-check3"
             type="checkbox"
-            variant="outline-primary"
+            variant="outline-secondary"
             value={options[2]}
             checked={upnPickup}
             onChange={(e) => {
@@ -93,7 +93,7 @@ function Pickup(props) {
             className={styles["pickup-option"]}
             id="toggle-check4"
             type="checkbox"
-            variant="outline-primary"
+            variant="outline-secondary"
             value={options[3]}
             checked={mashoufPickup}
             onChange={(e) => {
