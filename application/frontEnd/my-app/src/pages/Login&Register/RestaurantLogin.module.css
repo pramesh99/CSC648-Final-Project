@@ -14,15 +14,19 @@
 
 form{
     background-color: white;
-    padding: 0px 60px;
+    /* padding: 0px 60px; */
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .Title {
     color: rgb(77, 1, 77);
     font-weight: bold;
     text-align: center;
-    font-size: 40px;
+    font-size: 30px;
     padding-top: 5px;
 }
 

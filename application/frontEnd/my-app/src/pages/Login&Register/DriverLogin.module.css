@@ -12,17 +12,17 @@
     background-position: center;
 }
 
-form{
+/* form{
     background-color: white;
-    padding: 0px 60px;
+    padding: 300px 70px;
     border-radius: 10px;
-}
+} */
 
 .Title {
     color: rgb(77, 1, 77);
     font-weight: bold;
     text-align: center;
-    font-size: 40px;
+    font-size: 30px;
     padding-top: 5px;
 }
 
@@ -36,7 +36,8 @@ form{
 
 .Registerpath{
     text-align: 10px;
-    padding: 5px;
+    /* padding: 5px; */
+    margin-bottom: 5px;
 }
 
 button{

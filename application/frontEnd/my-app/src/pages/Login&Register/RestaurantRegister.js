@@ -125,11 +125,11 @@ const Register = () => {
         <div className={styles["Register"]}>
             <form onSubmit={handleSubmit}>
                 <div className={styles["Title"]}>
-                    GatorGrub
+                    Restaurant Owner Registration
                 </div>
-                <div className={styles["Title2"]}>
+                {/* <div className={styles["Title2"]}>
                     Be our Business
-                </div>
+                </div> */}
                 {inputs.map((input) => (
                     <Forminput key={input.id} {...input} value={values[input.name]} onChange={onChange}></Forminput>))}
                 <div className="Agreement" >

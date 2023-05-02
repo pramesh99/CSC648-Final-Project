@@ -73,11 +73,11 @@ const Login = (props) => {
         <div className={styles["Login"]}>
             <form onSubmit={handleSubmit}>
                 <div className={styles["Title"]}>
-                    Open the day
+                    Restaurant Owner Login
                 </div>
-                <div className={styles["Title2"]}>
+                {/* <div className={styles["Title2"]}>
                     with GatorGrub!
-                </div>
+                </div> */}
                 {inputs.map((input) => (
                     <Forminput key={input.id} {...input} value={values[input.name]} onChange={onChange}></Forminput>))}
                 <button onSubmit="submit" >Login</button>
