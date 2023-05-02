@@ -1,10 +1,14 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import Forminput from "./Forminput"
 import styles from "./RestaurantLogin.module.css";
 import "./RestaurantRegister"
 import Button from "react-bootstrap/esm/Button"
+import LoginRegisterModal from "../../components/loginRegisterModal/LoginRegisterModal";
 
 const Login = (props) => {
+
+    const [modalShow, setModalShow] = React.useState(false);
+
     const [values, setValues] = useState({
         email: "",
         password: "",
@@ -47,22 +51,23 @@ const Login = (props) => {
                 password: values.password,
             })
         })
-        .then(response => response.json())
-        .then(response => {
-            let res = JSON.parse(JSON.stringify(response));
-            console.log(JSON.stringify(response));
-            console.log(res[0].RestaurantOwnerName);
-            console.log(props);
-            props.setUserName(res[0].RestaurantOwnerName);
-            // "RestaurantOwnerName":"Bob Smith"
-        })
-        
+            .then(response => response.json())
+            .then(response => {
+                let res = JSON.parse(JSON.stringify(response));
+                console.log(JSON.stringify(response));
+                console.log(res[0].RestaurantOwnerName);
+                console.log(props);
+                props.setUserName(res[0].RestaurantOwnerName);
+                // "RestaurantOwnerName":"Bob Smith"
+            })
+
         return resData;
     }
 
     const handleSubmit = (e) => {
         login();
         e.preventDefault();
+
     }
 
     const onChange = (e) => {
@@ -80,7 +85,10 @@ const Login = (props) => {
                 </div> */}
                 {inputs.map((input) => (
                     <Forminput key={input.id} {...input} value={values[input.name]} onChange={onChange}></Forminput>))}
-                <button onSubmit="submit" >Login</button>
+                <button onSubmit="submit" onClick={() => {
+                    setModalShow(true)
+                    console.log(modalShow)
+                }} >Login</button>
                 <div className={styles["Registerpath"]}>
                     <a href="/forgotpassword">Forgot the password?</a>
                 </div>
@@ -88,6 +96,11 @@ const Login = (props) => {
                     Need to register?<a href="http://localhost:3000/Restaurant-register">Sign Up!</a>
                 </div>
             </form>
+            <LoginRegisterModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+
+            />
         </div>
     )
 }
