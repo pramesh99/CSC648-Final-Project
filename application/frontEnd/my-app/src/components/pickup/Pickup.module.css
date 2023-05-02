@@ -1,0 +1,9 @@
+.pickup-option {
+   width: 100%;
+   margin-bottom: 2%;
+}
+
+#pickup-option-container {
+   display: flex;
+   flex-direction: column;
+}

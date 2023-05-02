@@ -1,0 +1,8 @@
+#delivery-form-container {
+   display: flex;
+   flex-direction: column;
+}
+
+#if-applicable {
+   margin-bottom: 2%;
+}

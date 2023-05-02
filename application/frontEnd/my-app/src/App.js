@@ -16,7 +16,7 @@ import Register from './pages/Login&Register/Register';
 import DriverRegister from './pages/Login&Register/DriverRegister'
 import RestaurantRegister from './pages/Login&Register/RestaurantRegister'
 import Login from './pages/Login&Register/Login';
-// import Restaurant from './pages/restaurant/Restaurant';
+import Restaurant from './pages/restaurant/Restaurant';
 import DriverLogin from './pages/Login&Register/DriverLogin'
 import RestaurantLogin from './pages/Login&Register/RestaurantLogin'
 // import fetch from 'node-fetch';
@@ -127,7 +127,7 @@ function App() {
           newRestaurants[i]["item"]["ImgUrl"] = restaurantImages[i]?.urls?.regular;
         }
         console.log("search restaurants use effect", r)
-        setSearchRestaurants(newRestaurants);
+        setRestaurants(newRestaurants);
       });
     } else if (searchResultCategory === 'all' && searchResult === '') {
       getAllRestaurants().then((r) => {
@@ -138,7 +138,7 @@ function App() {
         for (let i = 0; i < newRestaurants.length; i++) {
           newRestaurants[i]["item"]["ImgUrl"] = restaurantImages[i]?.urls?.regular;
         }
-        setSearchRestaurants(newRestaurants);
+        setRestaurants(newRestaurants);
       })
     } else {
       getSearchRestaurants(searchResult).then((r) => {
@@ -203,7 +203,10 @@ function App() {
         <Route path="/Restaurant-register" element={<RestaurantRegister> </RestaurantRegister>} />
         <Route path="/browse" element={<Browse restaurants={restaurants} setSelectedRestaurant={setSelectedRestaurant} />} />
         <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} setSelectedRestaurant={setSelectedRestaurant} />} />
-        {/* <Route path="/restaurant" element={<Restaurant restaurant={selectedRestaurant} />} /> */}
+        <Route path="/restaurant" element={<Restaurant restaurant={selectedRestaurant} />} />
+        {restaurants.map((restaurant)=> (
+          <Route path={`${restaurant?.RestaurantName}`} element={<Restaurant restaurant={selectedRestaurant} />} />
+        ))}
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/aboutUs/Shauhin" element={<Shauhin />} />
         <Route path="/aboutUs/Hieu" element={<Hieu />} />
