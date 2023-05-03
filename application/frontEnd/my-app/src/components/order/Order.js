@@ -34,6 +34,27 @@ function Order(props) {
       }
    }
 
+   let finishOrder = () => {
+      let newActiveOrders = { ...activeOrders };
+      console.log("activeOrder", id);
+      if (!(id in newActiveOrders)) {
+         newActiveOrders[id] = {
+             OrderID: id, 
+             OrderPrice: price,
+         };
+         setActiveOrders(newActiveOrders);
+      }
+   }
+
+   // let removeOrder = () => {
+   //    let newIncomingOrders = { ...incomingOrders };
+   //    console.log("declineOrder", id);
+   //    if (id in newIncomingOrders) {
+   //       delete newIncomingOrders[id];
+   //       setIncomingOrders(newIncomingOrders);
+   //    }
+   // }
+
    return (
       <div id={styles["menu-item"]}>
          <div id={styles["menu-item-description-container"]}>
