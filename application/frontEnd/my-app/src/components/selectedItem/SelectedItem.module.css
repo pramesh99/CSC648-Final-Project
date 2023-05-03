@@ -12,12 +12,25 @@
 #menu-buttons-container {
    display: flex;
    flex-direction: column;
+   justify-content: space-evenly;
+}
+
+.menu-buttons {
+   width: 75%;
+   height: 100%;
 }
 
 #menu-buttons-add {
    margin-bottom: 5%;
+   margin-right: 2%;
 }
 
-.menu-buttons {
-   height: 50%;
+#increment-decrement-buttons {
+   display: flex;
 }
+
+#menu-buttons-remove {
+   height: 50%;
+   margin-top: 5%;
+}
+
