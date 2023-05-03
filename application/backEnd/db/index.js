@@ -70,7 +70,7 @@ DB.getRestByCuisine = (cuisine) => {
 
 DB.getAllCuisines = () => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT DISTINCT RestaurantCuisine from Restaurant ORDER BY RestaurantCuisine ASC',
+        pool.query('SELECT CuisineName from Cuisine ORDER BY CuisineName ASC',
             (err, results) => {
                 if (err) {
                     return reject(err);
@@ -83,14 +83,18 @@ DB.getAllCuisines = () => {
 
 DB.searchBarQueryNoCuisine = (search_input) => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT * FROM Restaurant',
+        pool.query(`SELECT Restaurant.RestaurantID, Restaurant.RestaurantOwnerID, Restaurant.flag, Restaurant.RestaurantName, 
+                           Restaurant.RestaurantPhone, Restaurant.RestaurantPassword, Restaurant.RestaurantAddress, Cuisine.cuisineName,
+                           Restaurant.RestaurantPriceTier, Restaurant.RestaurantHours, Restaurant.RestaurantPrepTime, Restaurant.RestaurantCoordinates, 
+                           Restaurant.RestaurantDescription
+                    FROM Restaurant
+                    INNER JOIN Cuisine ON Restaurant.RestaurantCuisine=Cuisine.cuisineID`,
             (err, results) => {
                 if (err) {
                     return reject(err);
                 }
                 const fuse_dict = results;
-                const fuse = new Fuse(fuse_dict, {threshold: 0.4, keys: ['RestaurantName', 'RestaurantCuisine', 'RestaurantDescription']});
-                console.log(fuse.search(search_input))
+                const fuse = new Fuse(fuse_dict, {threshold: 0.4, keys: ['RestaurantName', 'cuisine_name', 'RestaurantDescription']});
                 return resolve(fuse.search(search_input));
             });
     });
@@ -98,7 +102,13 @@ DB.searchBarQueryNoCuisine = (search_input) => {
 
 DB.searchBarQueryWithCuisine = (cuisine, search_input) => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT * FROM Restaurant WHERE RestaurantCuisine = ?',
+        pool.query(`SELECT Restaurant.RestaurantID, Restaurant.RestaurantOwnerID, Restaurant.flag, Restaurant.RestaurantName, 
+                           Restaurant.RestaurantPhone, Restaurant.RestaurantPassword, Restaurant.RestaurantAddress, Cuisine.cuisineName,
+                           Restaurant.RestaurantPriceTier, Restaurant.RestaurantHours, Restaurant.RestaurantPrepTime, Restaurant.RestaurantCoordinates, 
+                           Restaurant.RestaurantDescription
+                    FROM Restaurant
+                    INNER JOIN Cuisine ON Restaurant.RestaurantCuisine=Cuisine.cuisineID
+                    WHERE Cuisine.cuisineName = ?`,
             [cuisine],
             (err, results) => {
                 if (err) {
@@ -113,7 +123,6 @@ DB.searchBarQueryWithCuisine = (cuisine, search_input) => {
 
 DB.SFSUCustomerReg = (name, email, phone, password) => {
     return new Promise ((resolve, reject) => {
-        // let q = 'INSERT INTO SFSUCustomer (SFSUCustomerID, SFSUCustomerName, SFSUCustomerEmail, SFSUCustomerPhone, SFSUCustomerPassword) VALUES ("Balthazar McSquishy", "mcsquishb@sfsu.edu", "1231231234", "password8!")';
         pool.query('INSERT INTO SFSUCustomer (SFSUCustomerName, SFSUCustomerEmail, SFSUCustomerPhone, SFSUCustomerPassword) VALUES (?, ?, ?, ?)',
             [name, email, phone, password],
             (err, results) => {
@@ -127,7 +136,6 @@ DB.SFSUCustomerReg = (name, email, phone, password) => {
 
 DB.DriverReg = (name, email, phone, password) => {
     return new Promise ((resolve, reject) => {
-        // let q = 'INSERT INTO SFSUCustomer (SFSUCustomerID, SFSUCustomerName, SFSUCustomerEmail, SFSUCustomerPhone, SFSUCustomerPassword) VALUES ("Balthazar McSquishy", "mcsquishb@sfsu.edu", "1231231234", "password8!")';
         pool.query('INSERT INTO Driver (DriverName, DriverEmail, DriverPhone, DriverPassword) VALUES (?, ?, ?, ?)',
             [name, email, phone, password],
             (err, results) => {
@@ -141,7 +149,6 @@ DB.DriverReg = (name, email, phone, password) => {
 
 DB.RestaurantOwnerReg = (name, email, phone, password) => {
     return new Promise ((resolve, reject) => {
-        // let q = 'INSERT INTO SFSUCustomer (SFSUCustomerID, SFSUCustomerName, SFSUCustomerEmail, SFSUCustomerPhone, SFSUCustomerPassword) VALUES ("Balthazar McSquishy", "mcsquishb@sfsu.edu", "1231231234", "password8!")';
         pool.query('INSERT INTO RestaurantOwner (RestaurantOwnerName, RestaurantOwnerEmail, RestaurantOwnerPhone, RestaurantOwnerPassword) VALUES (?, ?, ?, ?)',
             [name, email, phone, password],
             (err, results) => {

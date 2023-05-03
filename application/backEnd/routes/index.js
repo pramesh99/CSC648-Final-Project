@@ -63,7 +63,7 @@ router.get('/allCuisines', async (req, res, next) => {
 });
 
 // query for search bar
-router.get('/search/:search_input', async (req, res, next) => {
+router.get('/searchNoCuisine/:search_input', async (req, res, next) => {
     try {
         let results = await db.searchBarQueryNoCuisine(req.params.search_input);
         res.json(results);
@@ -73,11 +73,9 @@ router.get('/search/:search_input', async (req, res, next) => {
     }
 });
 
-router.get('/search/:cuisine/:search_input', async (req, res, next) => {
+router.get('/searchWithCuisine/:cuisine/:search_input', async (req, res, next) => {
     try {
         let results = await db.searchBarQueryWithCuisine(req.params.cuisine, req.params.search_input);
-        // fetch('http://localhost:3001/api/submit/registration_form', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: '{"r_type": "driver"}'});
-        // ^^ THIS WORKS GO FROM HERE
         res.json(results);
     } catch(e) {
         console.log(e);
@@ -85,7 +83,7 @@ router.get('/search/:cuisine/:search_input', async (req, res, next) => {
     }
 });
 
-router.post('/submit/registration_form', async (req, res, next) => {
+router.post('/submit/registrationForm', async (req, res, next) => {
     try {
         const formData = req.body;
         if (formData.r_type === 'SFSUCustomer'){
