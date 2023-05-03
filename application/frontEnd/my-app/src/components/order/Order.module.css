@@ -1,0 +1,35 @@
+#menu-item {
+   background-color: rgb(212, 212, 212);
+   padding: 10px;
+   border-radius: 10px;
+   width: 100%;
+   margin-bottom: 2%;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+}
+
+#menu-buttons-container {
+   display: flex;
+   flex-direction: column;
+}
+
+.menu-buttons {
+   width: 100%;
+   height: 100%;
+}
+
+#menu-buttons-add {
+   margin-bottom: 5%;
+   margin-right: 2%;
+}
+
+#increment-decrement-buttons {
+   display: flex;
+}
+
+#menu-buttons-remove {
+   height: 50%;
+   margin-top: 5%;
+}
+

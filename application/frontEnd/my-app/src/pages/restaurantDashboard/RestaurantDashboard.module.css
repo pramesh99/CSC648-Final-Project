@@ -1,0 +1,46 @@
+#restaurant-card {
+   margin: 2%;
+   margin-left: 3%;
+}
+
+#restaurant-name {
+   font-weight: 600;
+   margin-top: 1%;
+   margin-bottom: 1%;
+}
+
+#restaurant-menu-cart-container {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+}
+
+#restaurant-menu {
+   display: flex;
+   flex-direction: column;
+   margin-right: 2%;
+}
+
+.restaurant-menu-items {
+   width: 100%;
+}
+
+#restaurant-cart {
+   margin-right: 2%;
+}
+
+.card-body {
+   display: flex;
+   justify-content: center;
+   padding: 12px;
+   overflow-y: scroll;
+}
+
+#restaurant-options-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   overflow-y: scroll;
+}
+
+

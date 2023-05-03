@@ -19,6 +19,7 @@ import Login from './pages/Login&Register/Login';
 import Restaurant from './pages/restaurant/Restaurant';
 import DriverLogin from './pages/Login&Register/DriverLogin'
 import RestaurantLogin from './pages/Login&Register/RestaurantLogin'
+import RestaurantDashboard from './pages/restaurantDashboard/RestaurantDashboard';
 // import fetch from 'node-fetch';
 
 function getRestaurantImgs(numOfRestaurants) {
@@ -207,6 +208,8 @@ function App() {
         {restaurants.map((restaurant)=> (
           <Route path={`${restaurant?.RestaurantName}`} element={<Restaurant restaurant={selectedRestaurant} />} />
         ))}
+        <Route path="/restaurantDashboard" element={<RestaurantDashboard/>} />
+
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/aboutUs/Shauhin" element={<Shauhin />} />
         <Route path="/aboutUs/Hieu" element={<Hieu />} />
