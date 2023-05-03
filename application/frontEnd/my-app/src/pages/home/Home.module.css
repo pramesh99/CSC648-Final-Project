@@ -71,9 +71,19 @@
    text-align: center;
 } */
 
+#home {
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   align-items: center;
+   padding-top: 8%;
+   padding-bottom: 8%;
+   background-color:#8987C8;
+}
+
 /* fist layer of food */
 .grid{
-   background-color: rgba(23, 166, 202, 0.562);
+   /* background-color: rgba(23, 166, 202, 0.562); */
 }
 
 .content{
@@ -94,30 +104,33 @@
 }
 
 .info{
+   text-align:center;
    max-width: 100%;
    display: flex;
    flex-direction: column;
+   align-items: center;
 }
 
 .gator-grub-header{
    font-size: 60px;
    font-family: sans-serif;
-   margin-bottom: 10px;
+   margin-bottom: 0px;
 }
 
 .gator-grub{
-   font-size: 23px;
+   font-size: 20px;
    line-height: 2pc;
-   margin-bottom: 10px;
+   margin-bottom: 5%;
    font-family: sans-serif;
+   color:rgb(66, 66, 66);
 }
 
-.explor-button{
-   padding: 10px 23px;
+.explore-button{
+   /* padding: 10px 23px;
    border-radius: 5px;
    margin-bottom: 10px;
-   max-width: 100%;
-   height: auto;
+   width: 100%; */
+   /* height: auto; */
 }
 
 .content-right{
@@ -139,7 +152,8 @@
 
 /* Second layer */
 .category{
-   background: rgb(34, 132, 197);
+   /* background: rgb(34, 132, 197); */
+   margin-bottom: 6%;
 }
  
  .user-img {
@@ -168,14 +182,14 @@
    margin-left: 3%;
    width: 90%;
    font-size: 30px;
-   color:rgb(121, 56, 241);
+   /* color:rgb(121, 56, 241); */
    font-family: sans-serif;
  }
 
 
 /* Third layer*/
 .category{
-   background: rgb(34, 132, 197);
+   
 }
  
  .business-img {
@@ -203,7 +217,7 @@
    margin-left: 3%;
    width: 90%;
    font-size: 30px;
-   color:rgb(121, 56, 241);
+   /* color:rgb(121, 56, 241); */
    font-family: sans-serif;
  }
 
@@ -225,7 +239,7 @@
    margin-left: 3%;
    width: 90%;
    font-size: 30px;
-   color:rgb(121, 56, 241);
+   /* color:rgb(121, 56, 241); */
    font-family: sans-serif;
  }
 
@@ -235,4 +249,33 @@
    border-radius: 8px;
    margin-left: 15%;
    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+}
+
+#signup-container {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+   height: 66vh;
+   background-color: #f3f3f3;
+}
+.signup-card {
+   width: 18rem;
+   height: 30rem;
+   margin-left: 2%;
+   margin-right: 2%;
+   /* display: flex;
+   flex-direction: column;
+   align-items: space-between; */
+}
+
+.card-header {
+   font-size: 24px;
+   text-align: center;
+}
+
+.card-p {
+   font-size: 18px;
+   text-align: center;
+
 }

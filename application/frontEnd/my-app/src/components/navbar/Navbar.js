@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Register from '../../pages/Login&Register/Register';
 import Result from '../../pages/result/Result';
 import LogoPic from '../../images/logo.jpg'
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function Navbar(props) {
 
@@ -18,7 +19,6 @@ function Navbar(props) {
 
    const handleChange = (event) => {
       setSearch(event.target.value);
-      // console.log(event.target.value)
    };
 
    const handleClick = () => {
@@ -33,7 +33,7 @@ function Navbar(props) {
          <div id={styles["navbar"]}>
             <div id={styles["home-icon"]}>
                <Link to="/" id={styles["icon-img"]}>
-               <img src={LogoPic} alt="Gator Grub Logo" />
+               <img id={styles["logo"]}src={LogoPic} alt="Gator Grub Logo" />
                </Link>
             </div>
             <div id={styles["search-bar"]}>

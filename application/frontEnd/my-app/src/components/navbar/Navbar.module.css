@@ -12,7 +12,7 @@
    justify-content: space-between;
    align-items: center;
    width: 100%;
-   height: 5rem;
+   height: 6rem;
    text-decoration: none;
    background-color: #3A0088 ;
    border-bottom: #3A0088 1px solid;
@@ -20,13 +20,17 @@
 
 #home-icon {
    margin-left: 4%;
-   height: 100%;
+   /* height: 75%; */
 }
 
 #icon-img {
    color: #E9D597;
    text-decoration: none;
    /* transition: color .3s; */
+}
+
+#logo{
+   height: 60px;
 }
 
 #icon-text:active {
