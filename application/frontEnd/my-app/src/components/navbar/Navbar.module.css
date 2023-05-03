@@ -162,4 +162,5 @@
 /* Add a background color to the dropdown links on hover */
 .dropdown-content a:hover {
   background-color: #333;
+   color: #ffffff;
 }
