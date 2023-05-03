@@ -4,6 +4,7 @@ import styles from "./Navbar.module.css";
 import { useNavigate } from 'react-router-dom';
 import Register from '../../pages/Login&Register/Register';
 import Result from '../../pages/result/Result';
+import LogoPic from '../../images/logo.jpg'
 
 function Navbar(props) {
 
@@ -14,8 +15,7 @@ function Navbar(props) {
    const setSearch = props.setSearch;
    const setSearchResult = props.setSearchResult;
    const setSearchResultCategory = props.setSearchResultCategory;
-   const userName = props.userName;
-   
+
    const handleChange = (event) => {
       setSearch(event.target.value);
       // console.log(event.target.value)
@@ -32,7 +32,9 @@ function Navbar(props) {
          <div id={styles["banner"]}>SFSU Software Engineering Project CSC 648-848, Spring 2023. For Demonstration Only.</div>
          <div id={styles["navbar"]}>
             <div id={styles["home-icon"]}>
-               <Link to="/" id={styles["icon-text"]}>Team 3 : Gator Grub</Link>
+               <Link to="/" id={styles["icon-img"]}>
+               <img src={LogoPic} alt="Gator Grub Logo" />
+               </Link>
             </div>
             <div id={styles["search-bar"]}>
                <select
@@ -65,24 +67,37 @@ function Navbar(props) {
 
             </div>
             {/* <div id={styles["profile-icon-container"]}> */}
-            <div id={styles["profile-icon-container"]}>
-               <div id={styles["user-name"]}>{userName}</div>
-               <div id={styles["profile-icon"]}></div>
-            </div>
+            <div id={styles["profile-icon"]}></div>
             {/* </div> */}
          </div>
+
          <div id={styles["tabs"]}>
             <div id={styles["right-buttons"]}>
-               <Link to="/register" id={styles["right-buttons-text"]}>Register</Link>
-               <Link to="/login" id={styles["right-buttons-text"]}>Login</Link>
-               <Link to="/Driver-register" id={styles["right-buttons-text"]}>Driver Register</Link>
-               <Link to="/Driver-login" id={styles["right-buttons-text"]}>Driver Login</Link>
-               <Link to="/Restaurant-register" id={styles["right-buttons-text"]}>Restaurant Register</Link>
-               <Link to="/Restaurant-login" id={styles["right-buttons-text"]}>Restaurant Login</Link>
                <Link to="/aboutUs" id={styles["right-buttons-text"]}>About Us</Link>
             </div>
-         </div>
+            <div class={styles["dropdown"]}>
+               <button class={styles["dropbtn"]}>Register / Login</button>
+               <div class={styles["dropdown-content"]}>
+                  <Link to="/register">Register</Link>
+                  <Link to="/login">Login</Link>
+               </div>
+            </div>
+            <div class={styles["dropdown"]}>
+               <button class={styles["dropbtn"]}>Delievery Driver</button>
+               <div class={styles["dropdown-content"]}>
+                  <Link to="/Driver-register">Driver Register</Link>
+                  <Link to="/Driver-login">Driver Login</Link>
+               </div>
+            </div>
+            <div class={styles["dropdown"]}>
+               <button class={styles["dropbtn"]}>Restaurant Owner</button>
+               <div class={styles["dropdown-content"]}>
+                  <Link to="/Restaurant-register">Restaurant Register</Link>
+                  <Link to="/Restaurant-login">Restaurant Login</Link>
+               </div>
+            </div>
       </div>
+   </div>
    )
 }
 
