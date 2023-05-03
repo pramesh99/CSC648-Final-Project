@@ -70,7 +70,7 @@ DB.getRestByCuisine = (cuisine) => {
 
 DB.getAllCuisines = () => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT cuisine_name from RestaurantCuisine ORDER BY cuisine_name ASC',
+        pool.query('SELECT CuisineName from Cuisine ORDER BY CuisineName ASC',
             (err, results) => {
                 if (err) {
                     return reject(err);
@@ -84,18 +84,17 @@ DB.getAllCuisines = () => {
 DB.searchBarQueryNoCuisine = (search_input) => {
     return new Promise((resolve, reject) => {
         pool.query(`SELECT Restaurant.RestaurantID, Restaurant.RestaurantOwnerID, Restaurant.flag, Restaurant.RestaurantName, 
-                           Restaurant.RestaurantPhone, Restaurant.RestaurantPassword, Restaurant.RestaurantAddress, RestaurantCuisine.cuisine_name,
+                           Restaurant.RestaurantPhone, Restaurant.RestaurantPassword, Restaurant.RestaurantAddress, Cuisine.cuisineName,
                            Restaurant.RestaurantPriceTier, Restaurant.RestaurantHours, Restaurant.RestaurantPrepTime, Restaurant.RestaurantCoordinates, 
                            Restaurant.RestaurantDescription
                     FROM Restaurant
-                    INNER JOIN RestaurantCuisine ON Restaurant.RestaurantCuisine=RestaurantCuisine.cuisine_id`,
+                    INNER JOIN Cuisine ON Restaurant.RestaurantCuisine=Cuisine.cuisineID`,
             (err, results) => {
                 if (err) {
                     return reject(err);
                 }
                 const fuse_dict = results;
                 const fuse = new Fuse(fuse_dict, {threshold: 0.4, keys: ['RestaurantName', 'cuisine_name', 'RestaurantDescription']});
-                // console.log(fuse.search(search_input));
                 return resolve(fuse.search(search_input));
             });
     });
@@ -104,12 +103,12 @@ DB.searchBarQueryNoCuisine = (search_input) => {
 DB.searchBarQueryWithCuisine = (cuisine, search_input) => {
     return new Promise((resolve, reject) => {
         pool.query(`SELECT Restaurant.RestaurantID, Restaurant.RestaurantOwnerID, Restaurant.flag, Restaurant.RestaurantName, 
-                           Restaurant.RestaurantPhone, Restaurant.RestaurantPassword, Restaurant.RestaurantAddress, RestaurantCuisine.cuisine_name,
+                           Restaurant.RestaurantPhone, Restaurant.RestaurantPassword, Restaurant.RestaurantAddress, Cuisine.cuisineName,
                            Restaurant.RestaurantPriceTier, Restaurant.RestaurantHours, Restaurant.RestaurantPrepTime, Restaurant.RestaurantCoordinates, 
                            Restaurant.RestaurantDescription
                     FROM Restaurant
-                    INNER JOIN RestaurantCuisine ON Restaurant.RestaurantCuisine=RestaurantCuisine.cuisine_id
-                    WHERE RestaurantCuisine.cuisine_name = ?`,
+                    INNER JOIN Cuisine ON Restaurant.RestaurantCuisine=Cuisine.cuisineID
+                    WHERE Cuisine.cuisineName = ?`,
             [cuisine],
             (err, results) => {
                 if (err) {
@@ -137,7 +136,6 @@ DB.SFSUCustomerReg = (name, email, phone, password) => {
 
 DB.DriverReg = (name, email, phone, password) => {
     return new Promise ((resolve, reject) => {
-        // let q = 'INSERT INTO SFSUCustomer (SFSUCustomerID, SFSUCustomerName, SFSUCustomerEmail, SFSUCustomerPhone, SFSUCustomerPassword) VALUES ("Balthazar McSquishy", "mcsquishb@sfsu.edu", "1231231234", "password8!")';
         pool.query('INSERT INTO Driver (DriverName, DriverEmail, DriverPhone, DriverPassword) VALUES (?, ?, ?, ?)',
             [name, email, phone, password],
             (err, results) => {
@@ -151,7 +149,6 @@ DB.DriverReg = (name, email, phone, password) => {
 
 DB.RestaurantOwnerReg = (name, email, phone, password) => {
     return new Promise ((resolve, reject) => {
-        // let q = 'INSERT INTO SFSUCustomer (SFSUCustomerID, SFSUCustomerName, SFSUCustomerEmail, SFSUCustomerPhone, SFSUCustomerPassword) VALUES ("Balthazar McSquishy", "mcsquishb@sfsu.edu", "1231231234", "password8!")';
         pool.query('INSERT INTO RestaurantOwner (RestaurantOwnerName, RestaurantOwnerEmail, RestaurantOwnerPhone, RestaurantOwnerPassword) VALUES (?, ?, ?, ?)',
             [name, email, phone, password],
             (err, results) => {
