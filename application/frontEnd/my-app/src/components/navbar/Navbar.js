@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import { Nav, NavDropdown } from 'react-bootstrap';
 import styles from "./Navbar.module.css";
 import { useNavigate } from 'react-router-dom';
 import Register from '../../pages/Login&Register/Register';
 import Result from '../../pages/result/Result';
 import LogoPic from '../../images/logo.jpg'
-import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function Navbar(props) {
 
@@ -19,6 +19,7 @@ function Navbar(props) {
 
    const handleChange = (event) => {
       setSearch(event.target.value);
+      // console.log(event.target.value)
    };
 
    const handleClick = () => {
@@ -33,7 +34,7 @@ function Navbar(props) {
          <div id={styles["navbar"]}>
             <div id={styles["home-icon"]}>
                <Link to="/" id={styles["icon-img"]}>
-               <img id={styles["logo"]}src={LogoPic} alt="Gator Grub Logo" />
+               <img src={LogoPic} alt="Gator Grub Logo" />
                </Link>
             </div>
             <div id={styles["search-bar"]}>
@@ -70,33 +71,30 @@ function Navbar(props) {
             <div id={styles["profile-icon"]}></div>
             {/* </div> */}
          </div>
+      
+      <Nav id={styles["tabs"]}>
+         <Nav id={styles["home-buttons"]}>
+            <Nav.Link href="/" id={styles["left-buttons"]}>Home</Nav.Link>
+         </Nav>
+      <Nav id={styles["aboutus-buttons"]}>
+         <Nav.Link href="/aboutUs" id={styles["left-buttons"]}>About Us</Nav.Link>
+      </Nav>
 
-         <div id={styles["tabs"]}>
-            <div id={styles["right-buttons"]}>
-               <Link to="/aboutUs" id={styles["right-buttons-text"]}>About Us</Link>
-            </div>
-            <div class={styles["dropdown"]}>
-               <button class={styles["dropbtn"]}>Register / Login</button>
-               <div class={styles["dropdown-content"]}>
-                  <Link to="/register">Register</Link>
-                  <Link to="/login">Login</Link>
-               </div>
-            </div>
-            <div class={styles["dropdown"]}>
-               <button class={styles["dropbtn"]}>Delievery Driver</button>
-               <div class={styles["dropdown-content"]}>
-                  <Link to="/Driver-register">Driver Register</Link>
-                  <Link to="/Driver-login">Driver Login</Link>
-               </div>
-            </div>
-            <div class={styles["dropdown"]}>
-               <button class={styles["dropbtn"]}>Restaurant Owner</button>
-               <div class={styles["dropdown-content"]}>
-                  <Link to="/Restaurant-register">Restaurant Register</Link>
-                  <Link to="/Restaurant-login">Restaurant Login</Link>
-               </div>
-            </div>
-      </div>
+      <NavDropdown title="Delivery Driver" id={styles["dropdown"]}>
+        <NavDropdown.Item as={Link} to="/Driver-register">Driver Register</NavDropdown.Item>
+        <NavDropdown.Item as={Link} to="/Driver-login">Driver Login</NavDropdown.Item>
+      </NavDropdown>
+
+      <NavDropdown title="Restaurant Owner" id={styles["dropdown"]}>
+        <NavDropdown.Item as={Link} to="/Restaurant-register">Restaurant Register</NavDropdown.Item>
+        <NavDropdown.Item as={Link} to="/Restaurant-login">Restaurant Login</NavDropdown.Item>
+      </NavDropdown>
+
+      <NavDropdown title="Register / Login" id={styles["dropdown"]}>
+        <NavDropdown.Item as={Link} to="/register">Register</NavDropdown.Item>
+        <NavDropdown.Item as={Link} to="/login">Login</NavDropdown.Item>
+      </NavDropdown>
+    </Nav>
    </div>
    )
 }
