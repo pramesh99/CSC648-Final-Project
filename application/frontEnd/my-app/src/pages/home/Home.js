@@ -15,47 +15,6 @@ import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 
 function Home(props) {
-   // console.log("restaurants passed down home", props.restaurants);
-
-   // let restaurants = props.restaurants.map((restaurant) => (
-   //    <restaurant name={restaurant.RestaurantName} img={restaurant.ImgUrl} />
-   // ))
-   // <div id={styles["home"]}>
-   //    <div id={styles["explore-browse-container"]}>
-   //       <Link to="/browse" id={styles["link"]}>
-   //          <div className={styles["left-container"]}>
-   //             <div id={styles["browse"]}></div>
-   //             <div className={styles["sub-title"]}>Browse Popular Spots</div>
-   //          </div>
-   //       </Link>
-   //       <div className={styles["left-container"]}>
-   //          <div id={styles["explore"]}></div>
-   //          <div className={styles["sub-title"]}>Explore Local Restaurants</div>
-   //       </div>
-   //    </div>
-   //    <div id={styles["gator-grub-container"]}>
-   //       <div id={styles["gator-grub-header"]}> What's GatorGrub?</div>
-   //       <div id={styles["gator-grub"]}>
-   //          <div id={styles["gator-grub-text-container"]}>
-   //             <div>
-   //                GatorGrub is where San Francisco State University students, faculty and staff get amazing deals on food which is delivered straight to them.
-   //                Our discounts, class-to-class delivery, and safe pickup spots help us bring amazing food to your table... or the back of the lecture hall.
-   //             </div>
-   //          </div>
-   //       </div>
-   //    </div>
-   //    <div id={styles["register"]}>
-   //       <h2>Register Now!</h2>
-   //       <div id={styles["register-text"]}>
-   //          SFSU Students, Faculty and Staff get exclusive discounts, pickup spots and more.
-   //          <br></br>
-   //          <br></br>
-   //          GatorGrub drivers and restaurant owners find new oportunities for satisfying customers and earning more profits!
-   //       </div>
-   //       <Button variant="secondary" href="http://localhost:3000/login"style={{ width: "25%", height: "8%" }}>Sign Up</Button>{' '}
-
-   //    </div>
-   //  </div>
    return (
       <>
          <div style={{
@@ -66,7 +25,7 @@ function Home(props) {
             paddingTop: "8%",
             paddingBottom: "8%",
             backgroundColor: "#8987C8",
-            backgroundImage: `url(${banner})`,
+            backgroundImage: `url(https://images.pexels.com/photos/2606030/pexels-photo-2606030.jpeg?auto=compress&cs=tinysrgb&w=1980&h=1280&dpr=1)`,
             backgroundSize: "cover"
          }}  >
             <section id={styles["explore-restaurants-section"]} >
@@ -75,7 +34,8 @@ function Home(props) {
                      <div className={styles["info"]}>
                         <div className={styles["gator-grub-header"]}>Explore Nearby Restaurants!</div>
                         <div className={styles["gator-grub"]}>
-                           We provide food delivery and pickup for SFSU members
+                        Hungry on campus? We've got you covered<br></br>
+                        We provide food delivery and pickup for SFSU members
                         </div>
                         <Link to="/browse">
                            <Button variant="secondary" className={styles["explore-button"]}>Explore Restaurants</Button>{' '}
@@ -89,13 +49,16 @@ function Home(props) {
          <div id={styles["signup-container"]}>
 
             <Card className={styles["signup-card"]}>
-               <Card.Img variant="top" src={UserPic} style={{ height: '15rem' }} />
+               <Card.Img variant="top" src={UserPic} style={{ height: '15rem', objectFit: 'cover' }} />
                <Card.Body style={{ display: "flex", flexDirection: 'column', justifyContent: 'space-between' }}>
                   <section className={styles["category"]}>
                      <div  >
                         <div className={styles["card-header"]}>User Signup</div>
                         <div className={styles["card-p"]}>
-                           Sign up to order/pickup food!
+                        No more waiting in line or searching for a parking spot
+                        <br></br> 
+                        order with us and let the food come to you!
+                        <br></br>
                         </div>
                      </div>
                   </section>
@@ -105,17 +68,17 @@ function Home(props) {
                </Card.Body>
             </Card>
 
-            <Card style={{ width: '18rem', height: '30rem' , marginLeft: "2%", marginRight: "2%",}}>
+            <Card className={styles["signup-card"]}>
                {/* style={{ height: "300px", backgroundSize: "cover", backgroundPosition: "center" }}  */}
-               <Card.Img variant="top" src={BusinessPic} style={{ height: '15rem' }} />
+               <Card.Img variant="top" src={BusinessPic} style={{ height: '15rem', objectFit: 'cover'}} />
 
                <Card.Body style={{ display: "flex", flexDirection: 'column', justifyContent: 'space-between' }}>
                   <section className={styles["category"]}>
                      <div >
                         <div className={styles["card-header"]}> Owner Signup</div>
                         <div className={styles["card-p"]}>
-                           Join our network of restaurants!
-                           <br></br>
+                           Don't limit your restaurant to just walk-ins <br></br>
+                           sign up for delivery and reach a wider audience.<br></br>
                            <div className="deliver-button" style={{ textAlign: "center" }}>
                            </div>
                         </div>
@@ -126,10 +89,10 @@ function Home(props) {
                   >Sign Up Now!</Button>{' '}
                </Card.Body>
             </Card>
-
-            <Card style={{ width: '18rem', height: '30rem' , marginLeft: "2%", marginRight: "2%",}}>
+            
+            <Card className={styles["signup-card"]}>
                {/* style={{ height: "300px", backgroundSize: "cover", backgroundPosition: "center" }}  */}
-               <Card.Img variant="top" src={DeliveryPic} style={{ height: '15rem', backgroundImage:"cover" }} />
+               <Card.Img variant="top" src={DeliveryPic} style={{ height: '15rem', objectFit: 'cover'}} />
 
                <Card.Body style={{ display: "flex", flexDirection: 'column', justifyContent: 'space-between' }}>
                   <section className={styles["category"]}>
