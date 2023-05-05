@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Order from '../../components/order/Order';
 // import Pickup from '../../components/pickup/Pickup';
 // import Delivery from '../../components/delivery/Delivery';
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function RestaurantDashboard(props) {
 
@@ -110,7 +110,7 @@ function RestaurantDashboard(props) {
                   >
                      <Card.Header>Restaurant Options</Card.Header>
                      <Card.Body id={styles["restaurant-options-container"]}>
-                        <Button variant="secondary" size="sm">Register a Restaurant</Button>
+                        <Link to="/restaurantSignup"><Button variant="secondary" size="sm">Register a Restaurant</Button></Link>
                         <Button variant="secondary" size="sm">Registration Status</Button>
                         <Button variant="secondary" size="sm">Customer Service</Button>
                      </Card.Body>
