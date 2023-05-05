@@ -10,68 +10,60 @@ import { Link } from "react-router-dom";
 
 function AboutUs (props) {
    return (
-      <div id={styles["about-us"]}>
-         <div id={styles["heading-container"]}>
-            <h1>Meet the Team!</h1>
+   <div id={styles["background"]}>
+   <div id={styles["about-us-card"]}>
+      <div id={styles["heading-container"]}>
+         <h1>Meet the Team!</h1>
+      </div>
+      <div id={styles["profiles-container"]}>
+         <div className={styles["profile"]}>
+            <a href="/aboutUs/Shauhin"><img src={Shauhin} alt="About Us: Shauhin" className={styles["profile-image"]}></img></a>
+            <div className={styles["profile-description"]}>
+               <div className={styles["profile-name"]}>Shauhin</div>
+               <div className={styles["profile-title-link-container"]}>
+                  <div className={styles["profile-title"]}><b>Team Lead</b></div>
+               </div>
+            </div>
          </div>
-         <div id={styles["profiles-container"]}>
-            <div className={styles["profile"]}>
-               <Link to="/aboutUs/Shauhin"><img src={Shauhin} alt="About Us: Shauhin" className={styles["profile-image"]}></img></Link>
-               <div className={styles["profile-description"]}>
-                  <div className={styles["profile-name"]}>Shauhin</div>
-                  <div className={styles["profile-title-link-container"]}>
-                     <div className={styles["profile-title"]}><b>Team Lead</b></div>
-                     <div className={styles["profile-link"]}><Link to="/aboutUs/Shauhin">{"read more ->"}</Link>
-                     </div>
-                  </div>
+         <div className={styles["profile"]}>
+            <a href="/aboutUs/Hieu"><img src={Hieu} alt="About Us: Hieu" className={styles["profile-image"]}></img></a>
+            <div className={styles["profile-description"]}>
+               <div className={styles["profile-name"]}>Hieu Ma</div>
+               <div className={styles["profile-title-link-container"]}>
+                  <div className={styles["profile-title"]}><b>Front-End Lead</b></div>
                </div>
             </div>
-            <div className={styles.profile}>
-               <Link to="/aboutUs/Hieu"><img src={Hieu} alt="About Us: Hieu" className={styles["profile-image"]}></img></Link>
-               <div className={styles["profile-description"]}>
-                  <div className={styles["profile-name"]}>Hieu Ma</div>
-                  <div className={styles["profile-title-link-container"]}>
-                     <div className={styles["profile-title"]}><b>Front-End Lead</b></div>
-                     <div className={styles["profile-link"]}><Link to="/aboutUs/Hieu">{"read more ->"}</Link>
-                     </div>
-                  </div>
+         </div>
+         <div className={styles["profile"]}>
+            <a href="/aboutUs/Preetham"><img src={Preetham} alt="About Us: Preetham" className={styles["profile-image"]}></img></a>
+            <div className={styles["profile-description"]}>
+               <div className={styles["profile-name"]}>Preetham</div>
+               <div className={styles["profile-title-link-container"]}>
+                  <div className={styles["profile-title"]}><b>Back-End Lead</b></div>
                </div>
             </div>
-            <div className={styles.profile}>
-               <Link to="/aboutUs/Preetham"><img src={Preetham} alt="About Us: Preetham" className={styles["profile-image"]}></img></Link>
-               <div className={styles["profile-description"]}>
-                  <div className={styles["profile-name"]}>Preetham</div>
-                  <div className={styles["profile-title-link-container"]}>
-                     <div className={styles["profile-title"]}><b>Back-End Lead</b></div>
-                     <div className={styles["profile-link"]}><Link to="/aboutUs/Preetham">{"read more ->"}</Link>
-                     </div>
-                  </div>
+         </div>
+         <div className={styles["profile"]}>
+            <a href="/aboutUs/Lin"><img src={Lin} alt="About Us: Lin" className={styles["profile-image"]}></img></a>
+            <div className={styles["profile-description"]}>
+               <div className={styles["profile-name"]}>Lin Tun</div>
+               <div className={styles["profile-title-link-container"]}>
+                  <div className={styles["profile-title"]}><b>Front-End Dev</b></div>
                </div>
             </div>
-            <div className={styles.profile}>
-               <Link to="/aboutUs/Lin"><img src={Lin} alt="About Us: Lin" className={styles["profile-image"]}></img></Link>
-               <div className={styles["profile-description"]}>
-                  <div className={styles["profile-name"]}>Lin</div>
-                  <div className={styles["profile-title-link-container"]}>
-                     <div className={styles["profile-title"]}><b>Front-End Dev</b></div>
-                     <div className={styles["profile-link"]}><Link to="/aboutUs/Lin">{"read more ->"}</Link>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div className={styles.profile}>
-               <Link to="/aboutUs/Derrick"><img src={Derrick} alt="About Us: Derrick" className={styles["profile-image"]}></img></Link> 
-               <div className={styles["profile-description"]}>
-                  <div className={styles["profile-name"]}>Derrick</div>
-                  <div className={styles["profile-title-link-container"]}>
-                     <div className={styles["profile-title"]}><b>Back-End Dev</b></div>
-                     <div className={styles["profile-link"]}><Link to="/aboutUs/Derrick">{"read more ->"}</Link>
-                     </div>
-                  </div>
+         </div>
+         <div className={styles["profile"]}>
+            <a href="/aboutUs/Derrick"><img src={Derrick} alt="About Us: Derrick" className={styles["profile-image"]}></img></a>
+            <div className={styles["profile-description"]}>
+               <div className={styles["profile-name"]}>Derrick</div>
+               <div className={styles["profile-title-link-container"]}>
+                  <div className={styles["profile-title"]}><b>Back-End Dev</b></div>
                </div>
             </div>
          </div>
       </div>
+   </div>
+   </div>
    )
 }
 

@@ -1,4 +1,4 @@
-#about-us {
+/* #about-us {
    font-family: 'Roboto Mono', monospace;
 }
 
@@ -43,4 +43,62 @@
    width: 300px;
    height: 400px;
    background-color: grey;
+} */
+
+#background{
+   background-image: url("https://images.pexels.com/photos/4087571/pexels-photo-4087571.jpeg?auto=compress&cs=tinysrgb&w=8245&h=5497&dpr=1");
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+#about-us-card {
+   background-color: #d3d3d3;
+   border: 1px solid #ddd;
+   border-radius: 5px;
+   box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+   margin: 1px auto;
+   margin-bottom: 0px;
+   max-width: 800px;
+   padding: 20px;
+   text-align: center;
+}
+
+#heading-container {
+   margin-bottom: 20px;
+}
+
+.profile {
+   display: inline-block;
+   margin: 25px;
+   text-align: center;
+}
+
+.profile-image {
+   border-radius: 10%;
+   height: 200px;
+   width: 150px;
+   object-fit: cover;
+}
+
+.profile-description {
+   margin-top: 10px;
+}
+
+.profile-name {
+   font-size: 20px;
+   font-weight: bold;
+}
+
+.profile-title-link-container {
+   margin-top: 5px;
+}
+
+.profile-title {
+   font-size: 16px;
+   font-weight: bold;
+}
+
+.profile-link {
+   font-size: 14px;
 }
