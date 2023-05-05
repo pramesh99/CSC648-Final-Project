@@ -63,7 +63,7 @@ function Home(props) {
                      </div>
                   </section>
                   <Button variant="secondary"
-                     href="http://localhost:3000/register"
+                     as={Link} to="/register"
                   >Sign Up Now!</Button>{' '}
                </Card.Body>
             </Card>
@@ -85,7 +85,7 @@ function Home(props) {
                      </div>
                   </section>
                   <Button variant="secondary"
-                     href="http://localhost:3000/Restaurant-register"
+                     as={Link} to="/Restaurant-register"
                   >Sign Up Now!</Button>{' '}
                </Card.Body>
             </Card>
@@ -109,7 +109,7 @@ function Home(props) {
                      </div>
                   </section>
                   <Button variant="secondary"
-                     href="http://localhost:3000/Driver-register"
+                     as={Link} to="/Driver-register"
                      >Sign Up Now!</Button>
                </Card.Body>
             </Card>
