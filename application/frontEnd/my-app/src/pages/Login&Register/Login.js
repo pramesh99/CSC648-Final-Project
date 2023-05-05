@@ -3,6 +3,7 @@ import Forminput from "./Forminput"
 import styles from "./Login.module.css";
 import "./Register"
 import Button from "react-bootstrap/esm/Button"
+import { Link } from "react-router-dom";
 
 const Login = (props) => {
     const [values, setValues] = useState({
@@ -77,10 +78,13 @@ const Login = (props) => {
             <Forminput key={input.id} {...input} value={values[input.name]} onChange={onChange}></Forminput>))}
             <button onSubmit="submit" >Login</button>
             <div className={styles["Registerpath"]}>
-                <a href="/forgotpassword">Forgot the password?</a>
+            <Link to="/Forgot-password" passHref>
+                <a href="replace">Forgot the password?</a></Link>
             </div>
             <div className={styles["Registerpath"]}>
-                Need to register?<a href="http://localhost:3000/register">Sign Up!</a>
+                Need to register?
+                <Link to="/register" passHref>
+                <a href="replace">Sing Up!</a></Link>
             </div>
             </form>
         </div>
