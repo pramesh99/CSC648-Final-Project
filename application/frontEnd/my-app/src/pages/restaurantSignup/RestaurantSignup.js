@@ -133,7 +133,7 @@ const RestaurantSignup = (props) => {
                      <Form.Control type="number" label="Avg Prep Time" />
                   </Form.Group>
                </div>
-               <div className={styles["restaurant-form"]}>
+               <div id={styles["hours-of-op"]} className={styles["restaurant-form"]}>
                   <h5>Hours of Operation:</h5>
                   {daysOfWeek.map((day) => (
                      <Form.Group controlId="restaurantAddress">
@@ -153,9 +153,9 @@ const RestaurantSignup = (props) => {
                               <option value="9">11</option>
                               <option value="10">12</option>
                            </Form.Select>
-                           <Form.Select aria-label="Default select example">
-                              <option value="AM">AM</option>
-                              <option value="PM">PM</option>
+                           <Form.Select  className={styles["time-form"]} aria-label="Default select example">
+                              <option value="AM">AM </option>
+                              <option value="PM">PM </option>
                            </Form.Select>
                            <div className={styles["to"]}>to</div>
                            <Form.Select aria-label="Default select example">

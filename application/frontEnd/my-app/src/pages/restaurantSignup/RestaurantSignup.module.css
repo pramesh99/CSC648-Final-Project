@@ -52,6 +52,7 @@
    display: flex;
    justify-content: center;
    align-items: center;
+   width: 18vw;
 }
 
 .time-num {
@@ -60,4 +61,9 @@
 .to {
    /* text-align: center; */
    margin: 0px 10px;
+}
+
+.time-form {
+   /* width: 100%; */
+   /* padding-right:100px; */
 }
