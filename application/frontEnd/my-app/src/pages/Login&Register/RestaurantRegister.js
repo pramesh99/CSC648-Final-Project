@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Forminput from "./Forminput"
 import styles from "./RestaurantRegister.module.css";
+import { Link } from "react-router-dom";
 
 const Register = () => {
     const [values, setValues] = useState({
@@ -138,7 +139,9 @@ const Register = () => {
                 </div>
                 <button className="Submit" type="submit">Sign Up</button>
                 <div className={styles["Loginpath"]}>
-                    Already have an account?<a href="http://localhost:3000/Restaurant-login">Log in</a>
+                    Already have an account?
+                <Link to="/Restaurant-login" passHref>
+                <a href="replace">Log in!</a></Link>
                 </div>
             </form>
         </div>

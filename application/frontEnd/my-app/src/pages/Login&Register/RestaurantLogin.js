@@ -4,6 +4,7 @@ import styles from "./RestaurantLogin.module.css";
 import "./RestaurantRegister"
 import Button from "react-bootstrap/esm/Button"
 import LoginRegisterModal from "../../components/loginRegisterModal/LoginRegisterModal";
+import { Link } from "react-router-dom";
 
 const Login = (props) => {
 
@@ -90,7 +91,8 @@ const Login = (props) => {
                     console.log(modalShow)
                 }} >Login</button>
                 <div className={styles["Registerpath"]}>
-                    <a href="/forgotpassword">Forgot the password?</a>
+                <Link to="/Forgot-password" passHref>
+                <a href="replace">Forgot the password?</a></Link>
                 </div>
                 <div className={styles["Registerpath"]}>
                     Need to register?<a href="http://localhost:3000/Restaurant-register">Sign Up!</a>

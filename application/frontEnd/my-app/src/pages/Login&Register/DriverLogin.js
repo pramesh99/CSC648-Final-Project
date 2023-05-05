@@ -3,6 +3,7 @@ import Forminput from "./Forminput"
 import styles from "./DriverLogin.module.css";
 import "./DriverRegister"
 import Button from "react-bootstrap/esm/Button"
+import { Link } from "react-router-dom";
 
 const Login = (props) => {
     const [values, setValues] = useState({
@@ -79,6 +80,13 @@ const Login = (props) => {
             </div>
             <div className={styles["Registerpath"]}>
                 Want to be a driver? <a href="http://localhost:3000/Driver-register">Sign Up!</a>
+            <Link to="/Forgot-password" passHref>
+                <a href="replace">Forgot the password?</a></Link>
+            </div>
+            <div className={styles["Registerpath"]}>
+                Want to be our Team?
+                <Link to="/Driver-register" passHref>
+                <a href="replace">Sign Up!</a></Link>
             </div>
             </form>
         </div>

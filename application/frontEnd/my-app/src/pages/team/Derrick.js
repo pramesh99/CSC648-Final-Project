@@ -5,7 +5,7 @@ import styles from "./Profile.module.css";
 function Derrick(props) {
    return (
       <div id={styles["profile-container"]}>
-         <img src={ProfilePic} id="profile-pic" alt="Derrick"></img>
+         <img src={ProfilePic} id={styles["profile-image"]} alt="Derrick"></img>
          <div id={styles["description-container"]}>
             <div id={styles["name"]}>Derrick</div>
             <div id={styles["position"]}><b>Back-End Dev</b></div>
