@@ -5,10 +5,17 @@ Purpose: API endpoint definitions.
 
 const express = require('express');
 const db = require('../db');
-const { application } = require('express');
 const router = express.Router();
 
 
+router.post('/test', async (req, res, next) => {
+    try {
+
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
 router.get('/restOwners', async (req,res,next) => { // route is appended to /api in server.js
     try {
         let results = await db.getAllOwners(); // params go here
