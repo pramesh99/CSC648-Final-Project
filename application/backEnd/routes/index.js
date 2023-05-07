@@ -144,4 +144,14 @@ router.post('/login', async (req, res, next) => {
     }
 });
 
+router.get('/restaurantMenu/:restaurant', async (req, res, next) => {
+    try {
+        let results = await db.getRestaurantMenu(req.params.restaurant);
+        res.json(results);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
 module.exports = router;

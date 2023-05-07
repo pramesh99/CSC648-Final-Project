@@ -199,4 +199,17 @@ DB.getRestaurantOwner = (email) => {
     });
 }
 
+
+DB.getRestaurantMenu = (restaurant) => {
+    return new Promise ((resolve, reject) => {
+        pool.query('SELECT MenuItem.* FROM MenuItem JOIN Restaurant ON MenuItem.RestaurantID = Restaurant.RestaurantID WHERE Restaurant.RestaurantName = ?', [restaurant],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+
 module.exports = DB;
