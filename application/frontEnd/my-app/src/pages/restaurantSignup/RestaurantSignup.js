@@ -153,7 +153,7 @@ const RestaurantSignup = (props) => {
                               <option value="9">11</option>
                               <option value="10">12</option>
                            </Form.Select>
-                           <Form.Select  className={styles["time-form"]} aria-label="Default select example">
+                           <Form.Select className={styles["time-form"]} aria-label="Default select example">
                               <option value="AM">AM </option>
                               <option value="PM">PM </option>
                            </Form.Select>

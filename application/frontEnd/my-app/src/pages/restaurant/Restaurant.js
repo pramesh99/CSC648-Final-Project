@@ -8,19 +8,33 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import Button from 'react-bootstrap/Button';
 import Pickup from '../../components/pickup/Pickup';
 import Delivery from '../../components/delivery/Delivery';
-// import { Link } from "react-router-dom";
+
+async function getSearchRestaurants(id, setMenu) {
+   let resData = [];
+   if (id) {
+      id = "/" + id
+   }
+   await fetch(`http://34.82.124.237:3001/api/restaurantMenu${id}`).then((r) => r.json()).then((data) => {
+      resData = data;
+      // console.log("Menu items:", resData);
+      setMenu(resData);
+   }
+   )
+   return resData;
+}
 
 function Restaurant(props) {
-   console.log("selected restaurant", props.restaurant);
+   // console.log("selected restaurant", props.restaurant);
+
+   const [menu, setMenu] = useState([
+      { MenuItemName: "item_1", MenuItemDescription: "lorem ipsum", MenuItemPrice: 5 },
+      { MenuItemName: "item_2", MenuItemDescription: "lorem ipsum", MenuItemPrice: 10 },
+      { MenuItemName: "item_3", MenuItemDescription: "lorem ipsum", MenuItemPrice: 15 },
+   ]);
 
    let restaurant = props.restaurant;
 
-   let menu = props.menu;
-   let menuItems;
-
-   const [checked, setChecked] = useState(false);
    const [radioValue, setRadioValue] = useState('Set Pickup Location:');
-
    const [selectedItems, setSelectedItems] = useState({});
    const [total, setTotal] = useState(0);
 
@@ -29,26 +43,12 @@ function Restaurant(props) {
       { name: 'Delivery', value: 'Set Delivery Location:' },
    ];
 
-   if (menu) {
-      menuItems = menu.map((item) => (
-         <MenuItem name={item.name} description={item.description} price={item.price} updateTotalCost={updateTotalCost} />
-      ))
-   } else {
-      let fakeItems = [
-         { name: "item_1", description: "lorem ipsum", price: 5 },
-         { name: "item_2", description: "lorem ipsum", price: 10 },
-         { name: "item_3", description: "lorem ipsum", price: 15 },
-      ]
-      menuItems = fakeItems.map((item) => (
-         <MenuItem
-            name={item.name}
-            description={item.description}
-            price={item.price}
-            selectedItems={selectedItems}
-            setSelectedItems={setSelectedItems}
-         />
-      ))
-   }
+   useEffect(() => {
+      let restaurant = props.restaurant;
+      if (restaurant.RestaurantName) {
+         getSearchRestaurants(restaurant.RestaurantName, setMenu)
+      }
+   }, [])
 
    let updateTotalCost = () => {
       let selectedItemsArr = Object.values(selectedItems);
@@ -58,7 +58,7 @@ function Restaurant(props) {
             total += (selectedItemsArr[i].price * selectedItemsArr[i].amount);
          }
       }
-      return setTotal(total);
+      return setTotal(total.toFixed(2));
    }
 
    let renderDeliveryOption = () => {
@@ -93,7 +93,9 @@ function Restaurant(props) {
                   <Card.Header>Menu</Card.Header>
                   <Card.Body className={styles["card-body"]}>
                      <Card.Text className={styles["restaurant-menu-items"]}>
-                        {menuItems}
+                        {menu.map((item) => (
+                           <MenuItem name={item?.MenuItemName} description={item?.MenuItemDescription} price={item?.MenuItemPrice} selectedItems={selectedItems} setSelectedItems={setSelectedItems}/>
+                        ))}
                      </Card.Text>
                   </Card.Body>
                </Card>
