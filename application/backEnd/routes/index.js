@@ -32,7 +32,7 @@ router.get('/restOwners', async (req,res,next) => { // route is appended to /api
 // get restuarants by category
 router.get('/search/:cuisine', async (req,res,next) => { // route is appended to /api in server.js
     try {
-        let results = await db.getRestByCuisine(req.params.cuisine); // params go here
+        let results = await db.searchBarQueryWithCuisine(req.params.cuisine, " ");
         res.json(results);
     } catch(e) {
         console.log(e);

@@ -83,12 +83,7 @@ DB.getAllCuisines = () => {
 
 DB.searchBarQueryNoCuisine = (search_input) => {
     return new Promise((resolve, reject) => {
-        pool.query(`SELECT Restaurant.RestaurantID, Restaurant.RestaurantOwnerID, Restaurant.flag, Restaurant.RestaurantName, 
-                           Restaurant.RestaurantPhone, Restaurant.RestaurantPassword, Restaurant.RestaurantAddress, Cuisine.cuisineName,
-                           Restaurant.RestaurantPriceTier, Restaurant.RestaurantHours, Restaurant.RestaurantPrepTime, Restaurant.RestaurantCoordinates, 
-                           Restaurant.RestaurantDescription
-                    FROM Restaurant
-                    INNER JOIN Cuisine ON Restaurant.RestaurantCuisine=Cuisine.cuisineID`,
+        pool.query(`SELECT * FROM Restaurant`,
             (err, results) => {
                 if (err) {
                     return reject(err);
