@@ -10,7 +10,10 @@ const router = express.Router();
 
 router.post('/test', async (req, res, next) => {
     try {
-
+        fetch('http://localhost:3001/api/submit/customerOrder', {method: 'POST', headers: {'Content-Type': 'application/json'},
+             body: `{"OrderID": "1", CustomerID: "1", DriverID: "1", RestaurantID: "1", OrderTime: "6PM", DeliveryTime: "7PM", DeliveryAddress: "ur moms house",
+            AdditionalNotes: "", OrderDiscounts: "", OrderPrice: "69.69", OrderStatus: "2", Items: [{1: {count: "2", price: ""12.12"}}]}`}
+             );
     } catch (e) {
         console.log(e);
         res.sendStatus(500);
@@ -72,7 +75,11 @@ router.get('/allCuisines', async (req, res, next) => {
 // query for search bar
 router.get('/searchNoCuisine/:search_input', async (req, res, next) => {
     try {
-        let results = await db.searchBarQueryNoCuisine(req.params.search_input);
+        let temp = await db.searchBarQueryNoCuisine(req.params.search_input);
+        let results = [];
+        for (let i = 0; i < temp.length; i++){
+            results.push(temp[i].item);
+        }
         res.json(results);
     } catch(e) {
         console.log(e);
@@ -82,7 +89,11 @@ router.get('/searchNoCuisine/:search_input', async (req, res, next) => {
 
 router.get('/searchWithCuisine/:cuisine/:search_input', async (req, res, next) => {
     try {
-        let results = await db.searchBarQueryWithCuisine(req.params.cuisine, req.params.search_input);
+        let temp = await db.searchBarQueryWithCuisine(req.params.cuisine, req.params.search_input);
+        let results = [];
+        for (let i = 0; i < temp.length; i++){
+            results.push(temp[i].item);
+        }
         res.json(results);
     } catch(e) {
         console.log(e);
@@ -111,6 +122,36 @@ router.post('/submit/registrationForm', async (req, res, next) => {
         } else {
             res.sendStatus(500);
         }
+    }
+});
+
+router.post('/submit/customerOrder', async (req, res, next) => {
+    try {
+        const formData = req.body;
+        let results = await db.enterOrder(
+            formData.OrderID,
+            formData.CustomerID,
+            formData.DriverID,
+            formData.RestaurantID,
+            formData.OrderTime,
+            formData.DeliveryTime,
+            formData.DeliveryAddress,
+            formData.AdditionalNotes,
+            formData.OrderDiscounts,
+            formData.OrderPrice,
+            formData.OrderStatus
+        );
+
+        
+        for (let i = 0; i < formData.Items.length; i++){
+            results = await db.enterOrderItems(formData.OrderID, formData[i].menuItemID, formData[i].menuItemID.count, formData[i].menuItemID.quantity);
+        }
+
+        res.json(results);
+        //could implement pseudo-transcations by catching error and deleting rows just inserted
+    } catch(e) {
+        console.log(e);
+        res.sendStatus(500);
     }
 });
 

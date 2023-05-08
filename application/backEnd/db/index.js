@@ -212,4 +212,34 @@ DB.getRestaurantMenu = (restaurant) => {
     });
 }
 
+DB.enterOrder = (oID, cID, dID, rID, oTime, dTime, dAddress, aNotes, oDisc, oPrice, oStatus) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`INSERT INTO Orders (OrderID, CustomerID,
+                        DriverID, RestaurantID, OrderTime, DeliveryTime,
+                        DeliveryAddress, AdditionalNotes, OrderDiscounts, 
+                        OrderPrice, OrderStatus) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                    [oID, cID, dID, rID, oTime, dTime, dAddress, aNotes, oDisc, oPrice, oStatus],
+                    (err, results) => {
+                        if (err) {
+                            return reject(err);
+                        }
+                        return resolve(results);
+                    });
+    });
+}
+
+DB.enterOrderItems = (oID, miID, qty, price) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`INSERT INTO OrderItems (OrderItemsID, OrderID, MenuItemID, Quanity, Price) VALUES (?, ?, ?, ?)`, 
+        [oID, miID, qty, price],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            } 
+            return resolve(results);
+        });
+    })
+}
+
 module.exports = DB;
