@@ -155,6 +155,12 @@ DB.RestaurantOwnerReg = (name, email, phone, password) => {
     });
 }
 
+DB.RestaurantReg = () => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`INSERT INTO Restaurant ()`)
+    })
+}
+
 DB.getSFSUCustomer = (email) => {
     return new Promise ((resolve, reject) => {
         pool.query('SELECT * FROM SFSUCustomer WHERE SFSUCustomerEmail = ?',

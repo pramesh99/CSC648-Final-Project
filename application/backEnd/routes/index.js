@@ -129,6 +129,17 @@ router.post('/submit/registrationForm', async (req, res, next) => {
     }
 });
 
+router.post('/submit/registerRestaurant', async (req, res, next) => {
+    try{
+        const formData = req.body;
+        let results = await db.RestaurantReg();
+        res.json(results);
+    } catch(e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
 router.post('/submit/customerOrder', async (req, res, next) => {
     try {
         const formData = req.body;
