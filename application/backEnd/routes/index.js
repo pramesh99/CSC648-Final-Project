@@ -163,7 +163,6 @@ router.post('/submit/customerOrder', async (req, res, next) => {
             
         res.json(results);
         //could implement pseudo-transcations by catching error and deleting rows just inserted
-        console.log("deez nuts")
     } catch(e) {
         console.log(e);
         res.sendStatus(500);
