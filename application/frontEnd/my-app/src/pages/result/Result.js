@@ -17,30 +17,35 @@ function Result(props) {
    let search = props.search;
    console.log("results page", props);
    let restaurants;
-   if(props.restaurants){
+   if (props.restaurants) {
       restaurants = props.restaurants.map((restaurant) => (
-         <RestaurantCard restaurant ={restaurant} name={restaurant.item.RestaurantName} img={restaurant.item.ImgUrl} description={restaurant.item.RestaurantDescription} setSelectedRestaurant={props.setSelectedRestaurant}/>
+         <RestaurantCard restaurant={restaurant} name={restaurant.RestaurantName} img={restaurant.ImgUrl} description={restaurant.RestaurantDescription} setSelectedRestaurant={props.setSelectedRestaurant} />
       ))
    }
 
    let markerPositions = [];
+   let markers;
 
    for (let i = 0; i < props.restaurants.length; i++) {
-      let coordinates = props.restaurants[i].item.RestaurantCoordinates;
-      coordinates = coordinates.split(",");
-      coordinates[0] = Number(coordinates[0]);
-      coordinates[1] = Number(coordinates[1]);
-      markerPositions.push({
-         lat: coordinates[0],
-         lng: coordinates[1]
-      })
+      let coordinates = props.restaurants[i]?.item?.RestaurantCoordinates;
+      if (coordinates) {
+         coordinates = coordinates.split(",");
+         coordinates[0] = Number(coordinates[0]);
+         coordinates[1] = Number(coordinates[1]);
+         markerPositions.push({
+            lat: coordinates[0],
+            lng: coordinates[1]
+         })
+      }
    }
 
-   let markers = markerPositions.map((position) => (
-      <Marker
-         position={position}
-      />
-   ))
+   if (markerPositions.length > 0) {
+      markers = markerPositions.map((position) => (
+         <Marker
+            position={position}
+         />
+      ))
+   }
 
    // Google Maps Implementation
    const { isLoaded } = useJsApiLoader({

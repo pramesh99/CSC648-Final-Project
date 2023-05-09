@@ -6,8 +6,7 @@ import Button from 'react-bootstrap/Button';
 function MenuItem(props) {
    let selectedItems = props.selectedItems;
    let setSelectedItems = props.setSelectedItems;
-   let updateTotalCost = props.updateTotalCost;
-
+   // console.log(selectedItems)
    let addItem = () => {
       let newSelectedItems = { ...selectedItems };
       if (!(props.name in newSelectedItems)) {
@@ -18,17 +17,7 @@ function MenuItem(props) {
             amount: 1,
          }
          setSelectedItems(newSelectedItems);
-         console.log("ADDED NEW ITEM", newSelectedItems)
-         
-      }
-   }
-
-   let removeItem = () => {
-      let newSelectedItems = { ...selectedItems };
-      if (props.name in newSelectedItems) {
-         delete newSelectedItems[props.name];
-         setSelectedItems(newSelectedItems);
-         console.log("DELETED", newSelectedItems)
+         // console.log("ADDED NEW ITEM", newSelectedItems)
       }
    }
 
