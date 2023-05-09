@@ -83,12 +83,7 @@ DB.getAllCuisines = () => {
 
 DB.searchBarQueryNoCuisine = (search_input) => {
     return new Promise((resolve, reject) => {
-        pool.query(`SELECT Restaurant.RestaurantID, Restaurant.RestaurantOwnerID, Restaurant.flag, Restaurant.RestaurantName, 
-                           Restaurant.RestaurantPhone, Restaurant.RestaurantPassword, Restaurant.RestaurantAddress, Cuisine.cuisineName,
-                           Restaurant.RestaurantPriceTier, Restaurant.RestaurantHours, Restaurant.RestaurantPrepTime, Restaurant.RestaurantCoordinates, 
-                           Restaurant.RestaurantDescription
-                    FROM Restaurant
-                    INNER JOIN Cuisine ON Restaurant.RestaurantCuisine=Cuisine.cuisineID`,
+        pool.query(`SELECT * FROM Restaurant`,
             (err, results) => {
                 if (err) {
                     return reject(err);
@@ -160,6 +155,12 @@ DB.RestaurantOwnerReg = (name, email, phone, password) => {
     });
 }
 
+DB.RestaurantReg = () => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`INSERT INTO Restaurant ()`)
+    })
+}
+
 DB.getSFSUCustomer = (email) => {
     return new Promise ((resolve, reject) => {
         pool.query('SELECT * FROM SFSUCustomer WHERE SFSUCustomerEmail = ?',
@@ -210,6 +211,36 @@ DB.getRestaurantMenu = (restaurant) => {
             return resolve(results);
         });
     });
+}
+
+DB.enterOrder = (cID, dID, rID, oTime, dTime, dAddress, aNotes, oDisc, oPrice, oStatus) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`INSERT INTO Orders (CustomerID,
+                        DriverID, RestaurantID, OrderTime, DeliveryTime,
+                        DeliveryAddress, AdditionalNotes, OrderDiscounts, 
+                        OrderPrice, OrderStatus) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                    [cID, dID, rID, oTime, dTime, dAddress, aNotes, oDisc, oPrice, oStatus],
+                    (err, results) => {
+                        if (err) {
+                            return reject(err);
+                        }
+                        return resolve(results);
+                    });
+    });
+}
+
+DB.enterOrderItems = (oID, miID, qty, price) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`INSERT INTO OrderItems (OrderItemsID, OrderID, MenuItemID, Quanity, Price) VALUES (?, ?, ?, ?)`, 
+        [oID, miID, qty, price],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            } 
+            return resolve(results);
+        });
+    })
 }
 
 module.exports = DB;

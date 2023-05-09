@@ -54,17 +54,23 @@ async function getAllRestaurants() {
 
 async function getSearchRestaurants(search) {
   let resData = [];
-  await fetch(`http://34.82.124.237:3001/api/search/${search}`).then((r) => r.json()).then((data) => {
-    resData = data
+  if (search) {
+    search = "/" + search
+  }
+  await fetch(`http://34.82.124.237:3001/api/searchNoCuisine${search}`).then((r) => r.json()).then((data) => {
+    resData = data;
     console.log("SEARCH HAS BEEN REQUESTED:", resData);
   }
   )
   return resData;
 }
 
-async function getSearchRestaurantsWithCategory(search, category) {
+async function getSearchRestaurantsWithCategory(category, search) {
   let resData = [];
-  await fetch(`http://34.82.124.237:3001/api/search/${category}${"/" + search}`).then((r) => r.json()).then((data) =>
+  if (search) {
+    search = "/" + search
+  }
+  await fetch(`http://34.82.124.237:3001/api/search/${category}${search}`).then((r) => r.json()).then((data) =>
     resData = data
   )
   return resData;
@@ -120,40 +126,44 @@ function App() {
 
   // Search Use Effect
   useEffect(() => {
+    // console.log("useEffect searchResultCategory", searchResultCategory)
+    // console.log("useEffect searchResult", searchResult)
     if (searchResultCategory !== 'all') {
       let newRestaurants = [];
-      getSearchRestaurantsWithCategory(searchResult, searchResultCategory).then((r) => {
+      getSearchRestaurantsWithCategory(searchResultCategory, searchResult).then((r) => {
+        console.log("with category", searchResultCategory, searchResult);
         for (let i = 0; i < r.length; i++) {
-          newRestaurants.push({ item: r[i] });
+          newRestaurants.push(r[i]);
         }
         for (let i = 0; i < r.length; i++) {
-          newRestaurants[i]["item"]["ImgUrl"] = restaurantImages[i]?.urls?.regular;
+          newRestaurants[i]["ImgUrl"] = restaurantImages[i]?.urls?.regular;
         }
-        console.log("search restaurants use effect", r)
-        setRestaurants(newRestaurants);
+        // console.log("search restaurants use effect", r)
+        setSearchRestaurants(newRestaurants);
       });
     } else if (searchResultCategory === 'all' && searchResult === '') {
       getAllRestaurants().then((r) => {
+        console.log("get all rest", r)
         let newRestaurants = [];
         for (let i = 0; i < r.length; i++) {
-          newRestaurants.push({ item: r[i] });
+          newRestaurants.push(r[i]);
         }
         for (let i = 0; i < newRestaurants.length; i++) {
-          newRestaurants[i]["item"]["ImgUrl"] = restaurantImages[i]?.urls?.regular;
+          newRestaurants[i]["ImgUrl"] = restaurantImages[i]?.urls?.regular;
         }
-        setRestaurants(newRestaurants);
+        setSearchRestaurants(newRestaurants);
       })
     } else {
       getSearchRestaurants(searchResult).then((r) => {
         let newRestaurants = [];
         for (let i = 0; i < r.length; i++) {
-          newRestaurants.push({ item: r[i] });
+          newRestaurants.push(r[i]);
         }
         for (let i = 0; i < r.length; i++) {
-          newRestaurants[i]["item"]["ImgUrl"] = restaurantImages[i]?.urls?.regular;
+          newRestaurants[i]["ImgUrl"] = restaurantImages[i]?.urls?.regular;
         }
         setSearchRestaurants(newRestaurants);
-        console.log("getsearches", searchRestaurants);
+        // console.log("getsearches", searchRestaurants);
       });
     }
 
@@ -209,11 +219,11 @@ function App() {
         <Route path="/restaurant" element={<Restaurant restaurant={selectedRestaurant} />} />
         <Route path="/restaurantSignup" element={<RestaurantSignup />} />
 
-        {restaurants.map((restaurant)=> (
-          <Route path={`${restaurant?.RestaurantName}`} element={<Restaurant restaurant={selectedRestaurant} />} />
+        {restaurants.map((restaurant) => (
+          <Route key={"app.js" + restaurant?.RestaurantName} path={`${restaurant?.RestaurantName}`} element={<Restaurant restaurant={selectedRestaurant} />} />
         ))}
-        <Route path="/restaurantDashboard" element={<RestaurantDashboard/>} />
-        <Route path="/driverDashboard" element={<DriverDashboard/>}/>
+        <Route path="/restaurantDashboard" element={<RestaurantDashboard />} />
+        <Route path="/driverDashboard" element={<DriverDashboard />} />
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/aboutUs/Shauhin" element={<Shauhin />} />
         <Route path="/aboutUs/Hieu" element={<Hieu />} />

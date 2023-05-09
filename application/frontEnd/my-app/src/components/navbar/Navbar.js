@@ -25,6 +25,7 @@ function Navbar(props) {
    const handleClick = () => {
       setSearchResult(search);
       setSearchResultCategory(category);
+      console.log(search, category);
       navigate("/result");
    };
 
