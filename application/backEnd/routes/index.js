@@ -144,7 +144,6 @@ router.post('/submit/customerOrder', async (req, res, next) => {
     try {
         const formData = req.body;
         let results = await db.enterOrder(
-            formData.OrderID,
             formData.CustomerID,
             formData.DriverID,
             formData.RestaurantID,
@@ -158,12 +157,13 @@ router.post('/submit/customerOrder', async (req, res, next) => {
         );
 
         
-        for (let i = 0; i < formData.Items.length; i++){
-            results = await db.enterOrderItems(formData.OrderID, formData[i].menuItemID, formData[i].menuItemID.count, formData[i].menuItemID.quantity);
-        }
-
+        // for (let i = 0; i < formData.Items.length; i++){
+        //     results = await db.enterOrderItems(formData[i].menuItemID, formData[i].menuItemID.count, formData[i].menuItemID.quantity);
+        // }
+            
         res.json(results);
         //could implement pseudo-transcations by catching error and deleting rows just inserted
+        console.log("deez nuts")
     } catch(e) {
         console.log(e);
         res.sendStatus(500);

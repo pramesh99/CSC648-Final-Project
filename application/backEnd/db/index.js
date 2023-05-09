@@ -213,14 +213,14 @@ DB.getRestaurantMenu = (restaurant) => {
     });
 }
 
-DB.enterOrder = (oID, cID, dID, rID, oTime, dTime, dAddress, aNotes, oDisc, oPrice, oStatus) => {
+DB.enterOrder = (cID, dID, rID, oTime, dTime, dAddress, aNotes, oDisc, oPrice, oStatus) => {
     return new Promise ((resolve, reject) => {
-        pool.query(`INSERT INTO Orders (OrderID, CustomerID,
+        pool.query(`INSERT INTO Orders (CustomerID,
                         DriverID, RestaurantID, OrderTime, DeliveryTime,
                         DeliveryAddress, AdditionalNotes, OrderDiscounts, 
                         OrderPrice, OrderStatus) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-                    [oID, cID, dID, rID, oTime, dTime, dAddress, aNotes, oDisc, oPrice, oStatus],
+                    [cID, dID, rID, oTime, dTime, dAddress, aNotes, oDisc, oPrice, oStatus],
                     (err, results) => {
                         if (err) {
                             return reject(err);
