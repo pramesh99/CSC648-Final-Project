@@ -9,6 +9,77 @@ import Button from 'react-bootstrap/Button';
 import Pickup from '../../components/pickup/Pickup';
 import Delivery from '../../components/delivery/Delivery';
 
+// router.post('/submit/customerOrder', async (req, res, next) => {
+//    try {
+//       const formData = req.body;
+//       let results = await db.enterOrder(
+//          formData.OrderID,
+//          formData.CustomerID,
+//          formData.DriverID,
+//          formData.RestaurantID,
+//          formData.OrderTime,
+//          formData.DeliveryTime,
+//          formData.DeliveryAddress,
+//          formData.AdditionalNotes,
+//          formData.OrderDiscounts,
+//          formData.OrderPrice,
+//          formData.OrderStatus
+//       );
+
+//       for (let i = 0; i < formData.Items.length; i++) {
+//          results = await db.enterOrderItems(formData.OrderID, formData[i].menuItemID, formData[i].menuItemID.count, formData[i].menuItemID.quantity);
+//       }
+
+//       res.json(results);
+//       //could implement pseudo-transcations by catching error and deleting rows just inserted
+//    } catch (e) {
+//       console.log(e);
+//       res.sendStatus(500);
+//    }
+// });
+
+//  `OrderID` INT NOT NULL AUTO_INCREMENT,
+//  `CustomerID` INT NOT NULL,
+//  `DriverID` INT NOT NULL,
+//  `RestaurantID` INT NOT NULL,
+//  `OrderTime` VARCHAR(45) NOT NULL,
+//  `DeliveryTIme` VARCHAR(45) NOT NULL,
+//  `DeliveryAddress` VARCHAR(75) NOT NULL,
+//  `AdditionalNotes` VARCHAR(102) NOT NULL,
+//  `OrderDiscounts` DECIMAL(6,2) ZEROFILL NULL,
+//  `OrderPrice` DECIMAL(6,2) NOT NULL,
+
+async function submitOrder(orderPrice) {
+   console.log("submitted order");
+   let resData = [];
+   fetch(`http://34.82.124.237:3001/api/submit/customerOrder`, {
+      method: 'POST',
+      headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+         OrderID: 1,
+         CustomerID: 1,
+         DriverID: 2,
+         RestaurantID: 1,
+         OrderTime: "5 minutes",
+         DeliveryTime: "5 minutes",
+         DeliveryAddress: "UPN Pickup",
+         AdditionalNotes: "none",
+         OrderDiscounts: 0,
+         OrderPrice: Number(orderPrice),
+         OrderStatus: 1,
+      })
+   })
+      .then(response => response.json())
+      .then(response => console.log(JSON.stringify(response)))
+
+   return resData;
+}
+
+
+
 async function getSearchRestaurants(id, setMenu) {
    let resData = [];
    if (id) {
@@ -94,7 +165,7 @@ function Restaurant(props) {
                   <Card.Body className={styles["card-body"]}>
                      <Card.Text className={styles["restaurant-menu-items"]}>
                         {menu.map((item) => (
-                           <MenuItem name={item?.MenuItemName} description={item?.MenuItemDescription} price={item?.MenuItemPrice} selectedItems={selectedItems} setSelectedItems={setSelectedItems}/>
+                           <MenuItem name={item?.MenuItemName} description={item?.MenuItemDescription} price={item?.MenuItemPrice} selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
                         ))}
                      </Card.Text>
                   </Card.Body>
@@ -164,7 +235,7 @@ function Restaurant(props) {
                      </Card.Text>
                   </Card.Body>
                </Card>
-               <Button variant="secondary" size="sm">Order</Button>
+               <Button variant="secondary" size="sm" onClick={() => submitOrder(total)}>Order</Button>
             </div>
          </div>
 
