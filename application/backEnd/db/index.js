@@ -243,4 +243,83 @@ DB.enterOrderItems = (oID, miID, qty, price) => {
     })
 }
 
+
+DB.getOrderByStatusNum = (statusNum) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`SELECT * FROM Orders WHERE OrderStatus = ?`,
+        [statusNum],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+
+DB.getOrderByDriverID = (driverID) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`SELECT * FROM Orders WHERE DriverID = ?`,
+        [driverID],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+
+DB.getOrderByRestID = (restID) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`SELECT * FROM Orders WHERE RestaurantID = ?`,
+        [restID],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+
+DB.getOrderByDriverID = (driverID) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`SELECT * FROM Orders WHERE DriverID = ?`,
+        [driverID],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+DB.updateOrderStatus = (orderID, statusID) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`UPDATE Orders SET statusID = ? WHERE OrderID = ?`,
+        [statusID, orderID],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+
+DB.updateDriverID = (orderID, driverID) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`UPDATE Orders SET DriverID = ? WHERE OrderID = ?`,
+        [driverID, orderID],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+
+
 module.exports = DB;
