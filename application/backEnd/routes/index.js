@@ -6,6 +6,9 @@ Purpose: API endpoint definitions.
 const express = require('express');
 const db = require('../db');
 const router = express.Router();
+const bcrypt = require("bcrypt");
+
+const SALT_ROUNDS = 10;
 
 
 router.post('/test', async (req, res, next) => {
@@ -108,14 +111,16 @@ router.get('/searchWithCuisine/:cuisine/:search_input', async (req, res, next) =
 router.post('/submit/registrationForm', async (req, res, next) => {
     try {
         const formData = req.body;
+        const salt = await bcrypt.genSalt(SALT_ROUNDS);
+        const hash = await bcrypt.hash(formData.password, salt);
         if (formData.r_type === 'SFSUCustomer'){
-            let results = await db.SFSUCustomerReg(formData.name, formData.email, formData.phone, formData.password);
+            let results = await db.SFSUCustomerReg(formData.name, formData.email, formData.phone, hash);
             res.json(results);
         } else if (formData.r_type === 'Driver') {
-            let results = await db.DriverReg(formData.name, formData.email, formData.phone, formData.password);
+            let results = await db.DriverReg(formData.name, formData.email, formData.phone, hash);
             res.json(results);
         } else if (formData.r_type === 'RestaurantOwner'){
-            let results = await db.RestaurantOwnerReg(formData.name, formData.email, formData.phone, formData.password);
+            let results = await db.RestaurantOwnerReg(formData.name, formData.email, formData.phone, hash);
             res.json(results);
         }
         // console.log(formData);
@@ -176,19 +181,19 @@ router.post('/login', async (req, res, next) => {
         if (formData.r_type === 'SFSUCustomer'){
             results = await db.getSFSUCustomer(formData.email);
             if (results.length === 0){throw "email"}
-            if (formData.password != results[0].SFSUCustomerPassword){
+            if (!bcrypt.compare(formData.password, results[0].SFSUCustomerPassword)){
                 throw "password";
             }
         } else if (formData.r_type === 'Driver') {
             results = await db.getDriver(formData.email);
             if (results.length === 0){throw "email"}
-            if (formData.password != results[0].DriverPassword){
+            if (!bcrypt.compare(formData.password, results[0].DriverPassword)){
                 throw "password";
             }
         } else if (formData.r_type === 'RestaurantOwner'){
             results = await db.getRestaurantOwner(formData.email);
             if (results.length === 0){throw "email"}
-            if (formData.password != results[0].RestaurantOwnerPassword){
+            if (!bcrypt.compare(formData.password, results[0].RestaurantOwnerPassword)){
                 throw "password";
             }
         }
