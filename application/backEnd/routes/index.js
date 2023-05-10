@@ -216,4 +216,14 @@ router.get('/restaurantMenu/:restaurant', async (req, res, next) => {
     }
 });
 
+router.get('/orders/status3Orders', async (req, res, next) => {
+    try {
+        let results = await db.ordersToPickUp();
+        res.json(results);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
 module.exports = router;

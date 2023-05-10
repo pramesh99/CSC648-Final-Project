@@ -200,7 +200,6 @@ DB.getRestaurantOwner = (email) => {
     });
 }
 
-
 DB.getRestaurantMenu = (restaurant) => {
     return new Promise ((resolve, reject) => {
         pool.query('SELECT MenuItem.* FROM MenuItem JOIN Restaurant ON MenuItem.RestaurantID = Restaurant.RestaurantID WHERE Restaurant.RestaurantName = ?', [restaurant],
@@ -243,4 +242,23 @@ DB.enterOrderItems = (oID, miID, qty, price) => {
     })
 }
 
+DB.ordersToPickUp = () => {
+    return new Promise ((resolve, reject) => {
+        pool.query('SELECT * FROM Orders where OrderStatus = 1',
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+
+// DB.getDriverOrder
+// SELECT *
+// FROM `gatorGrubDB`.`Orders`
+// WHERE `DriverID` = 1;
+
+
+// SELECT * FROM gatorGrubDB.Orders where OrderStatus = 3;
 module.exports = DB;
