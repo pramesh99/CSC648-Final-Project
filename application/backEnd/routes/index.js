@@ -221,4 +221,24 @@ router.get('/restaurantMenu/:restaurant', async (req, res, next) => {
     }
 });
 
+router.get('/order/statusNum/:statusNum', async (req, res, next) => {
+    try {
+        let results = await db.getOrderByStatusNum(req.params.statusNum);
+        res.json(results);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
+router.post('/order/update//:orderID/:statusNum', async (req, res, next) => {
+    try {
+        let results = await db.updateOrderStatus(req.params.orderID, req.params.statusNum);
+        res.json(results);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
 module.exports = router;
