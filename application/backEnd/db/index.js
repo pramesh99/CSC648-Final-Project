@@ -31,7 +31,7 @@ DB.getAllOwners = () => {
 
 DB.getAllRestaurants = () => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT * FROM Restaurant', (err, results) => {
+        pool.query('SELECT * FROM Restaurant WHERE flag = 1', (err, results) => {
             if (err) {
                 return reject(err);
             }
@@ -43,7 +43,7 @@ DB.getAllRestaurants = () => {
 
 DB.getRestaurantByName = (name) => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT * FROM Restaurant WHERE RestaurantName = ?',
+        pool.query('SELECT * FROM Restaurant WHERE RestaurantName = ? AND flag = 1',
             [name],
             (err, results) => {
                 if (err) {
@@ -56,7 +56,7 @@ DB.getRestaurantByName = (name) => {
 
 DB.getRestByCuisine = (cuisine) => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT * FROM Restaurant WHERE RestaurantCuisine = ?',
+        pool.query('SELECT * FROM Restaurant WHERE RestaurantCuisine = ? AND flag = 1',
             [cuisine], //prevent SQL injection
             (err, results) => {
                 if (err) {
@@ -83,7 +83,7 @@ DB.getAllCuisines = () => {
 
 DB.searchBarQueryNoCuisine = (search_input) => {
     return new Promise((resolve, reject) => {
-        pool.query(`SELECT * FROM Restaurant`,
+        pool.query(`SELECT * FROM Restaurant WHERE flag = 1`,
             (err, results) => {
                 if (err) {
                     return reject(err);
@@ -103,7 +103,7 @@ DB.searchBarQueryWithCuisine = (cuisine, search_input) => {
                            Restaurant.RestaurantDescription
                     FROM Restaurant
                     INNER JOIN Cuisine ON Restaurant.RestaurantCuisine=Cuisine.cuisineID
-                    WHERE Cuisine.cuisineName = ?`,
+                    WHERE Cuisine.cuisineName = ? AND Restaurant.flag = 1`,
             [cuisine],
             (err, results) => {
                 if (err) {
