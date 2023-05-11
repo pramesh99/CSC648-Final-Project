@@ -297,7 +297,7 @@ DB.getOrderByDriverID = (driverID) => {
 }
 DB.updateOrderStatus = (orderID, statusID) => {
     return new Promise ((resolve, reject) => {
-        pool.query(`UPDATE Orders SET statusID = ? WHERE OrderID = ?`,
+        pool.query(`UPDATE Orders SET OrderStatus = ? WHERE OrderID = ?`,
         [statusID, orderID],
         (err, results) => {
             if (err) {
