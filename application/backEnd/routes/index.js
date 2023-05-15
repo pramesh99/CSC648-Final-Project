@@ -221,9 +221,50 @@ router.get('/restaurantMenu/:restaurant', async (req, res, next) => {
     }
 });
 
-router.get('/orders/status3Orders', async (req, res, next) => {
+router.get('/order/statusNum/:statusNum', async (req, res, next) => {
     try {
-        let results = await db.ordersToPickUp();
+        let results = await db.getOrderByStatusNum(req.params.statusNum);
+        res.json(results);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
+router.get('/order/driverID/:driverID', async (req, res, next) => {
+    try {
+        let results = await db.getOrderByDriverID(req.params.driverID);
+        res.json(results);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
+
+router.get('/order/restaurantID/:restID', async (req, res, next) => {
+    try {
+        let results = await db.getOrderByRestID(req.params.restID);
+        res.json(results);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
+router.post('/order/updateStatus/:orderID/:statusNum', async (req, res, next) => {
+    try {
+        let results = await db.updateOrderStatus(req.params.orderID, req.params.statusNum);
+        res.json(results);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
+router.post('/order/updateDriver/:orderID/:driverID', async (req, res, next) => {
+    try {
+        let results = await db.updateDriverID(req.params.orderID, req.params.driverID);
         res.json(results);
     } catch (e) {
         console.log(e);
