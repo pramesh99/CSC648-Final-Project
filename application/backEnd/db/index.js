@@ -321,5 +321,17 @@ DB.updateDriverID = (orderID, driverID) => {
     });
 }
 
+DB.deleteOrder = (orderID) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`DELETE FROM Orders WHERE OrderID =?`,
+        [orderID],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
 
 module.exports = DB;
