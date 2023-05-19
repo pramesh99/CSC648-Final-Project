@@ -11,35 +11,53 @@ import Order from '../../components/order/Order';
 // import Delivery from '../../components/delivery/Delivery';
 // import { Link } from "react-router-dom";
 
+async function getOrders(setIncomingOrders) {
+   let resData = [];
+
+   await fetch(`http://34.82.124.237:3001/api/order/statusNum/3`).then((r) => r.json()).then((data) => {
+      resData = data;
+      if(resData.length > 0) {
+         setIncomingOrders(resData);
+      }
+      console.log("orders:", resData);
+   }
+   )
+   return resData;
+}
+
 function DriverDashboard(props) {
 
-   let orders;
-   let renderOrderItems;
-
-   const [incomingOrders, setIncomingOrders] = useState({});
+   const [incomingOrders, setIncomingOrders] = useState({
+      item_1: { OrderID: "item_1", OrderPrice: 5, key: "1", status: "incoming" },
+      item_2: { OrderID: "item_2", OrderPrice: 10, key: "2", status: "incoming" },
+      item_3: { OrderID: "item_3", OrderPrice: 15, key: "3", status: "incoming" },
+   });
    const [activeOrders, setActiveOrders] = useState({});
 
    useEffect(() => {
-      if (orders) {
-         renderOrderItems = orders.map((order) => (
-            <Order
-               id={order.OrderID}
-               price={order.OrderPrice}
-               incomingOrders={incomingOrders}
-               setIncomingOrders={setIncomingOrders}
-               activeOrders={activeOrders}
-               setActiveOrders={setActiveOrders}
-               status={order.status}
-            />
-         ))
-      } else {
-         let fakeItems = {
-            item_1: { OrderID: "item_1", OrderPrice: 5, key: "1", status: "incoming" },
-            item_2: { OrderID: "item_2", OrderPrice: 10, key: "2", status: "incoming" },
-            item_3: { OrderID: "item_3", OrderPrice: 15, key: "3", status: "incoming" },
-         }
-         setIncomingOrders(fakeItems);
-      }
+      getOrders(setIncomingOrders);
+
+      // if (Object.values(incomingOrders).length > 0) {
+      //    renderOrderItems = orders.map((order) => (
+      //       <Order
+      //          id={order.OrderID}
+      //          price={order.OrderPrice}
+      //          incomingOrders={incomingOrders}
+      //          setIncomingOrders={setIncomingOrders}
+      //          activeOrders={activeOrders}
+      //          setActiveOrders={setActiveOrders}
+      //          status={order.status}
+      //       />
+      //    ))
+      // } else {
+      //    let fakeItems = {
+      //       item_1: { OrderID: "item_1", OrderPrice: 5, key: "1", status: "incoming" },
+      //       item_2: { OrderID: "item_2", OrderPrice: 10, key: "2", status: "incoming" },
+      //       item_3: { OrderID: "item_3", OrderPrice: 15, key: "3", status: "incoming" },
+      //    }
+      //    setIncomingOrders(fakeItems);
+      // }
+  
    }, [])
 
 
@@ -67,7 +85,7 @@ function DriverDashboard(props) {
                                  setIncomingOrders={setIncomingOrders}
                                  activeOrders={activeOrders}
                                  setActiveOrders={setActiveOrders}
-                                 status={order.status}
+                                 status={"incoming"}
                               />
                            ))}
                         </Card.Text>
@@ -93,7 +111,7 @@ function DriverDashboard(props) {
                                  setIncomingOrders={setIncomingOrders}
                                  activeOrders={activeOrders}
                                  setActiveOrders={setActiveOrders}
-                                 status={order.status}
+                                 status={"active"}
                               />
                            ))}
                         </Card.Text>

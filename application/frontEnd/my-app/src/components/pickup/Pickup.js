@@ -4,12 +4,14 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 function Pickup(props) {
+   let setLocation = props.setLocation;
 
    const [restaurantPickup, setRestaurantPickup] = useState(false);
    const [chavezPickup, setChavezPickup] = useState(false);
    const [upnPickup, setUPNPickup] = useState(false);
    const [mashoufPickup, setMashoufPickup] = useState(false);
    const [selectedPickup, setSelectedPickup] = useState('');
+
    let options = [
       "Restaurant Pickup",
       "Ceaser Chavez Pickup",
@@ -50,7 +52,7 @@ function Pickup(props) {
                setChavezPickup(false);
                setUPNPickup(false);
                setMashoufPickup(false);
-               setSelectedPickup(options[0]);
+               setLocation(options[0]);
             }}
          >
             {options[0]}
@@ -67,7 +69,7 @@ function Pickup(props) {
                setChavezPickup(!chavezPickup);
                setUPNPickup(false);
                setMashoufPickup(false);
-               setSelectedPickup(options[1]);
+               setLocation(options[1]);
             }}
          >
             {options[1]}
@@ -84,7 +86,7 @@ function Pickup(props) {
                setChavezPickup(false);
                setUPNPickup(!upnPickup);
                setMashoufPickup(false);
-               setSelectedPickup(options[2]);
+               setLocation(options[2]);
             }}
          >
             {options[2]}
@@ -101,7 +103,7 @@ function Pickup(props) {
                setChavezPickup(false);
                setUPNPickup(false);
                setMashoufPickup(!mashoufPickup);
-               setSelectedPickup(options[3]);
+               setLocation(options[3]);
             }}
          >
             {options[3]}

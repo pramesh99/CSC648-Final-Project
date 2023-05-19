@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Delivery.module.css";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 
 function Delivery(props) {
+   let setLocation = props.setLocation;
+
+   const [address, setAddress] = useState('');
+
+   const handleAddressChange = (event) => {
+      setAddress(event.target.value);
+   };
+
+   useEffect(() => {
+      setLocation(address);
+   }, [address])
 
    return (
       <>
@@ -13,6 +24,8 @@ function Delivery(props) {
                <Form.Control
                   aria-label="Address"
                   aria-describedby="basic-addon1"
+                  value={address}
+                  onChange={handleAddressChange}
                />
             </InputGroup>
             <div id={styles["if-applicable"]}>If Applicable:</div>

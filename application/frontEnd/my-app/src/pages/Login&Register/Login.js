@@ -6,6 +6,10 @@ import Button from "react-bootstrap/esm/Button"
 import { Link } from "react-router-dom";
 
 const Login = (props) => {
+    let setUserName = props.setUserName;
+    let setUserID = props.setUserID;
+    let setUserType = props.setUserType;
+
     const [values, setValues] = useState({
         email: "",
         password: "",
@@ -48,14 +52,25 @@ const Login = (props) => {
                 password: values.password,
             })
         })
-        .then(response => response.json())
-        .then(response => console.log(JSON.stringify(response)))
-        
+            .then(response => response.json())
+            .then(response => {
+                // let userData = JSON.stringify(response);
+                console.log(response)
+                let id = response[0].SFSUCustomerID;
+                let name = response[0].SFSUCustomerName;
+                let type = 0
+                setUserName(name);
+                setUserID(id);
+                setUserType(type);
+            }
+            )
+
         return resData;
     }
 
 
     const handleSubmit = (e) => {
+        login();
         e.preventDefault();
     }
 
@@ -68,24 +83,24 @@ const Login = (props) => {
     return (
         <div className={styles["Login"]}>
             <form onSubmit={handleSubmit}>
-            <div className={styles["Title"]}>
-                Login
-            </div>
-            {/* <div className={styles["Title2"]}>
+                <div className={styles["Title"]}>
+                    Login
+                </div>
+                {/* <div className={styles["Title2"]}>
                 with GatorGrub!
             </div> */}
-            {inputs.map((input) => (
-            <Forminput key={input.id} {...input} value={values[input.name]} onChange={onChange}></Forminput>))}
-            <button onSubmit="submit" >Login</button>
-            <div className={styles["Registerpath"]}>
-            <Link to="/Forgot-password" passHref>
-                <a href="replace">Forgot the password?</a></Link>
-            </div>
-            <div className={styles["Registerpath"]}>
-                Need to register?
-                <Link to="/register" passHref>
-                <a href="replace">Sing Up!</a></Link>
-            </div>
+                {inputs.map((input) => (
+                    <Forminput key={input.id} {...input} value={values[input.name]} onChange={onChange}></Forminput>))}
+                <button onSubmit="submit" >Login</button>
+                <div className={styles["Registerpath"]}>
+                    <Link to="/Forgot-password" passHref>
+                        <a href="replace">Forgot the password?</a></Link>
+                </div>
+                <div className={styles["Registerpath"]}>
+                    Need to register?
+                    <Link to="/register" passHref>
+                        <a href="replace">Sing Up!</a></Link>
+                </div>
             </form>
         </div>
     )

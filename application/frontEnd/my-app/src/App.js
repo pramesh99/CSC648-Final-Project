@@ -110,8 +110,12 @@ function App() {
 
   const [searchRestaurants, setSearchRestaurants] = useState([]);
 
-  // User DSata
+  // User data
   const [userName, setUserName] = useState('');
+  const [userID, setUserID] = useState('');
+  //(0 = customer) (1 = driver) (2 = restaurant owner)
+  const [userType, setUserType] = useState(0);
+
 
   useEffect(() => {
     getAllRestaurants().then((r) => {
@@ -123,6 +127,13 @@ function App() {
     })
 
   }, []);
+
+  useEffect(() => {
+    console.log(userName)
+    console.log(userID)
+    console.log(userType)
+
+  }, [userName]);
 
   // Search Use Effect
   useEffect(() => {
@@ -208,9 +219,9 @@ function App() {
       </div>
       <Routes>
         <Route path="/" element={<Home restaurants={restaurants} />} />
-        <Route path="/login" element={<Login setUserName={setUserName}> </Login>} />
-        <Route path="/Driver-login" element={<DriverLogin setUserName={setUserName} />} />
-        <Route path="/Restaurant-login" element={<RestaurantLogin setUserName={setUserName} />} />
+        <Route path="/login" element={<Login setUserName={setUserName} setUserID={setUserID} setUserType={setUserType}> </Login>} />
+        <Route path="/Driver-login" element={<DriverLogin setUserName={setUserName} setUserID={setUserID} setUserType={setUserType}/>} />
+        <Route path="/Restaurant-login" element={<RestaurantLogin setUserName={setUserName} setUserID={setUserID} setUserType={setUserType}/>} />
         <Route path="/register" element={<Register> </Register>} />
         <Route path="/Driver-register" element={<DriverRegister />} />
         <Route path="/Restaurant-register" element={<RestaurantRegister> </RestaurantRegister>} />
@@ -218,7 +229,6 @@ function App() {
         <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} setSelectedRestaurant={setSelectedRestaurant} />} />
         <Route path="/restaurant" element={<Restaurant restaurant={selectedRestaurant} />} />
         <Route path="/restaurantSignup" element={<RestaurantSignup />} />
-
         {restaurants.map((restaurant) => (
           <Route key={"app.js" + restaurant?.RestaurantName} path={`${restaurant?.RestaurantName}`} element={<Restaurant restaurant={selectedRestaurant} />} />
         ))}

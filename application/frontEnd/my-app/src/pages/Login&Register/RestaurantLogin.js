@@ -7,6 +7,9 @@ import LoginRegisterModal from "../../components/loginRegisterModal/LoginRegiste
 import { Link } from "react-router-dom";
 
 const Login = (props) => {
+    let setUserName = props.setUserName;
+    let setUserID = props.setUserID;
+    let setUserType = props.setUserType;
 
     const [modalShow, setModalShow] = React.useState(false);
 
@@ -54,13 +57,14 @@ const Login = (props) => {
         })
             .then(response => response.json())
             .then(response => {
-                let res = JSON.parse(JSON.stringify(response));
-                console.log(JSON.stringify(response));
-                console.log(res[0].RestaurantOwnerName);
-                console.log(props);
-                props.setUserName(res[0].RestaurantOwnerName);
-                // "RestaurantOwnerName":"Bob Smith"
-            })
+                let id = response[0].RestaurantOwnerID;
+                let name = response[0].RestaurantOwnerName;
+                let type = 2;
+                setUserName(name);
+                setUserID(id);
+                setUserType(type);
+            }
+            )
 
         return resData;
     }

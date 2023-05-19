@@ -9,47 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Pickup from '../../components/pickup/Pickup';
 import Delivery from '../../components/delivery/Delivery';
 
-// router.post('/submit/customerOrder', async (req, res, next) => {
-//    try {
-//       const formData = req.body;
-//       let results = await db.enterOrder(
-//          formData.OrderID,
-//          formData.CustomerID,
-//          formData.DriverID,
-//          formData.RestaurantID,
-//          formData.OrderTime,
-//          formData.DeliveryTime,
-//          formData.DeliveryAddress,
-//          formData.AdditionalNotes,
-//          formData.OrderDiscounts,
-//          formData.OrderPrice,
-//          formData.OrderStatus
-//       );
-
-//       for (let i = 0; i < formData.Items.length; i++) {
-//          results = await db.enterOrderItems(formData.OrderID, formData[i].menuItemID, formData[i].menuItemID.count, formData[i].menuItemID.quantity);
-//       }
-
-//       res.json(results);
-//       //could implement pseudo-transcations by catching error and deleting rows just inserted
-//    } catch (e) {
-//       console.log(e);
-//       res.sendStatus(500);
-//    }
-// });
-
-//  `OrderID` INT NOT NULL AUTO_INCREMENT,
-//  `CustomerID` INT NOT NULL,
-//  `DriverID` INT NOT NULL,
-//  `RestaurantID` INT NOT NULL,
-//  `OrderTime` VARCHAR(45) NOT NULL,
-//  `DeliveryTIme` VARCHAR(45) NOT NULL,
-//  `DeliveryAddress` VARCHAR(75) NOT NULL,
-//  `AdditionalNotes` VARCHAR(102) NOT NULL,
-//  `OrderDiscounts` DECIMAL(6,2) ZEROFILL NULL,
-//  `OrderPrice` DECIMAL(6,2) NOT NULL,
-
-async function submitOrder(orderPrice) {
+async function submitOrder(orderPrice, location, restaurantID) {
    console.log("submitted order");
    let resData = [];
    fetch(`http://34.82.124.237:3001/api/submit/customerOrder`, {
@@ -59,13 +19,12 @@ async function submitOrder(orderPrice) {
          'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-         OrderID: 1,
          CustomerID: 1,
-         DriverID: 2,
-         RestaurantID: 1,
+         DriverID: 1,
+         RestaurantID: restaurantID,
          OrderTime: "5 minutes",
          DeliveryTime: "5 minutes",
-         DeliveryAddress: "UPN Pickup",
+         DeliveryAddress: location,
          AdditionalNotes: "none",
          OrderDiscounts: 0,
          OrderPrice: Number(orderPrice),
@@ -77,8 +36,6 @@ async function submitOrder(orderPrice) {
 
    return resData;
 }
-
-
 
 async function getSearchRestaurants(id, setMenu) {
    let resData = [];
@@ -103,6 +60,8 @@ function Restaurant(props) {
       { MenuItemName: "item_3", MenuItemDescription: "lorem ipsum", MenuItemPrice: 15 },
    ]);
 
+   const [location, setLocation] = useState("");
+
    let restaurant = props.restaurant;
 
    const [radioValue, setRadioValue] = useState('Set Pickup Location:');
@@ -116,6 +75,7 @@ function Restaurant(props) {
 
    useEffect(() => {
       let restaurant = props.restaurant;
+      console.log("restaurant", restaurant.RestaurantID)
       if (restaurant.RestaurantName) {
          getSearchRestaurants(restaurant.RestaurantName, setMenu)
       }
@@ -135,15 +95,14 @@ function Restaurant(props) {
    let renderDeliveryOption = () => {
       if (radioValue === 'Set Pickup Location:') {
          return (
-            <Pickup />
+            <Pickup setLocation={setLocation} />
          )
       } else {
          return (
-            <Delivery />
+            <Delivery setLocation={setLocation} />
          )
       }
    }
-
 
    useEffect(() => {
       updateTotalCost();
@@ -165,7 +124,7 @@ function Restaurant(props) {
                   <Card.Body className={styles["card-body"]}>
                      <Card.Text className={styles["restaurant-menu-items"]}>
                         {menu.map((item) => (
-                           <MenuItem name={item?.MenuItemName} description={item?.MenuItemDescription} price={item?.MenuItemPrice} selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
+                           <MenuItem id={item?.MenuItemID} name={item?.MenuItemName} description={item?.MenuItemDescription} price={item?.MenuItemPrice} selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
                         ))}
                      </Card.Text>
                   </Card.Body>
@@ -235,7 +194,7 @@ function Restaurant(props) {
                      </Card.Text>
                   </Card.Body>
                </Card>
-               <Button variant="secondary" size="sm" onClick={() => submitOrder(total)}>Order</Button>
+               <Button variant="secondary" size="sm" onClick={() => submitOrder(total, location, restaurant.RestaurantID)}>Order</Button>
             </div>
          </div>
 

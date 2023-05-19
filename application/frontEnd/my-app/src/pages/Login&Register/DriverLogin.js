@@ -6,6 +6,10 @@ import Button from "react-bootstrap/esm/Button"
 import { Link } from "react-router-dom";
 
 const Login = (props) => {
+    let setUserName = props.setUserName;
+    let setUserID = props.setUserID;
+    let setUserType = props.setUserType;
+
     const [values, setValues] = useState({
         email: "",
         password: "",
@@ -17,9 +21,9 @@ const Login = (props) => {
             name: "email",
             type: "email",
             placeholder: "Email",
-            errorMessage: "It should be a vaild SFSU email, such as example@sfsu.edu",
+            // errorMessage: "It should be a vaild SFSU email, such as example@sfsu.edu",
             label: "Email",
-            pattern: "[a-z0-9._%+-]+@sfsu.edu$",
+            // pattern: "[a-z0-9._%+-]+@sfsu.edu$",
             required: true,
         },
         {
@@ -48,13 +52,21 @@ const Login = (props) => {
                 password: values.password,
             })
         })
-        .then(response => response.json())
-        .then(response => console.log(JSON.stringify(response)))
+            .then(response => response.json())
+            .then(response => {
+                // let userData = JSON.stringify(response);
+                let id = response[0].DriverID;
+                let name = response[0].DriverName;
+                let type = 1
+                setUserName(name);
+                setUserID(id);
+                setUserType(type);
+            }
+            )
         
         return resData;
     }
 
-    
     const handleSubmit = (e) => {
         login();
         e.preventDefault();
@@ -69,25 +81,25 @@ const Login = (props) => {
     return (
         <div className={styles["Login"]}>
             <form onSubmit={handleSubmit}>
-            <div className={styles["Title"]}>
-                Driver Login
-            </div>
-            {inputs.map((input) => (
-            <Forminput key={input.id} {...input} value={values[input.name]} onChange={onChange}></Forminput>))}
-            <button onSubmit="submit" >Login</button>
-            <div className={styles["Registerpath"]}>
-                <a href="/forgotpassword">Forgot password?</a>
-            </div>
-            <div className={styles["Registerpath"]}>
-                Want to be a driver? <a href="http://localhost:3000/Driver-register">Sign Up!</a>
-            <Link to="/Forgot-password" passHref>
-                <a href="replace">Forgot the password?</a></Link>
-            </div>
-            <div className={styles["Registerpath"]}>
-                Want to be our Team?
-                <Link to="/Driver-register" passHref>
-                <a href="replace">Sign Up!</a></Link>
-            </div>
+                <div className={styles["Title"]}>
+                    Driver Login
+                </div>
+                {inputs.map((input) => (
+                    <Forminput key={input.id} {...input} value={values[input.name]} onChange={onChange}></Forminput>))}
+                <button onSubmit="submit" >Login</button>
+                <div className={styles["Registerpath"]}>
+                    <a href="/forgotpassword">Forgot password?</a>
+                </div>
+                <div className={styles["Registerpath"]}>
+                    Want to be a driver? <a href="http://localhost:3000/Driver-register">Sign Up!</a>
+                    <Link to="/Forgot-password" passHref>
+                        <a href="replace">Forgot the password?</a></Link>
+                </div>
+                <div className={styles["Registerpath"]}>
+                    Want to be our Team?
+                    <Link to="/Driver-register" passHref>
+                        <a href="replace">Sign Up!</a></Link>
+                </div>
             </form>
         </div>
     )
