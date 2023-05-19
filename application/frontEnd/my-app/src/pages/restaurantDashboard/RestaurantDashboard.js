@@ -27,10 +27,10 @@ async function getOrders(setIncomingOrders, setActiveOrders, restID) {
                activeOrders.push(resData[i]);
             }
          }
+         console.log("incomingOrders", incomingOrders);
          setIncomingOrders(incomingOrders);
          setActiveOrders(activeOrders);
       }
-      console.log("orders:", resData);
    }
    )
    return resData;
@@ -65,7 +65,7 @@ function RestaurantDashboard(props) {
                      <Card.Header>Incoming Orders</Card.Header>
                      <Card.Body className={styles["card-body"]}>
                         <Card.Text className={styles["restaurant-menu-items"]}>
-                           {Object.values(incomingOrders).map((order) => (
+                           {incomingOrders.map((order) => (
                               <Order
                                  id={order.OrderID}
                                  price={order.OrderPrice}
@@ -74,6 +74,7 @@ function RestaurantDashboard(props) {
                                  activeOrders={activeOrders}
                                  setActiveOrders={setActiveOrders}
                                  status={"incoming"}
+                                 getOrders={getOrders}
                               />
                            ))}
                         </Card.Text>
@@ -91,7 +92,7 @@ function RestaurantDashboard(props) {
                      <Card.Header>Active Orders</Card.Header>
                      <Card.Body className={styles["card-body"]}>
                         <Card.Text className={styles["restaurant-menu-items"]}>
-                           {Object.values(activeOrders).map((order) => (
+                           {activeOrders.map((order) => (
                               <Order
                                  id={order.OrderID}
                                  price={order.OrderPrice}
@@ -100,6 +101,7 @@ function RestaurantDashboard(props) {
                                  activeOrders={activeOrders}
                                  setActiveOrders={setActiveOrders}
                                  status={"active"}
+                                 getOrders={getOrders}
                               />
                            ))}
                         </Card.Text>

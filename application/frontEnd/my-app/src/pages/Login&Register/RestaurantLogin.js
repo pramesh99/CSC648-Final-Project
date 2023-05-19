@@ -105,7 +105,6 @@ const Login = (props) => {
             <LoginRegisterModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-
             />
         </div>
     )
