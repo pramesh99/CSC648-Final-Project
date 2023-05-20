@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 function LoginRegisterModal(props) {
+   console.log(props)
+   let text = props?.text;
    return (
       <Modal
          {...props}
@@ -14,7 +16,7 @@ function LoginRegisterModal(props) {
          <Modal.Header id={styles["header"]} closeButton>
          </Modal.Header>
          <Modal.Body>
-            <h1 id={styles["login-text"]}>Login Successful</h1>
+            <h1 id={styles["login-text"]}>{text}</h1>
          </Modal.Body>
       </Modal>
    )

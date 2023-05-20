@@ -37,6 +37,9 @@ async function getOrders(setIncomingOrders, setActiveOrders, id) {
 }
 
 function DriverDashboard(props) {
+   let userID = props.userID;
+   let userName = props.userName;
+   let userType = props.userType;
 
    const [incomingOrders, setIncomingOrders] = useState([
       { OrderID: "item_1", OrderPrice: 5, key: "1", status: "incoming" },
@@ -47,7 +50,9 @@ function DriverDashboard(props) {
    const [activeOrders, setActiveOrders] = useState([]);
 
    useEffect(() => {
-      getOrders(setIncomingOrders, setActiveOrders, 1);
+      if(userID) {
+         getOrders(setIncomingOrders, setActiveOrders, userID);
+      }
 
    }, [])
 

@@ -5,13 +5,18 @@ import "./RestaurantRegister"
 import Button from "react-bootstrap/esm/Button"
 import LoginRegisterModal from "../../components/loginRegisterModal/LoginRegisterModal";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const Login = (props) => {
     let setUserName = props.setUserName;
     let setUserID = props.setUserID;
     let setUserType = props.setUserType;
+    let setRestaurantID = props.setRestaurantID;
+
+    const navigate = useNavigate();
 
     const [modalShow, setModalShow] = React.useState(false);
+    const [modalText, setModalText] = React.useState('');
 
     const [values, setValues] = useState({
         email: "",
@@ -42,33 +47,39 @@ const Login = (props) => {
     ]
 
     async function login() {
-        let resData = [];
-        fetch(`http://34.82.124.237:3001/api/login`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                r_type: "RestaurantOwner",
-                email: values.email,
-                password: values.password,
-            })
-        })
-            .then(response => response.json())
-            .then(response => {
-                let id = response[0].RestaurantOwnerID;
-                let name = response[0].RestaurantOwnerName;
-                let type = 2;
+        try {
+            const response = await fetch(`http://34.82.124.237:3001/api/login`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    r_type: "RestaurantOwner",
+                    email: values.email,
+                    password: values.password,
+                })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                let id = data[0].RestaurantOwnerID;
+                let name = data[0].RestaurantOwnerName;
+                let restID = data[0].RestaurantID;
                 setUserName(name);
                 setUserID(id);
-                setUserType(type);
+                setUserType("RestaurantOwner");
+                setRestaurantID(restID);
+                navigate('/');
+            } else {
+                throw new Error('Login failed');
             }
-            )
-
-        return resData;
+        } catch (error) {
+            setModalText("Login Unsuccessful");
+            setModalShow(true);
+        }
     }
-
+    
     const handleSubmit = (e) => {
         login();
         e.preventDefault();
@@ -85,24 +96,19 @@ const Login = (props) => {
                 <div className={styles["Title"]}>
                     Restaurant Owner Login
                 </div>
-                {/* <div className={styles["Title2"]}>
-                    with GatorGrub!
-                </div> */}
                 {inputs.map((input) => (
                     <Forminput key={input.id} {...input} value={values[input.name]} onChange={onChange}></Forminput>))}
-                <button onSubmit="submit" onClick={() => {
-                    setModalShow(true)
-                    console.log(modalShow)
-                }} >Login</button>
+                <button onSubmit="submit" >Login</button>
                 <div className={styles["Registerpath"]}>
-                <Link to="/Forgot-password" passHref>
-                <a href="replace">Forgot the password?</a></Link>
+                    <Link to="/Forgot-password" passHref>
+                        <a href="replace">Forgot the password?</a></Link>
                 </div>
                 <div className={styles["Registerpath"]}>
                     Need to register?<a href="http://localhost:3000/Restaurant-register">Sign Up!</a>
                 </div>
             </form>
             <LoginRegisterModal
+                text={modalText}
                 show={modalShow}
                 onHide={() => setModalShow(false)}
             />

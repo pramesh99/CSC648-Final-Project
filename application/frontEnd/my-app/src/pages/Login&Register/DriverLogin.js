@@ -1,14 +1,21 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import Forminput from "./Forminput"
 import styles from "./DriverLogin.module.css";
 import "./DriverRegister"
 import Button from "react-bootstrap/esm/Button"
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import LoginRegisterModal from "../../components/loginRegisterModal/LoginRegisterModal";
 
 const Login = (props) => {
     let setUserName = props.setUserName;
     let setUserID = props.setUserID;
     let setUserType = props.setUserType;
+
+    const navigate = useNavigate();
+
+    const [modalShow, setModalShow] = React.useState(false);
+    const [modalText, setModalText] = React.useState('');
 
     const [values, setValues] = useState({
         email: "",
@@ -39,32 +46,36 @@ const Login = (props) => {
     ]
 
     async function login() {
-        let resData = [];
-        fetch(`http://34.82.124.237:3001/api/login`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                r_type: "Driver",
-                email: values.email,
-                password: values.password,
+        try {
+            const response = await fetch(`http://34.82.124.237:3001/api/login`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    r_type: "Driver",
+                    email: values.email,
+                    password: values.password,
+                })
             })
-        })
-            .then(response => response.json())
-            .then(response => {
-                // let userData = JSON.stringify(response);
-                let id = response[0].DriverID;
-                let name = response[0].DriverName;
-                let type = 1
+            if (response.ok) {
+                const data = await response.json();
+                let id = data[0].DriverID;
+                let name = data[0].DriverName;
                 setUserName(name);
                 setUserID(id);
-                setUserType(type);
+                setUserType("Driver");
+                navigate('/');
+            } else {
+                throw new Error('Login failed');
             }
-            )
-        
-        return resData;
+        } catch (error) {
+            console.log(error)
+            setModalText("Login Unsuccessful");
+            setModalShow(true);
+        }
+
     }
 
     const handleSubmit = (e) => {
@@ -101,6 +112,11 @@ const Login = (props) => {
                         <a href="replace">Sign Up!</a></Link>
                 </div>
             </form>
+            <LoginRegisterModal
+                text={modalText}
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+            />
         </div>
     )
 }

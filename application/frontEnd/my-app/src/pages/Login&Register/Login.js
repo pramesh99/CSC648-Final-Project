@@ -1,19 +1,27 @@
-import { useState } from "react"
+import React,{ useState } from "react"
 import Forminput from "./Forminput"
 import styles from "./Login.module.css";
 import "./Register"
 import Button from "react-bootstrap/esm/Button"
+import LoginRegisterModal from "../../components/loginRegisterModal/LoginRegisterModal";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const Login = (props) => {
     let setUserName = props.setUserName;
     let setUserID = props.setUserID;
     let setUserType = props.setUserType;
 
+    const navigate = useNavigate();
+
+    const [modalShow, setModalShow] = React.useState(false);
+    const [modalText, setModalText] = React.useState('');
+
     const [values, setValues] = useState({
         email: "",
         password: "",
     })
+
     //Input of the user information
     const inputs = [
         {
@@ -39,33 +47,32 @@ const Login = (props) => {
     ]
 
     async function login() {
-        let resData = [];
-        fetch(`http://34.82.124.237:3001/api/login`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                r_type: "SFSUCustomer",
-                email: values.email,
-                password: values.password,
+        try {
+            const response = await fetch(`http://34.82.124.237:3001/api/login`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    r_type: "SFSUCustomer",
+                    email: values.email,
+                    password: values.password,
+                })
             })
-        })
-            .then(response => response.json())
-            .then(response => {
-                // let userData = JSON.stringify(response);
-                console.log(response)
-                let id = response[0].SFSUCustomerID;
-                let name = response[0].SFSUCustomerName;
-                let type = 0
-                setUserName(name);
-                setUserID(id);
-                setUserType(type);
+            if(response.ok) {
+                    const data = await response.json();
+                    let id = data[0].SFSUCustomerID;
+                    let name = data[0].SFSUCustomerName;
+                    setUserName(name);
+                    setUserID(id);
+                    setUserType("SFSUCustomer");
+                    navigate('/');
             }
-            )
-
-        return resData;
+        } catch (error) {
+            setModalText("Login Unsuccessful");
+            setModalShow(true);
+        }
     }
 
 
@@ -99,9 +106,14 @@ const Login = (props) => {
                 <div className={styles["Registerpath"]}>
                     Need to register?
                     <Link to="/register" passHref>
-                        <a href="replace">Sing Up!</a></Link>
+                        <a href="replace">Sign Up!</a></Link>
                 </div>
             </form>
+            <LoginRegisterModal
+                text={modalText}
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+            />
         </div>
     )
 }
