@@ -76,6 +76,7 @@ function RestaurantDashboard(props) {
                            {incomingOrders.map((order) => (
                               <Order
                                  id={order.OrderID}
+                                 restaurantID={restaurantID}
                                  price={order.OrderPrice}
                                  incomingOrders={incomingOrders}
                                  setIncomingOrders={setIncomingOrders}
@@ -103,6 +104,7 @@ function RestaurantDashboard(props) {
                            {activeOrders.map((order) => (
                               <Order
                                  id={order.OrderID}
+                                 restaurantID={restaurantID}
                                  price={order.OrderPrice}
                                  incomingOrders={incomingOrders}
                                  setIncomingOrders={setIncomingOrders}

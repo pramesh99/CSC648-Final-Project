@@ -4,8 +4,8 @@ import styles from "./Order.module.css";
 import Button from 'react-bootstrap/Button';
 
 function Order(props) {
-   // console.log("Order", props);
    let id = props.id;
+   let restaurantID = props.restaurantID;
    let driverID = props.driverID;
    let address = props.address;
    let customerID = props.customerID;
@@ -16,7 +16,6 @@ function Order(props) {
    let status = props.status;
    let getOrders = props?.getOrders;
 
-   //deletion of order on restaurant dashboard
    async function deleteOrder(id) {
       const url = `http://34.82.124.237:3001/api/order/deleteOrder/${id}`;
       fetch(url, {
@@ -25,7 +24,37 @@ function Order(props) {
          .then(response => response.json())
          .then(data => {
             console.log(data);
-            getOrders(setIncomingOrders, setActiveOrders, 1);
+            getOrders(setIncomingOrders, setActiveOrders, restaurantID);
+         })
+         .catch(error => {
+            console.error(error);
+         });
+   }
+
+   function updateOrderStatusToActive() {
+      const url = `http://34.82.124.237:3001/api/order/updateStatus/${id}/${2}`;
+      fetch(url, {
+         method: 'POST',
+      })
+         .then(response => response.json())
+         .then(data => {
+            console.log(data);
+            getOrders(setIncomingOrders, setActiveOrders, restaurantID);
+         })
+         .catch(error => {
+            console.error(error);
+         });
+   }
+
+   function updateOrderStatusToPickup() {
+      const url = `http://34.82.124.237:3001/api/order/updateStatus/${id}/${3}`;
+      fetch(url, {
+         method: 'POST',
+      })
+         .then(response => response.json())
+         .then(data => {
+            console.log(data);
+            getOrders(setIncomingOrders, setActiveOrders, restaurantID);
          })
          .catch(error => {
             console.error(error);
@@ -47,37 +76,6 @@ function Order(props) {
          });
    }
 
-   function updateOrderStatusToActive() {
-      const url = `http://34.82.124.237:3001/api/order/updateStatus/${id}/${2}`;
-      fetch(url, {
-         method: 'POST',
-      })
-         .then(response => response.json())
-         .then(data => {
-            console.log(data);
-            getOrders(setIncomingOrders, setActiveOrders, 1);
-         })
-         .catch(error => {
-            console.error(error);
-         });
-   }
-
-   function updateOrderStatusToPickup() {
-      const url = `http://34.82.124.237:3001/api/order/updateStatus/${id}/${3}`;
-      fetch(url, {
-         method: 'POST',
-      })
-         .then(response => response.json())
-         .then(data => {
-            console.log(data);
-            getOrders(setIncomingOrders, setActiveOrders, 1);
-         })
-         .catch(error => {
-            console.error(error);
-         });
-   }
-
-   
    function updateOrdersDriver(orderID, driverID) {
       const url = `http://34.82.124.237:3001/api/order/updateDriver/${orderID}/${driverID}`;
       fetch(url, {
