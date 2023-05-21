@@ -11,6 +11,7 @@ import Delivery from '../../components/delivery/Delivery';
 import LoginRegisterModal from '../../components/loginRegisterModal/LoginRegisterModal';
 
 async function submitOrder(orderPrice, location, restaurantID, userName, setModalShow) {
+   console.log("submit order login username", userName)
    if (userName) {
       console.log("submitted order");
       let resData = [];
@@ -55,8 +56,10 @@ async function getSearchRestaurants(id, setMenu) {
 }
 
 function Restaurant(props) {
+   
    // console.log("selected restaurant", props.restaurant);
-   let userName = props.userName;
+   let userName = props?.userName;
+   console.log("restaurant order login username", props)
 
    const [modalShow, setModalShow] = React.useState(false);
    const [modalText, setModalText] = React.useState('Please login to order');

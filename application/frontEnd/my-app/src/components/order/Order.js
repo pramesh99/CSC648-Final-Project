@@ -5,18 +5,18 @@ import Button from 'react-bootstrap/Button';
 
 function Order(props) {
    // console.log("Order", props);
-
    let id = props.id;
+   let driverID = props.driverID;
+   let address = props.address;
+   let customerID = props.customerID;
    let price = props.price;
    let setActiveOrders = props.setActiveOrders;
-   let activeOrders = props.activeOrders;
-   let incomingOrders = props.incomingOrders;
    let setIncomingOrders = props.setIncomingOrders;
+   let setDeliveredOrders = props.setDeliveredOrders;
    let status = props.status;
    let getOrders = props?.getOrders;
-   let add;
-   let remove;
 
+   //deletion of order on restaurant dashboard
    async function deleteOrder(id) {
       const url = `http://34.82.124.237:3001/api/order/deleteOrder/${id}`;
       fetch(url, {
@@ -26,6 +26,21 @@ function Order(props) {
          .then(data => {
             console.log(data);
             getOrders(setIncomingOrders, setActiveOrders, 1);
+         })
+         .catch(error => {
+            console.error(error);
+         });
+   }
+
+   async function driverDashbaordDeleteOrder() {
+      const url = `http://34.82.124.237:3001/api/order/deleteOrder/${id}`;
+      fetch(url, {
+         method: 'POST',
+      })
+         .then(response => response.json())
+         .then(data => {
+            console.log(data);
+            getOrders(setIncomingOrders, setActiveOrders, setDeliveredOrders, driverID);
          })
          .catch(error => {
             console.error(error);
@@ -63,7 +78,7 @@ function Order(props) {
    }
 
    
-   function updateOrderStatusToDeliver(orderID, driverID) {
+   function updateOrdersDriver(orderID, driverID) {
       const url = `http://34.82.124.237:3001/api/order/updateDriver/${orderID}/${driverID}`;
       fetch(url, {
          method: 'POST',
@@ -71,7 +86,7 @@ function Order(props) {
          .then(response => response.json())
          .then(data => {
             console.log(data);
-            getOrders(setIncomingOrders, setActiveOrders, 1);
+            getOrders(setIncomingOrders, setActiveOrders, setDeliveredOrders, driverID);
          })
          .catch(error => {
             console.error(error);
@@ -86,7 +101,7 @@ function Order(props) {
          .then(response => response.json())
          .then(data => {
             console.log(data);
-            getOrders(setIncomingOrders, setActiveOrders, 1);
+            getOrders(setIncomingOrders, setActiveOrders, setDeliveredOrders, driverID);
          })
          .catch(error => {
             console.error(error);
@@ -101,7 +116,7 @@ function Order(props) {
          .then(response => response.json())
          .then(data => {
             console.log(data);
-            getOrders(setIncomingOrders, setActiveOrders, 1);
+            getOrders(setIncomingOrders, setActiveOrders, setDeliveredOrders, driverID);
          })
          .catch(error => {
             console.error(error);
@@ -126,6 +141,7 @@ function Order(props) {
    }
 
    let updateToDeliver = () => {
+      updateOrdersDriver(id, driverID)
       updateOrderStatusToDeliver();
    }
 
@@ -141,7 +157,12 @@ function Order(props) {
          <div id={styles["menu-item-description-container"]}>
             <div>Order ID: {id}</div>
             <div>Order Cost: ${price}</div>
-
+            {driverID && 
+               <div>Address: {address}</div>
+            }
+            {driverID && 
+               <div>Customer ID: {customerID}</div>
+            }
          </div>
          <div id={styles["menu-buttons-container"]}>
             {status === "incoming" &&
@@ -157,13 +178,13 @@ function Order(props) {
                <Button onClick={() => cancelOrder()} variant="outline-secondary" className={styles["menu-buttons"]}>Cancel</Button>
             }
             {status === "pickup" &&
-               <Button onClick={() => updateToDeliver()} variant="outline-secondary" id={styles["menu-buttons-add"]} className={styles["menu-buttons"]}>Pickup</Button>
+               <Button onClick={() => updateToDeliver()} variant="outline-secondary" id={styles["menu-button-deliver"]} className={styles["menu-buttons"]}>Pickup</Button>
             }
             {status === "delivery" &&
-               <Button onClick={() => updateToDelivered()} variant="outline-secondary" className={styles["menu-buttons"]}>Delivered</Button>
+               <Button onClick={() => updateToDelivered()} variant="outline-secondary" id={styles["menu-buttons-add"]} className={styles["menu-buttons"]}>Delivered</Button>
             }
             {status === "delivery" &&
-               <Button onClick={() => cancelOrder()} variant="outline-secondary" className={styles["menu-buttons"]}>Cancel</Button>
+               <Button onClick={() => driverDashbaordDeleteOrder()} variant="outline-secondary" className={styles["menu-buttons"]}>Cancel</Button>
             }
          </div>
       </div>

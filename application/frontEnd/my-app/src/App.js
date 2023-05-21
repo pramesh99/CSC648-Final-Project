@@ -235,11 +235,11 @@ function App() {
         <Route path="/restaurantSignup" element={<RestaurantSignup />} />
         <Route path="/restaurantDashboard" element={<RestaurantDashboard userName={userName} userID={userID} userType={userType} RestaurantID={RestaurantID}/>} />
         
-        <Route path="/browse" element={<Browse restaurants={restaurants} setSelectedRestaurant={setSelectedRestaurant} userName={userName} />} />
+        <Route path="/browse" element={<Browse restaurants={restaurants} setSelectedRestaurant={setSelectedRestaurant} />} />
         <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} setSelectedRestaurant={setSelectedRestaurant} />} />
-        <Route path="/restaurant" element={<Restaurant restaurant={selectedRestaurant} />} />
+        <Route path="/restaurant" element={<Restaurant restaurant={selectedRestaurant} userName={userName}/>} />
         {restaurants.map((restaurant) => (
-          <Route key={"app.js" + restaurant?.RestaurantName} path={`${restaurant?.RestaurantName}`} element={<Restaurant restaurant={selectedRestaurant} />} />
+          <Route key={"app.js" + restaurant?.RestaurantName} path={`${restaurant?.RestaurantName}`} element={<Restaurant restaurant={selectedRestaurant} userName={userName} />} />
         ))}
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/aboutUs/Shauhin" element={<Shauhin />} />

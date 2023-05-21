@@ -24,6 +24,12 @@
    margin-right: 2%;
 }
 
+#menu-button-deliver {
+   height: 50%;
+   margin-bottom: 5%;
+   margin-right: 2%;
+}
+
 #increment-decrement-buttons {
    display: flex;
 }

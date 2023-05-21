@@ -11,13 +11,14 @@ import Order from '../../components/order/Order';
 // import Delivery from '../../components/delivery/Delivery';
 // import { Link } from "react-router-dom";
 
-async function getOrders(setIncomingOrders, setActiveOrders, id) {
+async function getOrders(setIncomingOrders, setActiveOrders, setDeliveredOrders, id) {
    let resData = [];
 
    await fetch(`http://34.82.124.237:3001/api/order/driverID/${id}`).then((r) => r.json()).then((data) => {
       resData = data;
       let incomingOrders = [];
       let activeOrders = [];
+      let deliveredOrders = [];
       if (resData.length > 0) {
          for (let i = 0; i < resData.length; i++) {
             if (resData[i].OrderStatus === 3) {
@@ -26,10 +27,14 @@ async function getOrders(setIncomingOrders, setActiveOrders, id) {
             if (resData[i].OrderStatus === 4) {
                activeOrders.push(resData[i]);
             }
+            if (resData[i].OrderStatus === 5) {
+               deliveredOrders.push(resData[i]);
+            }
          }
          console.log("incomingOrders", incomingOrders);
          setIncomingOrders(incomingOrders);
          setActiveOrders(activeOrders);
+         setDeliveredOrders(deliveredOrders);
       }
    }
    )
@@ -47,13 +52,14 @@ function DriverDashboard(props) {
       { OrderID: "item_3", OrderPrice: 15, key: "3", status: "incoming" },
    ]
    );
+
    const [activeOrders, setActiveOrders] = useState([]);
+   const [deliveredOrders, setDeliveredOrders] = useState([]);
 
    useEffect(() => {
       if(userID) {
-         getOrders(setIncomingOrders, setActiveOrders, userID);
+         getOrders(setIncomingOrders, setActiveOrders, setDeliveredOrders, userID);
       }
-
    }, [])
 
 
@@ -81,7 +87,12 @@ function DriverDashboard(props) {
                                  setIncomingOrders={setIncomingOrders}
                                  activeOrders={activeOrders}
                                  setActiveOrders={setActiveOrders}
+                                 setDeliveredOrders={setDeliveredOrders}
                                  status={"pickup"}
+                                 driverID={userID}
+                                 getOrders={getOrders}
+                                 address={order.DeliveryAddress}
+                                 customerID={order.CustomerID}
                               />
                            ))}
                         </Card.Text>
@@ -107,7 +118,12 @@ function DriverDashboard(props) {
                                  setIncomingOrders={setIncomingOrders}
                                  activeOrders={activeOrders}
                                  setActiveOrders={setActiveOrders}
+                                 setDeliveredOrders={setDeliveredOrders}
                                  status={"delivery"}
+                                 getOrders={getOrders}
+                                 driverID={userID}
+                                 address={order.DeliveryAddress}
+                                 customerID={order.CustomerID}
                               />
                            ))}
                         </Card.Text>
@@ -125,7 +141,7 @@ function DriverDashboard(props) {
                      <Card.Header>Completed Orders</Card.Header>
                      <Card.Body className={styles["card-body"]}>
                         <Card.Text className={styles["restaurant-menu-items"]}>
-                           {/* {Object.values(activeOrders).map((order) => (
+                           {deliveredOrders.map((order) => (
                               <Order
                                  id={order.OrderID}
                                  price={order.OrderPrice}
@@ -133,9 +149,12 @@ function DriverDashboard(props) {
                                  setIncomingOrders={setIncomingOrders}
                                  activeOrders={activeOrders}
                                  setActiveOrders={setActiveOrders}
-                                 status={order.status}
+                                 setDeliveredOrders={setDeliveredOrders}
+                                 address={order.DeliveryAddress}
+                                 customerID={order.CustomerID}
+                                 driverID={userID}
                               />
-                           ))} */}
+                           ))}
                         </Card.Text>
                      </Card.Body>
                   </Card>
