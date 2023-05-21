@@ -8,33 +8,37 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import Button from 'react-bootstrap/Button';
 import Pickup from '../../components/pickup/Pickup';
 import Delivery from '../../components/delivery/Delivery';
+import LoginRegisterModal from '../../components/loginRegisterModal/LoginRegisterModal';
 
-async function submitOrder(orderPrice, location, restaurantID) {
-   console.log("submitted order");
-   let resData = [];
-   fetch(`http://34.82.124.237:3001/api/submit/customerOrder`, {
-      method: 'POST',
-      headers: {
-         'Accept': 'application/json',
-         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-         CustomerID: 1,
-         DriverID: 1,
-         RestaurantID: restaurantID,
-         OrderTime: "5 minutes",
-         DeliveryTime: "5 minutes",
-         DeliveryAddress: location,
-         AdditionalNotes: "none",
-         OrderDiscounts: 0,
-         OrderPrice: Number(orderPrice),
-         OrderStatus: 1,
+async function submitOrder(orderPrice, location, restaurantID, userName, setModalShow) {
+   if (userName) {
+      console.log("submitted order");
+      let resData = [];
+      fetch(`http://34.82.124.237:3001/api/submit/customerOrder`, {
+         method: 'POST',
+         headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+         },
+         body: JSON.stringify({
+            CustomerID: 1,
+            DriverID: 1,
+            RestaurantID: restaurantID,
+            OrderTime: "5 minutes",
+            DeliveryTime: "5 minutes",
+            DeliveryAddress: location,
+            AdditionalNotes: "none",
+            OrderDiscounts: 0,
+            OrderPrice: Number(orderPrice),
+            OrderStatus: 1,
+         })
       })
-   })
-      .then(response => response.json())
-      .then(response => console.log(JSON.stringify(response)))
-
-   return resData;
+         .then(response => response.json())
+         .then(response => console.log(JSON.stringify(response)))
+      return resData;
+   } else {
+      setModalShow(true);
+   }
 }
 
 async function getSearchRestaurants(id, setMenu) {
@@ -44,7 +48,6 @@ async function getSearchRestaurants(id, setMenu) {
    }
    await fetch(`http://34.82.124.237:3001/api/restaurantMenu${id}`).then((r) => r.json()).then((data) => {
       resData = data;
-      // console.log("Menu items:", resData);
       setMenu(resData);
    }
    )
@@ -53,13 +56,16 @@ async function getSearchRestaurants(id, setMenu) {
 
 function Restaurant(props) {
    // console.log("selected restaurant", props.restaurant);
+   let userName = props.userName;
+
+   const [modalShow, setModalShow] = React.useState(false);
+   const [modalText, setModalText] = React.useState('Please login to order');
 
    const [menu, setMenu] = useState([
       { MenuItemName: "item_1", MenuItemDescription: "lorem ipsum", MenuItemPrice: 5 },
       { MenuItemName: "item_2", MenuItemDescription: "lorem ipsum", MenuItemPrice: 10 },
       { MenuItemName: "item_3", MenuItemDescription: "lorem ipsum", MenuItemPrice: 15 },
    ]);
-
    const [location, setLocation] = useState("");
 
    let restaurant = props.restaurant;
@@ -194,11 +200,14 @@ function Restaurant(props) {
                      </Card.Text>
                   </Card.Body>
                </Card>
-               <Button variant="secondary" size="sm" onClick={() => submitOrder(total, location, restaurant.RestaurantID)}>Order</Button>
+               <Button variant="secondary" size="sm" onClick={() => submitOrder(total, location, restaurant.RestaurantID, userName, setModalShow)}>Order</Button>
             </div>
          </div>
-
-
+         <LoginRegisterModal
+            text={modalText}
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+         />
       </div>
    )
 }

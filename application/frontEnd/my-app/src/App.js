@@ -235,7 +235,7 @@ function App() {
         <Route path="/restaurantSignup" element={<RestaurantSignup />} />
         <Route path="/restaurantDashboard" element={<RestaurantDashboard userName={userName} userID={userID} userType={userType} RestaurantID={RestaurantID}/>} />
         
-        <Route path="/browse" element={<Browse restaurants={restaurants} setSelectedRestaurant={setSelectedRestaurant} />} />
+        <Route path="/browse" element={<Browse restaurants={restaurants} setSelectedRestaurant={setSelectedRestaurant} userName={userName} />} />
         <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} setSelectedRestaurant={setSelectedRestaurant} />} />
         <Route path="/restaurant" element={<Restaurant restaurant={selectedRestaurant} />} />
         {restaurants.map((restaurant) => (
