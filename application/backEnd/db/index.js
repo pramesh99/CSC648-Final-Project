@@ -257,6 +257,19 @@ DB.getOrderByStatusNum = (statusNum) => {
     });
 }
 
+DB.getOrderByCustID = (custID) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`SELECT * FROM Orders WHERE CustomerID = ?`,
+        [custID],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    })
+}
+
 DB.getOrderByDriverID = (driverID) => {
     return new Promise ((resolve, reject) => {
         pool.query(`SELECT * FROM Orders WHERE DriverID = ?`,

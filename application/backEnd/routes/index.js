@@ -282,4 +282,13 @@ router.post('/order/deleteOrder/:orderID', async (req, res, next) => {
     }
 });
 
+router.get('/order/getOrder/:customerID', async (req, res, next) => {
+    try {
+        let results = await db.getOrderByCustID(req.params.customerID);
+        res.json(results);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
 module.exports = router;
