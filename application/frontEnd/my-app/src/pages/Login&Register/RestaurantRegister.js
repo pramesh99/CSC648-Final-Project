@@ -2,8 +2,11 @@ import { useState } from "react"
 import Forminput from "./Forminput"
 import styles from "./RestaurantRegister.module.css";
 import { Link } from "react-router-dom";
-
+import LoginRegisterModal from "../../components/loginRegisterModal/LoginRegisterModal";
 const Register = () => {
+    const [modalShow, setModalShow] = useState(false);
+    const [modalText, setModalText] = useState('');
+
     const [values, setValues] = useState({
         restaurant: "",
         email: "",
@@ -93,24 +96,35 @@ const Register = () => {
         }
     ]
 
-    const register = () => {
-        fetch('http://34.82.124.237:3001/api/submit/registration_form', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                r_type: "RestaurantOwner",
-                restaurant: values.restaurant, 
-                name: values.firstname,
-                email: values.email,
-                phone: values.phone,
-                password: values.password,
+    async function register() {
+        try {
+            const response = await fetch('http://34.82.124.237:3001/api/submit/registrationForm', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    r_type: "Driver",
+                    name: values.firstname,
+                    email: values.email,
+                    phone: values.phone,
+                    password: values.password,
+                })
             })
-        })
-            .then(response => response.json())
-            .then(response => console.log(JSON.stringify(response)))
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data)
+                setModalText("Registration Successful");
+                setModalShow(true);
+            } else {
+                throw new Error('Registration failed');
+            }
+
+        } catch (error) {
+            setModalText("Registration Unsuccessful");
+            setModalShow(true);
+        }
     }
 
     const handleSubmit = (e) => {
@@ -144,6 +158,11 @@ const Register = () => {
                 <a href="replace">Log in!</a></Link>
                 </div>
             </form>
+            <LoginRegisterModal
+                text={modalText}
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+            />
         </div>
     )
 }

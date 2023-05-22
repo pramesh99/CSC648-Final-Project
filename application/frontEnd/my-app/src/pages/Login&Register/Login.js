@@ -1,4 +1,4 @@
-import React,{ useState } from "react"
+import { useState } from "react"
 import Forminput from "./Forminput"
 import styles from "./Login.module.css";
 import "./Register"
@@ -14,8 +14,8 @@ const Login = (props) => {
 
     const navigate = useNavigate();
 
-    const [modalShow, setModalShow] = React.useState(false);
-    const [modalText, setModalText] = React.useState('');
+    const [modalShow, setModalShow] = useState(false);
+    const [modalText, setModalText] = useState('');
 
     const [values, setValues] = useState({
         email: "",
@@ -68,6 +68,8 @@ const Login = (props) => {
                     setUserID(id);
                     setUserType("SFSUCustomer");
                     navigate('/');
+            } else {
+                throw new Error('Login failed');
             }
         } catch (error) {
             setModalText("Login Unsuccessful");
