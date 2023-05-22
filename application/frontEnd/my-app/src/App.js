@@ -1,3 +1,7 @@
+/* 
+Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
+*/
+
 import './App.css';
 import Navbar from './components/navbar/Navbar';
 import { Route, Routes } from "react-router-dom";

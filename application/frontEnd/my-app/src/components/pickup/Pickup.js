@@ -1,3 +1,7 @@
+/* 
+Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
+*/
+
 import React, { useState } from "react";
 import styles from "./Pickup.module.css";
 import ToggleButton from 'react-bootstrap/ToggleButton';

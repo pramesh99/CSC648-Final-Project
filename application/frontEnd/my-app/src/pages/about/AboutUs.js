@@ -1,3 +1,7 @@
+/* 
+Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
+*/
+
 import React from 'react';
 import styles from "./AboutUs.module.css";
 import Hieu from "../../images/Hieu.jpg";
@@ -29,7 +33,7 @@ function AboutUs (props) {
             <div className={styles.profile}>
                <Link to="/aboutUs/Hieu"><img src={Hieu} alt="About Us: Hieu" className={styles["profile-image"]}></img></Link>
                <div className={styles["profile-description"]}>
-                  <div className={styles["profile-name"]}>Hieu Ma</div>
+                  <div className={styles["profile-name"]}>Hieu</div>
                   <div className={styles["profile-title-link-container"]}>
                      <div className={styles["profile-title"]}><b>Front-End Lead</b></div>
                      <div className={styles["profile-link"]}><Link to="/aboutUs/Hieu">{"read more ->"}</Link>

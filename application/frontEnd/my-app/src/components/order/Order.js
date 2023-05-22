@@ -1,3 +1,7 @@
+/* 
+Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
+*/
+
 import React, { useEffect } from 'react';
 import styles from "./Order.module.css";
 // import { Link } from "react-router-dom";

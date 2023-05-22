@@ -1,3 +1,7 @@
+/* 
+Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
+*/
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';

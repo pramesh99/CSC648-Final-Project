@@ -1,3 +1,7 @@
+/* 
+Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
+*/
+
 import React, { useState } from "react"
 import Forminput from "./Forminput"
 import styles from "./RestaurantLogin.module.css";

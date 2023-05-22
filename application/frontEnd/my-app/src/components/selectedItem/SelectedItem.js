@@ -1,3 +1,7 @@
+/* 
+Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
+*/
+
 import React, { useState } from 'react';
 import styles from "./SelectedItem.module.css";
 // import { Link } from "react-router-dom";

@@ -1,3 +1,7 @@
+/* 
+Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
+*/
+
 import React, { useState, useCallback } from 'react';
 import styles from "./Browse.module.css";
 import RestaurantCard from '../../components/restaurantCard/RestaurantCard';

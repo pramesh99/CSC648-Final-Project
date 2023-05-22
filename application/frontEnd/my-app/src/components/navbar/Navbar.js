@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+/* 
+Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
+*/
+
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { Nav, NavDropdown } from 'react-bootstrap';
 import styles from "./Navbar.module.css";
@@ -10,7 +14,7 @@ import LogoPic from '../../images/logo.jpg'
 function Navbar(props) {
 
    const [category, setCategory] = useState('all');
-
+   const [categories, setCategories] = useState([]);
    const navigate = useNavigate();
    const search = props.search;
    const setSearch = props.setSearch;
@@ -46,6 +50,21 @@ function Navbar(props) {
       navigate("/result");
    };
 
+   async function getAllCategories() {
+      const response = await fetch("http://34.82.124.237:3001/api/allCuisines")
+      if(response.ok) {
+         const data = await response.json();
+         console.log("ALL CATEGORIES", data);
+         setCategories(data);
+      } else {
+         setCategories([{CuisineName: 'American'}, {CuisineName: 'Chinese'}, {CuisineName: 'Indian'}, {CuisineName: 'Italian'}])
+      }
+    }
+
+   useEffect( () => {
+      getAllCategories();
+   },[])
+
    return (
       <div id={styles["navbar-container"]}>
          <div id={styles["banner"]}>SFSU Software Engineering Project CSC 648-848, Spring 2023. For Demonstration Only.</div>
@@ -68,11 +87,10 @@ function Navbar(props) {
                   value={category}
                   onChange={e => setCategory(e.target.value)}
                >
-                  <option value="all">All</option>
-                  <option value="american">American</option>
-                  <option value="chinese">Chinese</option>
-                  <option value="indian">Indian</option>
-                  <option value="italian">Italian</option>
+               <option value="all">All</option>
+               {categories.map((category) => (
+                  <option value={category?.CuisineName}>{category?.CuisineName}</option>
+               ))}
                </select>
                <div id={styles["search-separator"]}></div>
                <input

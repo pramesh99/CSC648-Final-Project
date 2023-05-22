@@ -1,3 +1,7 @@
+/* 
+Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
+*/
+
 import React from 'react';
 import ProfilePic from "../../images/Hieu.jpg";
 import styles from "./Profile.module.css"
