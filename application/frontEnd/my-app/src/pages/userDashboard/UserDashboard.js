@@ -1,3 +1,7 @@
+/* 
+Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
+*/
+
 import React, { useState, useEffect } from 'react';
 import styles from "./UserDashboard.module.css";
 // import MenuItem from '../../components/menuItem/MenuItem';

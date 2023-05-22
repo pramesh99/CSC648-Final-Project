@@ -1,3 +1,7 @@
+/* 
+Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
+*/
+
 import React, { useState } from 'react';
 import styles from "./Home.module.css";
 //import for img

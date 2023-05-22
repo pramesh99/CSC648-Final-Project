@@ -1,3 +1,7 @@
+/* 
+Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
+*/
+
 import { useState } from "react";
 import styles from "./FormInput.module.css"
 

@@ -1,3 +1,7 @@
+/* 
+Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
+*/
+
 import React, { useState, useEffect } from 'react';
 import styles from "./Restaurant.module.css";
 import MenuItem from '../../components/menuItem/MenuItem';
@@ -10,7 +14,7 @@ import Pickup from '../../components/pickup/Pickup';
 import Delivery from '../../components/delivery/Delivery';
 import LoginRegisterModal from '../../components/loginRegisterModal/LoginRegisterModal';
 
-async function submitOrder(orderPrice, location, restaurantID, userName, setModalShow, selectedItems) {
+async function submitOrder(orderPrice, location, restaurantID, userName, setModalShow, selectedItems, userID) {
    console.log("submit order login username", userName)
    if (userName) {
       // console.log("submitted order");
@@ -23,8 +27,8 @@ async function submitOrder(orderPrice, location, restaurantID, userName, setModa
             'Content-Type': 'application/json'
          },
          body: JSON.stringify({
-            CustomerID: 1,
-            DriverID: 1,
+            CustomerID: userID,
+            DriverID: 0,
             RestaurantID: restaurantID,
             OrderTime: "5 minutes",
             DeliveryTime: "5 minutes",
@@ -61,6 +65,7 @@ function Restaurant(props) {
    
    // console.log("selected restaurant", props.restaurant);
    let userName = props?.userName;
+   let userID = props?.userID;
    console.log("restaurant order login username", props)
 
    const [modalShow, setModalShow] = React.useState(false);
@@ -205,7 +210,7 @@ function Restaurant(props) {
                      </Card.Text>
                   </Card.Body>
                </Card>
-               <Button variant="secondary" size="sm" onClick={() => submitOrder(total, location, restaurant.RestaurantID, userName, setModalShow, selectedItems)}>Order</Button>
+               <Button variant="secondary" size="sm" onClick={() => submitOrder(total, location, restaurant.RestaurantID, userName, setModalShow, selectedItems, userID)}>Order</Button>
             </div>
          </div>
          <LoginRegisterModal

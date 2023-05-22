@@ -1,3 +1,7 @@
+/* 
+Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
+*/
+
 import React from "react";
 import styles from "./LoginRegisterModal.module.css";
 import Button from 'react-bootstrap/Button';

@@ -162,10 +162,9 @@ router.post('/submit/customerOrder', async (req, res, next) => {
             formData.OrderStatus
         );
 
-        
-        for (let i = 0; i < formData.Items.length; i++){
-            results = await db.enterOrderItems(formData[i].menuItemID, formData[i].menuItemID.count, formData[i].menuItemID.quantity);
-        }
+        // for (let i = 0; i < formData.Items.length; i++){
+        //     results = await db.enterOrderItems(formData[i].menuItemID, formData[i].menuItemID.count, formData[i].menuItemID.quantity);
+        // }
             
         res.json(results);
         //could implement pseudo-transcations by catching error and deleting rows just inserted

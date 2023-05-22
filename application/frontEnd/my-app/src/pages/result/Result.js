@@ -1,3 +1,7 @@
+/* 
+Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
+*/
+
 import React, { useState, useCallback } from 'react';
 import styles from "./Result.module.css";
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';

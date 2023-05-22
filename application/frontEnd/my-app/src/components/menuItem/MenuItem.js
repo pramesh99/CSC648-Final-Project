@@ -1,3 +1,7 @@
+/* 
+Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
+*/
+
 import React from 'react';
 import styles from "./MenuItem.module.css";
 // import { Link } from "react-router-dom";
