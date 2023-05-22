@@ -11,25 +11,25 @@ import Order from '../../components/order/Order';
 // import Delivery from '../../components/delivery/Delivery';
 import { Link } from "react-router-dom";
 
-async function getOrders(setIncomingOrders, setActiveOrders, restID) {
+async function getOrders(setCurrentOrders, setFinishedOrders, customerID) {
    let resData = [];
 
-   await fetch(`http://34.82.124.237:3001/api/order/restaurantID/${restID}`).then((r) => r.json()).then((data) => {
+   await fetch(`http://34.82.124.237:3001/api/order/getOrder/${customerID}`).then((r) => r.json()).then((data) => {
       resData = data;
-      let incomingOrders = [];
-      let activeOrders = [];
+      let currentOrders = [];
+      let finishedOrders = [];
       if(resData.length > 0) {
          for(let i = 0; i < resData.length; i++) {
             if(resData[i].OrderStatus === 1) {
-               incomingOrders.push(resData[i]);
+               currentOrders.push(resData[i]);
             }
-            if(resData[i].OrderStatus === 2) {
-               activeOrders.push(resData[i]);
+            if(resData[i].OrderStatus === 5) {
+               finishedOrders.push(resData[i]);
             }
          }
-         console.log("incomingOrders", incomingOrders);
-         setIncomingOrders(incomingOrders);
-         setActiveOrders(activeOrders);
+         console.log("currentOrders", currentOrders);
+         setCurrentOrders(currentOrders);
+         setFinishedOrders(finishedOrders);
       }
    }
    )
@@ -39,21 +39,17 @@ async function getOrders(setIncomingOrders, setActiveOrders, restID) {
 function UserDashboard(props) {
    let userID = props.userID;
    let userName = props.userName;
-   let userType = props.userType;
    let restaurantID = props.RestaurantID;
    console.log(props);
-   let orders;
-   let renderOrderItems;
 
-   const [incomingOrders, setIncomingOrders] = useState([]);
+   const [currentOrders, setCurrentOrders] = useState([]);
 
-   const [activeOrders, setActiveOrders] = useState([]);
+   const [finishedOrders, setFinishedOrders] = useState([]);
 
    useEffect(() => {
-      console.log(props);
 
-      if(restaurantID) {
-         getOrders(setIncomingOrders, setActiveOrders, restaurantID);
+      if(userID) {
+         getOrders(setCurrentOrders, setFinishedOrders, userID);
       }
    }, [])
 
@@ -73,17 +69,20 @@ function UserDashboard(props) {
                      <Card.Header>Active Orders</Card.Header>
                      <Card.Body className={styles["card-body"]}>
                         <Card.Text className={styles["restaurant-menu-items"]}>
-                           {incomingOrders.map((order) => (
+                           {currentOrders.map((order) => (
                               <Order
                                  id={order.OrderID}
                                  restaurantID={restaurantID}
                                  price={order.OrderPrice}
-                                 incomingOrders={incomingOrders}
-                                 setIncomingOrders={setIncomingOrders}
-                                 activeOrders={activeOrders}
-                                 setActiveOrders={setActiveOrders}
-                                 status={"incoming"}
+                                 currentOrders={currentOrders}
+                                 setCurrentOrders={setCurrentOrders}
+                                 finishedOrders={finishedOrders}
+                                 setFinishedOrders={setFinishedOrders}
+                                 driverID={order.DriverID}
+                                 address={order.DeliveryAddress}
+                                 customerID={order.CustomerID}
                                  getOrders={getOrders}
+                                 
                               />
                            ))}
                         </Card.Text>
@@ -101,16 +100,18 @@ function UserDashboard(props) {
                      <Card.Header>Finished Orders</Card.Header>
                      <Card.Body className={styles["card-body"]}>
                         <Card.Text className={styles["restaurant-menu-items"]}>
-                           {activeOrders.map((order) => (
+                           {finishedOrders.map((order) => (
                               <Order
                                  id={order.OrderID}
                                  restaurantID={restaurantID}
                                  price={order.OrderPrice}
-                                 incomingOrders={incomingOrders}
-                                 setIncomingOrders={setIncomingOrders}
-                                 activeOrders={activeOrders}
-                                 setActiveOrders={setActiveOrders}
-                                 status={"active"}
+                                 currentOrders={currentOrders}
+                                 setCurrentOrders={setCurrentOrders}
+                                 finishedOrders={finishedOrders}
+                                 setFinishedOrders={setFinishedOrders}
+                                 driverID={order.DriverID}
+                                 address={order.DeliveryAddress}
+                                 customerID={order.CustomerID}
                                  getOrders={getOrders}
                               />
                            ))}
