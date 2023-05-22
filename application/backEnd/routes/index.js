@@ -22,6 +22,7 @@ router.post('/test', async (req, res, next) => {
         res.sendStatus(500);
     }
 });
+
 router.get('/restOwners', async (req,res,next) => { // route is appended to /api in server.js
     try {
         let results = await db.getAllOwners(); // params go here

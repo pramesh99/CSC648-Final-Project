@@ -22,6 +22,7 @@ import RestaurantLogin from './pages/Login&Register/RestaurantLogin'
 import RestaurantDashboard from './pages/restaurantDashboard/RestaurantDashboard';
 import DriverDashboard from './pages/driverDashboard/DriverDashboard';
 import RestaurantSignup from './pages/restaurantSignup/RestaurantSignup';
+import UserDashboard from './pages/userDashboard/UserDashboard';
 // import fetch from 'node-fetch';
 
 function getRestaurantImgs(numOfRestaurants) {
@@ -234,7 +235,8 @@ function App() {
         <Route path="/Restaurant-login" element={<RestaurantLogin setUserName={setUserName} setUserID={setUserID} setUserType={setUserType} setRestaurantID={setRestaurantID}/>} />
         <Route path="/restaurantSignup" element={<RestaurantSignup />} />
         <Route path="/restaurantDashboard" element={<RestaurantDashboard userName={userName} userID={userID} userType={userType} RestaurantID={RestaurantID}/>} />
-        
+        <Route path="/userDashboard" element={<UserDashboard userName={userName} userID={userID} userType={userType}/>} />
+
         <Route path="/browse" element={<Browse restaurants={restaurants} setSelectedRestaurant={setSelectedRestaurant} />} />
         <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} setSelectedRestaurant={setSelectedRestaurant} />} />
         <Route path="/restaurant" element={<Restaurant restaurant={selectedRestaurant} userName={userName}/>} />

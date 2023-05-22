@@ -51,9 +51,16 @@ function Navbar(props) {
          <div id={styles["banner"]}>SFSU Software Engineering Project CSC 648-848, Spring 2023. For Demonstration Only.</div>
          <div id={styles["navbar"]}>
             <div id={styles["home-icon"]}>
-               <Link to="/" id={styles["icon-img"]}>
-                  <img src={LogoPic} alt="Gator Grub Logo" />
-               </Link>
+               {userType === "SFSUCustomer" &&
+                  <Link to="/userDashboard" id={styles["icon-img"]}>
+                     <img src={LogoPic} alt="Gator Grub Logo" />
+                  </Link>
+               }
+               {userType !== "SFSUCustomer" &&
+                  <Link to="/" id={styles["icon-img"]}>
+                     <img src={LogoPic} alt="Gator Grub Logo" />
+                  </Link>
+               }
             </div>
             <div id={styles["search-bar"]}>
                <select
@@ -87,8 +94,8 @@ function Navbar(props) {
             {/* <div id={styles["profile-icon-container"]}> */}
             <div id={styles["logout-profile-container"]}>
                {userID &&
-               <div id={styles["logout"]} onClick={() => logout()}>logout</div>
-               
+                  <div id={styles["logout"]} onClick={() => logout()}>logout</div>
+
                }
                <div id={styles["profile-icon"]}></div>
             </div>
@@ -97,12 +104,12 @@ function Navbar(props) {
 
          <Nav id={styles["tabs"]}>
             <Nav id={styles["home-buttons"]}>
-               <Link to="/" style={{textDecoration: "none"}}>
+               <Link to="/" style={{ textDecoration: "none" }}>
                   <Nav.Link href="/" id={styles["left-buttons"]}>Home</Nav.Link>
                </Link>
             </Nav>
             <Nav id={styles["aboutus-buttons"]}>
-               <Link to="/aboutUs" style={{textDecoration: "none"}}>
+               <Link to="/aboutUs" style={{ textDecoration: "none" }}>
                   <Nav.Link href="/aboutUs" id={styles["left-buttons"]}>About Us</Nav.Link>
                </Link>
             </Nav>
@@ -126,6 +133,9 @@ function Navbar(props) {
             <NavDropdown title="Register / Login" id={styles["dropdown"]}>
                <NavDropdown.Item as={Link} to="/register">Register</NavDropdown.Item>
                <NavDropdown.Item as={Link} to="/login">Login</NavDropdown.Item>
+               {userType === "SFSUCustomer" &&
+                  <NavDropdown.Item as={Link} to="/userDashboard">User Dashboard</NavDropdown.Item>
+               }
             </NavDropdown>
          </Nav>
       </div>

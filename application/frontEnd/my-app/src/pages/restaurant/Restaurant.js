@@ -10,10 +10,11 @@ import Pickup from '../../components/pickup/Pickup';
 import Delivery from '../../components/delivery/Delivery';
 import LoginRegisterModal from '../../components/loginRegisterModal/LoginRegisterModal';
 
-async function submitOrder(orderPrice, location, restaurantID, userName, setModalShow) {
+async function submitOrder(orderPrice, location, restaurantID, userName, setModalShow, selectedItems) {
    console.log("submit order login username", userName)
    if (userName) {
-      console.log("submitted order");
+      // console.log("submitted order");
+      // console.log(selectedItems)
       let resData = [];
       fetch(`http://34.82.124.237:3001/api/submit/customerOrder`, {
          method: 'POST',
@@ -49,6 +50,7 @@ async function getSearchRestaurants(id, setMenu) {
    }
    await fetch(`http://34.82.124.237:3001/api/restaurantMenu${id}`).then((r) => r.json()).then((data) => {
       resData = data;
+      console.log("MENU: ", resData)
       setMenu(resData);
    }
    )
@@ -203,7 +205,7 @@ function Restaurant(props) {
                      </Card.Text>
                   </Card.Body>
                </Card>
-               <Button variant="secondary" size="sm" onClick={() => submitOrder(total, location, restaurant.RestaurantID, userName, setModalShow)}>Order</Button>
+               <Button variant="secondary" size="sm" onClick={() => submitOrder(total, location, restaurant.RestaurantID, userName, setModalShow, selectedItems)}>Order</Button>
             </div>
          </div>
          <LoginRegisterModal
