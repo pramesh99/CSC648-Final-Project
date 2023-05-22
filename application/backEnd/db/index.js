@@ -31,7 +31,7 @@ DB.getAllOwners = () => {
 
 DB.getAllRestaurants = () => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT * FROM Restaurant', (err, results) => {
+        pool.query('SELECT * FROM Restaurant WHERE flag = 1', (err, results) => {
             if (err) {
                 return reject(err);
             }
@@ -43,7 +43,7 @@ DB.getAllRestaurants = () => {
 
 DB.getRestaurantByName = (name) => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT * FROM Restaurant WHERE RestaurantName = ?',
+        pool.query('SELECT * FROM Restaurant WHERE RestaurantName = ? AND flag = 1',
             [name],
             (err, results) => {
                 if (err) {
@@ -56,7 +56,7 @@ DB.getRestaurantByName = (name) => {
 
 DB.getRestByCuisine = (cuisine) => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT * FROM Restaurant WHERE RestaurantCuisine = ?',
+        pool.query('SELECT * FROM Restaurant WHERE RestaurantCuisine = ? AND flag = 1',
             [cuisine], //prevent SQL injection
             (err, results) => {
                 if (err) {
@@ -83,7 +83,7 @@ DB.getAllCuisines = () => {
 
 DB.searchBarQueryNoCuisine = (search_input) => {
     return new Promise((resolve, reject) => {
-        pool.query(`SELECT * FROM Restaurant`,
+        pool.query(`SELECT * FROM Restaurant WHERE flag = 1`,
             (err, results) => {
                 if (err) {
                     return reject(err);
@@ -103,7 +103,7 @@ DB.searchBarQueryWithCuisine = (cuisine, search_input) => {
                            Restaurant.RestaurantDescription
                     FROM Restaurant
                     INNER JOIN Cuisine ON Restaurant.RestaurantCuisine=Cuisine.cuisineID
-                    WHERE Cuisine.cuisineName = ?`,
+                    WHERE Cuisine.cuisineName = ? AND Restaurant.flag = 1`,
             [cuisine],
             (err, results) => {
                 if (err) {
@@ -242,9 +242,11 @@ DB.enterOrderItems = (oID, miID, qty, price) => {
     })
 }
 
-DB.ordersToPickUp = () => {
+
+DB.getOrderByStatusNum = (statusNum) => {
     return new Promise ((resolve, reject) => {
-        pool.query('SELECT * FROM Orders where OrderStatus = 1',
+        pool.query(`SELECT * FROM Orders WHERE OrderStatus = ?`,
+        [statusNum],
         (err, results) => {
             if (err) {
                 return reject(err);
@@ -254,11 +256,94 @@ DB.ordersToPickUp = () => {
     });
 }
 
-// DB.getDriverOrder
-// SELECT *
-// FROM `gatorGrubDB`.`Orders`
-// WHERE `DriverID` = 1;
+DB.getOrderByCustID = (custID) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`SELECT * FROM Orders WHERE CustomerID = ?`,
+        [custID],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    })
+}
 
+DB.getOrderByDriverID = (driverID) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`SELECT * FROM Orders WHERE DriverID = ?`,
+        [driverID],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
 
-// SELECT * FROM gatorGrubDB.Orders where OrderStatus = 3;
+DB.getOrderByRestID = (restID) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`SELECT * FROM Orders WHERE RestaurantID = ?`,
+        [restID],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+
+DB.getOrderByDriverID = (driverID) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`SELECT * FROM Orders WHERE DriverID = ?`,
+        [driverID],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+DB.updateOrderStatus = (orderID, statusID) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`UPDATE Orders SET OrderStatus = ? WHERE OrderID = ?`,
+        [statusID, orderID],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+
+DB.updateDriverID = (orderID, driverID) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`UPDATE Orders SET DriverID = ? WHERE OrderID = ?`,
+        [driverID, orderID],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+
+DB.deleteOrder = (orderID) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`DELETE FROM Orders WHERE OrderID =?`,
+        [orderID],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
+
 module.exports = DB;

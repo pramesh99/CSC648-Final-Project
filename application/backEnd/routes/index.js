@@ -162,9 +162,9 @@ router.post('/submit/customerOrder', async (req, res, next) => {
         );
 
         
-        // for (let i = 0; i < formData.Items.length; i++){
-        //     results = await db.enterOrderItems(formData[i].menuItemID, formData[i].menuItemID.count, formData[i].menuItemID.quantity);
-        // }
+        for (let i = 0; i < formData.Items.length; i++){
+            results = await db.enterOrderItems(formData[i].menuItemID, formData[i].menuItemID.count, formData[i].menuItemID.quantity);
+        }
             
         res.json(results);
         //could implement pseudo-transcations by catching error and deleting rows just inserted
@@ -221,9 +221,9 @@ router.get('/restaurantMenu/:restaurant', async (req, res, next) => {
     }
 });
 
-router.get('/orders/status3Orders', async (req, res, next) => {
+router.get('/order/statusNum/:statusNum', async (req, res, next) => {
     try {
-        let results = await db.ordersToPickUp();
+        let results = await db.getOrderByStatusNum(req.params.statusNum);
         res.json(results);
     } catch (e) {
         console.log(e);
@@ -231,4 +231,64 @@ router.get('/orders/status3Orders', async (req, res, next) => {
     }
 });
 
+router.get('/order/driverID/:driverID', async (req, res, next) => {
+    try {
+        let results = await db.getOrderByDriverID(req.params.driverID);
+        res.json(results);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
+
+router.get('/order/restaurantID/:restID', async (req, res, next) => {
+    try {
+        let results = await db.getOrderByRestID(req.params.restID);
+        res.json(results);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
+router.post('/order/updateStatus/:orderID/:statusNum', async (req, res, next) => {
+    try {
+        let results = await db.updateOrderStatus(req.params.orderID, req.params.statusNum);
+        res.json(results);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
+router.post('/order/updateDriver/:orderID/:driverID', async (req, res, next) => {
+    try {
+        let results = await db.updateDriverID(req.params.orderID, req.params.driverID);
+        res.json(results);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
+router.post('/order/deleteOrder/:orderID', async (req, res, next) => {
+    try {
+        let results = await db.deleteOrder(req.params.orderID);
+        res.json(results);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
+router.get('/order/getOrder/:customerID', async (req, res, next) => {
+    try {
+        let results = await db.getOrderByCustID(req.params.customerID);
+        res.json(results);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
 module.exports = router;

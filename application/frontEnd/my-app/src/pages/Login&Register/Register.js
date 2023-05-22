@@ -75,7 +75,7 @@ const Register = () => {
     ]
 
     const register = () => {
-        fetch('http://34.82.124.237:3001/api/submit/registration_form', {
+        fetch('http://34.82.124.237:3001/api/submit/registrationForm', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
