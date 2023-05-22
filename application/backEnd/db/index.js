@@ -256,6 +256,19 @@ DB.getOrderByStatusNum = (statusNum) => {
     });
 }
 
+DB.getOrderByCustID = (custID) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`SELECT * FROM Orders WHERE CustomerID = ?`,
+        [custID],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    })
+}
+
 DB.getOrderByDriverID = (driverID) => {
     return new Promise ((resolve, reject) => {
         pool.query(`SELECT * FROM Orders WHERE DriverID = ?`,
@@ -294,7 +307,6 @@ DB.getOrderByDriverID = (driverID) => {
         });
     });
 }
-
 DB.updateOrderStatus = (orderID, statusID) => {
     return new Promise ((resolve, reject) => {
         pool.query(`UPDATE Orders SET OrderStatus = ? WHERE OrderID = ?`,
@@ -321,5 +333,17 @@ DB.updateDriverID = (orderID, driverID) => {
     });
 }
 
+DB.deleteOrder = (orderID) => {
+    return new Promise ((resolve, reject) => {
+        pool.query(`DELETE FROM Orders WHERE OrderID =?`,
+        [orderID],
+        (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+}
 
 module.exports = DB;
