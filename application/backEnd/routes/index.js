@@ -181,20 +181,21 @@ router.post('/login', async (req, res, next) => {
         if (formData.r_type === 'SFSUCustomer'){
             results = await db.getSFSUCustomer(formData.email);
             if (results.length === 0){throw "email"}
-            if (!bcrypt.compare(formData.password, results[0].SFSUCustomerPassword)){
-                throw "password";
+            if (!await bcrypt.compare(formData.password, results[0].SFSUCustomerPassword))
+            {
+                throw "password"
             }
         } else if (formData.r_type === 'Driver') {
             results = await db.getDriver(formData.email);
             if (results.length === 0){throw "email"}
-            if (!bcrypt.compare(formData.password, results[0].DriverPassword)){
-                throw "password";
+            if (!await bcrypt.compare(formData.password, results[0].DriverPassword)){
+                throw "password"
             }
         } else if (formData.r_type === 'RestaurantOwner'){
             results = await db.getRestaurantOwner(formData.email);
             if (results.length === 0){throw "email"}
-            if (!bcrypt.compare(formData.password, results[0].RestaurantOwnerPassword)){
-                throw "password";
+            if (!await bcrypt.compare(formData.password, results[0].RestaurantOwnerPassword)){
+                throw "password"
             }
         }
         res.json(results);
