@@ -4,7 +4,7 @@ Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan
 
 .Login{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     height: 100vh;
     background: linear-gradient(
@@ -16,10 +16,12 @@ Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan
     background-position: center;
 }
 
-form{
+.Login form{
+    margin-top: 8%;
     background-color: white;
-    padding: 0px 60px;
     border-radius: 10px;
+    padding-bottom: 2%;
+    padding-top: 1%;
 }
 
 .Title {

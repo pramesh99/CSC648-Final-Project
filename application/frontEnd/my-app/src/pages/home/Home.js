@@ -20,7 +20,7 @@ import Button from 'react-bootstrap/Button';
 
 function Home(props) {
    return (
-      <>
+      <div style={{display: "flex", flexDirection:"column"}}>
          <div style={{
             display: "flex",
             justifyContent: "center",
@@ -51,7 +51,6 @@ function Home(props) {
          </div>
 
          <div id={styles["signup-container"]}>
-
             <Card className={styles["signup-card"]}>
                <Card.Img variant="top" src={UserPic} style={{ height: '15rem', objectFit: 'cover' }} />
                <Card.Body style={{ display: "flex", flexDirection: 'column', justifyContent: 'space-between' }}>
@@ -117,10 +116,8 @@ function Home(props) {
                      >Sign Up Now!</Button>
                </Card.Body>
             </Card>
-
-
          </div>
-      </>
+      </div>
    )
 }
 

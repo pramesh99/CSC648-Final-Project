@@ -1,6 +1,6 @@
 .Login{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     height: 100vh;
     background: linear-gradient(
@@ -12,11 +12,14 @@
     background-position: center;
 }
 
-/* form{
+form{
+    margin-top: 8%;
     background-color: white;
-    padding: 300px 70px;
+    padding: 0px 60px;
     border-radius: 10px;
-} */
+    padding-bottom: 2%;
+    padding-top: 1%;
+}
 
 .Title {
     color: rgb(77, 1, 77);
@@ -35,8 +38,8 @@
 }
 
 .Registerpath{
+    margin-top: 3%;
     text-align: 10px;
-    /* padding: 5px; */
     margin-bottom: 5px;
 }
 

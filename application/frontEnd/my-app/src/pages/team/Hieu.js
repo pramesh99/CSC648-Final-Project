@@ -11,7 +11,7 @@ function Hieu(props) {
       <div id={styles["profile-container"]}>
          <img src={ProfilePic} id={styles["profile-image"]} alt="Hieu"></img>
          <div id={styles["description-container"]}>
-            <div id={styles["name"]}>Hieu</div>
+            <div id={styles["name"]}>Hieu Ma</div>
             <div id={styles["position"]}><b>Front-End Dev</b></div>
             <div id={styles["about-me"]}>About Me: </div>
             <div id={styles["about-me-description"]}>
