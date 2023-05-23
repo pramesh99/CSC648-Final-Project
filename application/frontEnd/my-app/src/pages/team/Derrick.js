@@ -11,7 +11,7 @@ function Derrick(props) {
       <div id={styles["profile-container"]}>
          <img src={ProfilePic} id={styles["profile-image"]} alt="Derrick"></img>
          <div id={styles["description-container"]}>
-            <div id={styles["name"]}>Derrick</div>
+            <div id={styles["name"]}>Derrick Liang</div>
             <div id={styles["position"]}><b>Back-End Dev</b></div>
             <div id={styles["about-me"]}>About Me: </div>
             

@@ -135,11 +135,11 @@ const Register = () => {
                 </div> */}
                 {inputs.map((input) => (
                     <Forminput key={input.id} {...input} value={values[input.name]} onChange={onChange}></Forminput>))}
-                <div className="Agreement" >
+                {/* <div className="Agreement" >
                     <input type="checkbox" id="agree-checkbox" name="agree-checkbox" required={true} ></input>
                     <label for="agree-checkbox"> I agree to the <a href="/terms-and-conditions" target="_blank" rel="noopener">terms and conditions</a>.</label>
-                </div>
-                <button className="Submit" type="submit">Sign Up</button>
+                </div> */}
+                <button style={{marginTop: "3%"}} className="Submit" type="submit">Sign Up</button>
                 <div className={styles["Loginpath"]}>
                     Already have an account?
                     <Link to="/login" passHref>

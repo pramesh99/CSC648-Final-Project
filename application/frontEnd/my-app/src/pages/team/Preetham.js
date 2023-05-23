@@ -11,7 +11,7 @@ function Preetham(props) {
       <div id={styles["profile-container"]}>
          <img src={ProfilePic} id={styles["profile-image"]} alt="Preetham"></img>
          <div id={styles["description-container"]}>
-            <div id={styles["name"]}>Preetham</div>
+            <div id={styles["name"]}>Preetham Ramesh</div>
             <div id={styles["position"]}><b>Back-End Lead</b></div>
             <div id={styles["about-me"]}>About Me: </div>
             <div id={styles["about-me-description"]}>

@@ -6,17 +6,19 @@ Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 100%;
     background: linear-gradient(rgba(255, 255, 255, 0.7) rgba(255, 255, 255, 0.3));
     background-image: url("https://images.pexels.com/photos/7706402/pexels-photo-7706402.jpeg?auto=compress&cs=tinysrgb&w=5779&h=3853&dpr=1");
     background-size: cover;
     background-position: center;
+    padding-bottom: 8%;
 }
 
 form {
     background-color: white;
     padding: 0px 60px;
     border-radius: 10px;
+    margin-top: 3%;
 }
 
 .Title {
@@ -38,6 +40,7 @@ form {
 .Loginpath{
     text-align: 10px;
     padding: 5px;
+    margin-top: 3%;
 }
 
 .Submit {

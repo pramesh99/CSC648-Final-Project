@@ -32,9 +32,9 @@ const Login = (props) => {
             name: "email",
             type: "email",
             placeholder: "Email",
-            // errorMessage: "It should be a vaild SFSU email, such as example@sfsu.edu",
+            errorMessage: "It should be a vaild SFSU email, such as example@gmail.com",
             label: "Email",
-            // pattern: "[a-z0-9._%+-]+@sfsu.edu$",
+            pattern: "[a-z0-9._%+-]+@gmail.com$",
             required: true,
         },
         {
@@ -44,7 +44,7 @@ const Login = (props) => {
             placeholder: "Password",
             errorMessage: "Your email or password was incorrect",
             label: "Password",
-            // pattern: "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$",
+            pattern: "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$",
             required: true,
         }
     ]
@@ -101,19 +101,19 @@ const Login = (props) => {
                 </div>
                 {inputs.map((input) => (
                     <Forminput key={input.id} {...input} value={values[input.name]} onChange={onChange}></Forminput>))}
-                <button onSubmit="submit" >Login</button>
+                <button style={{marginTop: "3%"}} onSubmit="submit" >Login</button>
                 <div className={styles["Registerpath"]}>
-                    <a href="/forgotpassword">Forgot password?</a>
+                    {/* <a href="/forgotpassword">Forgot password?</a> */}
                 </div>
                 <div className={styles["Registerpath"]}>
                     Want to be a driver? <a href="http://localhost:3000/Driver-register">Sign Up!</a>
-                    <Link to="/Forgot-password" passHref>
-                        <a href="replace">Forgot the password?</a></Link>
+                    {/* <Link to="/Forgot-password" passHref>
+                        <a href="replace">Forgot the password?</a></Link> */}
                 </div>
                 <div className={styles["Registerpath"]}>
-                    Want to be our Team?
+                    Want to be a customer?
                     <Link to="/Driver-register" passHref>
-                        <a href="replace">Sign Up!</a></Link>
+                        <a href="replace"> Sign Up!</a></Link>
                 </div>
             </form>
             <LoginRegisterModal
