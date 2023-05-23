@@ -11,7 +11,7 @@ function Shauhin(props) {
       <div id={styles["profile-container"]}>
          <img src={ProfilePic} id={styles["profile-image"]} alt="Shauhin"></img>
          <div id={styles["description-container"]}>
-            <div id={styles["name"]}>Shauhin</div>
+            <div id={styles["name"]}>Shauhin Pourshayegan</div>
             <div id={styles["position"]}><b>Team Lead</b></div>
             <div id={styles["about-me"]}>About Me: </div>
             <div id={styles["about-me-description"]}>

@@ -26,7 +26,7 @@ function Browse(props) {
    let markerPositions = [];
 
    for (let i = 0; i < props.restaurants.length; i++) {
-      let coordinates = props.restaurants[i].RestaurantCoordinates;
+      let coordinates = props?.restaurants[i]?.RestaurantCoordinates;
       coordinates = coordinates.split(",");
       coordinates[0] = Number(coordinates[0]);
       coordinates[1] = Number(coordinates[1]);
@@ -56,7 +56,7 @@ function Browse(props) {
       const bounds = new window.google.maps.LatLngBounds(center);
       map.fitBounds(bounds);
       // console.log("MAP", map)
-      map.setZoom = 14;
+      // map.setZoom = 14;
       setMap(map)
 
    }, [])

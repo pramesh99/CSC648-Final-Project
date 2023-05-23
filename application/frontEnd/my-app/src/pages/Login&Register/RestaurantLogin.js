@@ -102,13 +102,13 @@ const Login = (props) => {
                 </div>
                 {inputs.map((input) => (
                     <Forminput key={input.id} {...input} value={values[input.name]} onChange={onChange}></Forminput>))}
-                <button onSubmit="submit" >Login</button>
+                <button style={{marginTop: "3%", width: "80%"}} onSubmit="submit" >Login</button>
                 <div className={styles["Registerpath"]}>
-                    <Link to="/Forgot-password" passHref>
-                        <a href="replace">Forgot the password?</a></Link>
+                    {/* <Link to="/Forgot-password" passHref>
+                        <a href="replace">Forgot the password?</a></Link> */}
                 </div>
                 <div className={styles["Registerpath"]}>
-                    Need to register?<a href="http://localhost:3000/Restaurant-register">Sign Up!</a>
+                    Need to register?<a href="http://localhost:3000/Restaurant-register"> Sign Up!</a>
                 </div>
             </form>
             <LoginRegisterModal
