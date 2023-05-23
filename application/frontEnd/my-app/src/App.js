@@ -245,7 +245,7 @@ function App() {
         <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} setSelectedRestaurant={setSelectedRestaurant} />} />
         <Route path="/restaurant" element={<Restaurant restaurant={selectedRestaurant} userName={userName}/>} />
         {restaurants.map((restaurant) => (
-          <Route key={"app.js" + restaurant?.RestaurantName} path={`${restaurant?.RestaurantName}`} element={<Restaurant restaurant={selectedRestaurant} userName={userName} />} />
+          <Route key={"app.js" + restaurant?.RestaurantName} path={`${restaurant?.RestaurantName}`} element={<Restaurant restaurant={selectedRestaurant} userName={userName} userID={userID}/>} />
         ))}
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/aboutUs/Shauhin" element={<Shauhin />} />
