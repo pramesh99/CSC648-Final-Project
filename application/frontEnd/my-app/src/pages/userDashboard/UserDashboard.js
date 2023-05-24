@@ -44,16 +44,28 @@ function UserDashboard(props) {
    let userName = props.userName;
    let restaurantID = props.RestaurantID;
 
+   let setUserID = props.setUserID;
+   let setUserName = props.setUserName;
+   let setUserType = props.setUserType;
+
    const [currentOrders, setCurrentOrders] = useState([]);
 
    const [finishedOrders, setFinishedOrders] = useState([]);
 
    useEffect(() => {
+      let storedData = localStorage.getItem('myData');
 
+      if(storedData) {
+        let myData = JSON.parse(storedData);
+        setUserName(myData.name);
+        setUserID(myData.id);
+        setUserType(myData.type);
+      }
+  
       if(userID) {
          getOrders(setCurrentOrders, setFinishedOrders, userID);
       }
-   }, [])
+   }, [userID])
 
    return (
       <div>
@@ -84,7 +96,8 @@ function UserDashboard(props) {
                                  address={order.DeliveryAddress}
                                  customerID={order.CustomerID}
                                  getOrders={getOrders}
-                                 
+                                 status={"userActive"}
+                                 userID={userID}
                               />
                            ))}
                         </Card.Text>

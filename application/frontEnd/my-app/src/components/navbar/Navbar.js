@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import Register from '../../pages/Login&Register/Register';
 import Result from '../../pages/result/Result';
 import LogoPic from '../../images/logo.jpg'
-
+import cart from '../../images/cart.png'
 function Navbar(props) {
 
    const [category, setCategory] = useState('all');
@@ -36,6 +36,7 @@ function Navbar(props) {
       setUserType('');
       setRestaurantID(0);
       navigate("/");
+      localStorage.clear();
    }
 
    const handleChange = (event) => {
@@ -50,33 +51,27 @@ function Navbar(props) {
 
    async function getAllCategories() {
       const response = await fetch("http://34.82.124.237:3001/api/allCuisines")
-      if(response.ok) {
+      if (response.ok) {
          const data = await response.json();
          setCategories(data);
       } else {
-         setCategories([{CuisineName: 'American'}, {CuisineName: 'Chinese'}, {CuisineName: 'Indian'}, {CuisineName: 'Italian'}])
+         setCategories([{ CuisineName: 'American' }, { CuisineName: 'Chinese' }, { CuisineName: 'Indian' }, { CuisineName: 'Italian' }])
       }
-    }
+   }
 
-   useEffect( () => {
+   useEffect(() => {
       getAllCategories();
-   },[])
+   }, [])
 
    return (
       <div id={styles["navbar-container"]}>
          <div id={styles["banner"]}>SFSU Software Engineering Project CSC 648-848, Spring 2023. For Demonstration Only.</div>
          <div id={styles["navbar"]}>
             <div id={styles["home-icon"]}>
-               {userType === "SFSUCustomer" &&
-                  <Link to="/userDashboard" id={styles["icon-img"]}>
-                     <img src={LogoPic} alt="Gator Grub Logo" />
-                  </Link>
-               }
-               {userType !== "SFSUCustomer" &&
-                  <Link to="/" id={styles["icon-img"]}>
-                     <img src={LogoPic} alt="Gator Grub Logo" />
-                  </Link>
-               }
+               <Link to="/" id={styles["icon-img"]}>
+                  <img src={LogoPic} alt="Gator Grub Logo" />
+               </Link>
+
             </div>
             <div id={styles["search-bar"]}>
                <select
@@ -84,10 +79,10 @@ function Navbar(props) {
                   value={category}
                   onChange={e => setCategory(e.target.value)}
                >
-               <option value="all">All</option>
-               {categories.map((category) => (
-                  <option value={category?.CuisineName}>{category?.CuisineName}</option>
-               ))}
+                  <option value="all">All</option>
+                  {categories.map((category) => (
+                     <option value={category?.CuisineName}>{category?.CuisineName}</option>
+                  ))}
                </select>
                <div id={styles["search-separator"]}></div>
                <input
@@ -110,11 +105,40 @@ function Navbar(props) {
             <div id={styles["logout-profile-container"]}>
                {userID &&
                   <div id={styles["logout"]} onClick={() => logout()}>logout</div>
-
                }
-               <div id={styles["profile-icon"]}></div>
+               
+               {userType === "SFSUCustomer" &&
+                  <div>
+                     <Link to="/userDashboard" >
+                        <div style={{position: "absolute", 
+                        color: "red",
+                         right:"86px", 
+                         top:"60px", 
+                         width: "18px", 
+                         height: "18px", 
+                         borderRadius:"50%", 
+                         backgroundColor:"white",
+                         display:"flex",
+                         justifyContent:"center",
+                         alignItems: "center",
+                         fontWeight: "bold"
+                         }}>1</div>
+                     <img style={{marginRight: "18px"}}src={cart} alt="cart-img">
+                     </img>
+                     </Link>
+                  </div>
+               }
+               {userType === "SFSUCustomer" &&
+                  <Link to="/userDashboard" id={styles["icon-img"]}>
+                     <div id={styles["profile-icon"]}></div>
+                  </Link>
+               }
+               {userType !== "SFSUCustomer" &&
+                  <Link to="" id={styles["icon-img"]}>
+                     <div id={styles["profile-icon"]}></div>
+                  </Link>
+               }
             </div>
-            {/* </div> */}
          </div>
 
          <Nav id={styles["tabs"]}>

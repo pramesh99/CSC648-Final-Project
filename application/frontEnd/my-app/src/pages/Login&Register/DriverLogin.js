@@ -71,6 +71,14 @@ const Login = (props) => {
                 setUserID(id);
                 setUserType("Driver");
                 navigate('/');
+
+                var currentTime = new Date().getTime();
+
+                var expirationTime = currentTime + (60 * 60 * 1000);
+
+                localStorage.setItem('myData', JSON.stringify({id: id, name: name, type: "Driver"}));
+                localStorage.setItem('expirationTime', expirationTime.toString());
+
             } else {
                 throw new Error('Login failed');
             }

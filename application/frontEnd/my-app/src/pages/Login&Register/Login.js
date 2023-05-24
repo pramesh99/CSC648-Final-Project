@@ -64,14 +64,22 @@ const Login = (props) => {
                     password: values.password,
                 })
             })
-            if(response.ok) {
-                    const data = await response.json();
-                    let id = data[0].SFSUCustomerID;
-                    let name = data[0].SFSUCustomerName;
-                    setUserName(name);
-                    setUserID(id);
-                    setUserType("SFSUCustomer");
-                    navigate('/');
+            if (response.ok) {
+                const data = await response.json();
+                let id = data[0].SFSUCustomerID;
+                let name = data[0].SFSUCustomerName;
+                setUserName(name);
+                setUserID(id);
+                setUserType("SFSUCustomer");
+                navigate('/');
+
+                var currentTime = new Date().getTime();
+
+                var expirationTime = currentTime + (60 * 60 * 1000);
+
+                localStorage.setItem('myData', JSON.stringify({id: id, name: name, type: "SFSUCustomer"}));
+                localStorage.setItem('expirationTime', expirationTime.toString());
+
             } else {
                 throw new Error('Login failed');
             }
@@ -97,15 +105,11 @@ const Login = (props) => {
                 <div className={styles["Title"]}>
                     Login
                 </div>
-                {/* <div className={styles["Title2"]}>
-                with GatorGrub!
-            </div> */}
                 {inputs.map((input) => (
                     <Forminput key={input.id} {...input} value={values[input.name]} onChange={onChange}></Forminput>))}
-                <button style={{marginTop: "3%"}} onSubmit="submit" >Login</button>
+                <button style={{ marginTop: "3%" }} onSubmit="submit" >Login</button>
                 <div className={styles["Registerpath"]}>
-                    {/* <Link to="/Forgot-password" passHref>
-                        <a href="replace">Forgot the password?</a></Link> */}
+
                 </div>
                 <div className={styles["Registerpath"]}>
                     Need to register?

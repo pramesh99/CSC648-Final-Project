@@ -112,6 +112,8 @@ function App() {
   const [userType, setUserType] = useState('');
   const [RestaurantID, setRestaurantID] = useState(0);
 
+  const [cartCount, setCartCount] = useState(0);
+
   useEffect(() => {
     getAllRestaurants().then((r) => {
       setRestaurants(r);
@@ -166,6 +168,18 @@ function App() {
   }, [searchResult, searchResultCategory]);
 
   useEffect(() => {
+    let storedData = localStorage.getItem('myData');
+    if(storedData) {
+      let myData = JSON.parse(storedData);
+      setUserName(myData.name);
+      setUserID(myData.id);
+      setUserType(myData.type);
+      console.log(myData.type)
+      if(myData.restID) {
+        setRestaurantID(myData.restID);
+      }
+    }
+
     let newRestaurants = restaurants;
 
     // if (restaurantImages) {
@@ -175,7 +189,7 @@ function App() {
     // }
 
     setRestaurants(newRestaurants);
-  }, [restaurantImages, restaurants]);
+  }, [restaurantImages, restaurants, userName]);
 
   return (
     <>
@@ -199,16 +213,16 @@ function App() {
       </div>
       <Routes>
         <Route path="/" element={<Home restaurants={restaurants} />} />
-        <Route path="/login" element={<Login setUserName={setUserName} setUserID={setUserID} setUserType={setUserType}> </Login>} />
+        <Route path="/login" element={<Login setUserName={setUserName} setUserID={setUserID} setUserType={setUserType} > </Login>} />
         <Route path="/register" element={<Register> </Register>} />
         <Route path="/Driver-register" element={<DriverRegister />} />
         <Route path="/Driver-login" element={<DriverLogin setUserName={setUserName} setUserID={setUserID} setUserType={setUserType}/>} />
-        <Route path="/driverDashboard" element={<DriverDashboard userName={userName} userID={userID} userType={userType}/>} />
+        <Route path="/driverDashboard" element={<DriverDashboard userName={userName} userID={userID} userType={userType} setUserName={setUserName} setUserID={setUserID} setUserType={setUserType}/>} />
         <Route path="/Restaurant-register" element={<RestaurantRegister> </RestaurantRegister>} />
         <Route path="/Restaurant-login" element={<RestaurantLogin setUserName={setUserName} setUserID={setUserID} setUserType={setUserType} setRestaurantID={setRestaurantID}/>} />
         <Route path="/restaurantSignup" element={<RestaurantSignup />} />
-        <Route path="/restaurantDashboard" element={<RestaurantDashboard userName={userName} userID={userID} userType={userType} RestaurantID={RestaurantID}/>} />
-        <Route path="/userDashboard" element={<UserDashboard userName={userName} userID={userID} userType={userType}/>} />
+        <Route path="/restaurantDashboard" element={<RestaurantDashboard userName={userName} userID={userID} userType={userType} setUserName={setUserName} setUserID={setUserID} setUserType={setUserType} setRestaurantID={setRestaurantID} RestaurantID={RestaurantID}/>} />
+        <Route path="/userDashboard" element={<UserDashboard userName={userName} userID={userID} userType={userType} setUserName={setUserName} setUserID={setUserID} setUserType={setUserType}/>} />
 
         <Route path="/browse" element={<Browse restaurants={restaurants} setSelectedRestaurant={setSelectedRestaurant} />} />
         <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} setSelectedRestaurant={setSelectedRestaurant} />} />

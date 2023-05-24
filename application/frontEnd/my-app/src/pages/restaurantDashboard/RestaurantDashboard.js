@@ -44,6 +44,10 @@ function RestaurantDashboard(props) {
    let userName = props.userName;
    let userType = props.userType;
    let restaurantID = props.RestaurantID;
+   let setUserID = props.setUserID;
+   let setUserName = props.setUserName;
+   let setUserType = props.setUserType;
+   let setRestaurantID = props.setRestaurantID;
    let orders;
    let renderOrderItems;
 
@@ -52,10 +56,22 @@ function RestaurantDashboard(props) {
    const [activeOrders, setActiveOrders] = useState([]);
 
    useEffect(() => {
+      let storedData = localStorage.getItem('myData');
+      if(storedData) {
+        let myData = JSON.parse(storedData);
+        setUserName(myData.name);
+        setUserID(myData.id);
+        setUserType(myData.type);
+        console.log(myData.type)
+        if(myData.restID) {
+          setRestaurantID(myData.restID);
+        }
+      }
+      
       if(restaurantID) {
          getOrders(setIncomingOrders, setActiveOrders, restaurantID);
       }
-   }, [])
+   }, [restaurantID])
 
    return (
       <div>
