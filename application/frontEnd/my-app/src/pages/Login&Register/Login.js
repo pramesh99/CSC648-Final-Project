@@ -72,13 +72,13 @@ const Login = (props) => {
                 let id = data[0].SFSUCustomerID;
                 let name = data[0].SFSUCustomerName;
                 //hard coded id
-                setUserName("Bob");
-                setUserID(1);
+                setUserName(name);
+                setUserID(id);
                 setUserType("SFSUCustomer");
 
                 var currentTime = new Date().getTime()
                 var expirationTime = currentTime + (60 * 60 * 1000);
-                localStorage.setItem('myData', JSON.stringify({ id: 1, name: "Bob", type: "SFSUCustomer"}));
+                localStorage.setItem('myData', JSON.stringify({ id: id, name: name, type: "SFSUCustomer"}));
                 localStorage.setItem('expirationTime', expirationTime.toString());
 
                 navigate('/');
