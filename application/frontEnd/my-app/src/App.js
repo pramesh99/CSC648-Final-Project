@@ -107,9 +107,9 @@ function App() {
   const [searchRestaurants, setSearchRestaurants] = useState([]);
 
   // User data
-  const [userName, setUserName] = useState('');
-  const [userID, setUserID] = useState('');
-  const [userType, setUserType] = useState('');
+  const [userName, setUserName] = useState('TEST USER');
+  const [userID, setUserID] = useState('1');
+  const [userType, setUserType] = useState('SFSUCustomer');
   const [RestaurantID, setRestaurantID] = useState(0);
 
   const [cartCount, setCartCount] = useState(0);
@@ -169,13 +169,13 @@ function App() {
 
   useEffect(() => {
     let storedData = localStorage.getItem('myData');
-    if(storedData) {
+    if (storedData) {
       let myData = JSON.parse(storedData);
       setUserName(myData.name);
       setUserID(myData.id);
       setUserType(myData.type);
       console.log(myData.type)
-      if(myData.restID) {
+      if (myData.restID) {
         setRestaurantID(myData.restID);
       }
     }
@@ -200,14 +200,16 @@ function App() {
             setSearch={setSearch}
             setSearchResult={setSearchResult}
             setSearchResultCategory={setSearchResultCategory}
-            userName={userName} 
+            userName={userName}
             userID={userID}
             userType={userType}
             setUserName={setUserName}
             setUserID={setUserID}
             setUserType={setUserType}
             setRestaurantID={setRestaurantID}
-            />
+            cartCount={cartCount}
+            setCartCount={setCartCount}
+          />
 
         </header>
       </div>
@@ -216,19 +218,19 @@ function App() {
         <Route path="/login" element={<Login setUserName={setUserName} setUserID={setUserID} setUserType={setUserType} > </Login>} />
         <Route path="/register" element={<Register> </Register>} />
         <Route path="/Driver-register" element={<DriverRegister />} />
-        <Route path="/Driver-login" element={<DriverLogin setUserName={setUserName} setUserID={setUserID} setUserType={setUserType}/>} />
-        <Route path="/driverDashboard" element={<DriverDashboard userName={userName} userID={userID} userType={userType} setUserName={setUserName} setUserID={setUserID} setUserType={setUserType}/>} />
+        <Route path="/Driver-login" element={<DriverLogin setUserName={setUserName} setUserID={setUserID} setUserType={setUserType} />} />
+        <Route path="/driverDashboard" element={<DriverDashboard userName={userName} userID={userID} userType={userType} setUserName={setUserName} setUserID={setUserID} setUserType={setUserType} />} />
         <Route path="/Restaurant-register" element={<RestaurantRegister> </RestaurantRegister>} />
-        <Route path="/Restaurant-login" element={<RestaurantLogin setUserName={setUserName} setUserID={setUserID} setUserType={setUserType} setRestaurantID={setRestaurantID}/>} />
+        <Route path="/Restaurant-login" element={<RestaurantLogin setUserName={setUserName} setUserID={setUserID} setUserType={setUserType} setRestaurantID={setRestaurantID} />} />
         <Route path="/restaurantSignup" element={<RestaurantSignup />} />
-        <Route path="/restaurantDashboard" element={<RestaurantDashboard userName={userName} userID={userID} userType={userType} setUserName={setUserName} setUserID={setUserID} setUserType={setUserType} setRestaurantID={setRestaurantID} RestaurantID={RestaurantID}/>} />
-        <Route path="/userDashboard" element={<UserDashboard userName={userName} userID={userID} userType={userType} setUserName={setUserName} setUserID={setUserID} setUserType={setUserType}/>} />
+        <Route path="/restaurantDashboard" element={<RestaurantDashboard userName={userName} userID={userID} userType={userType} setUserName={setUserName} setUserID={setUserID} setUserType={setUserType} setRestaurantID={setRestaurantID} RestaurantID={RestaurantID} />} />
+        <Route path="/userDashboard" element={<UserDashboard userName={userName} userID={userID} userType={userType} setUserName={setUserName} setUserID={setUserID} setUserType={setUserType} cartCount={cartCount} setCartCount={setCartCount} />} />
 
         <Route path="/browse" element={<Browse restaurants={restaurants} setSelectedRestaurant={setSelectedRestaurant} />} />
         <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} setSelectedRestaurant={setSelectedRestaurant} />} />
         <Route path="/restaurant" element={<Restaurant restaurant={selectedRestaurant} userName={userName}/>} />
         {restaurants.map((restaurant) => (
-          <Route key={"app.js" + restaurant?.RestaurantName} path={`${restaurant?.RestaurantName}`} element={<Restaurant restaurant={selectedRestaurant} userName={userName} userID={userID}/>} />
+          <Route key={"app.js" + restaurant?.RestaurantName} path={`${restaurant?.RestaurantName}`} element={<Restaurant restaurant={selectedRestaurant} userName={userName} userID={userID}  cartCount={cartCount} setCartCount={setCartCount}/>} />
         ))}
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/aboutUs/Shauhin" element={<Shauhin />} />

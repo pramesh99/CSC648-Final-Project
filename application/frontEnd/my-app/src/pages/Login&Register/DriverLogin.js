@@ -32,7 +32,7 @@ const Login = (props) => {
             name: "email",
             type: "email",
             placeholder: "Email",
-            errorMessage: "It should be a vaild SFSU email, such as example@gmail.com",
+            errorMessage: "It should be a vaild email, such as example@gmail.com",
             label: "Email",
             pattern: "[a-z0-9._%+-]+@gmail.com$",
             required: true,

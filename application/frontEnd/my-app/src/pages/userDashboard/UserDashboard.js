@@ -31,6 +31,7 @@ async function getOrders(setCurrentOrders, setFinishedOrders, customerID) {
                finishedOrders.push(resData[i]);
             }
          }
+
          setCurrentOrders(currentOrders);
          setFinishedOrders(finishedOrders);
       }
@@ -47,6 +48,9 @@ function UserDashboard(props) {
    let setUserID = props.setUserID;
    let setUserName = props.setUserName;
    let setUserType = props.setUserType;
+
+   let cartCount = props.cartCount;
+   let setCartCount = props.setCartCount;
 
    const [currentOrders, setCurrentOrders] = useState([]);
 

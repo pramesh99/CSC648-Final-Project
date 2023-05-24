@@ -30,6 +30,9 @@ function Navbar(props) {
    const setUserType = props.setUserType;
    const setRestaurantID = props.setRestaurantID;
 
+   let cartCount = props.cartCount;
+   let setCartCount = props.setCartCount;
+
    const logout = () => {
       setUserName('');
       setUserID('');
@@ -106,27 +109,27 @@ function Navbar(props) {
                {userID &&
                   <div id={styles["logout"]} onClick={() => logout()}>logout</div>
                }
-               
+
                {userType === "SFSUCustomer" &&
-                  <div>
-                     <Link to="/userDashboard" >
-                        <div style={{position: "absolute", 
-                        color: "red",
-                         right:"86px", 
-                         top:"60px", 
-                         width: "18px", 
-                         height: "18px", 
-                         borderRadius:"50%", 
-                         backgroundColor:"white",
-                         display:"flex",
-                         justifyContent:"center",
-                         alignItems: "center",
-                         fontWeight: "bold"
-                         }}>1</div>
-                     <img style={{marginRight: "18px"}}src={cart} alt="cart-img">
-                     </img>
-                     </Link>
-                  </div>
+                  <Link to="/userDashboard" style={{textDecoration:"none"}}>
+                     <div style={{ display: "flex", alignItems:"flex-end" }}>
+                        <img  src={cart} alt="cart-img">
+                        </img>
+                        <div style={{
+                           color: "red",
+                           width: "18px",
+                           height: "18px",
+                           borderRadius: "50%",
+                           backgroundColor: "white",
+                           display: "flex",
+                           justifyContent: "center",
+                           alignItems: "center",
+                           fontWeight: "bold",
+                           marginRight: "18px"
+                        }}>{cartCount}</div>
+
+                     </div>
+                  </Link>
                }
                {userType === "SFSUCustomer" &&
                   <Link to="/userDashboard" id={styles["icon-img"]}>
