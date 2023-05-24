@@ -23,6 +23,7 @@ async function getOrders(setIncomingOrders, setActiveOrders, setDeliveredOrders,
       let incomingOrders = [];
       let activeOrders = [];
       let deliveredOrders = [];
+      console.log("driver dash", resData)
       if (resData.length > 0) {
          for (let i = 0; i < resData.length; i++) {
             if (resData[i].OrderStatus === 3) {

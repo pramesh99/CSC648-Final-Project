@@ -81,7 +81,7 @@ function UserDashboard(props) {
                      style={{ width: '30vw', height: '60vh' }}
                      className="mb-2"
                   >
-                     <Card.Header>Active Orders</Card.Header>
+                     <Card.Header>Orders in progress</Card.Header>
                      <Card.Body className={styles["card-body"]}>
                         <Card.Text className={styles["restaurant-menu-items"]}>
                            {currentOrders.map((order) => (
@@ -114,7 +114,7 @@ function UserDashboard(props) {
                      style={{ width: '30vw', height: '60vh' }}
                      className="mb-2"
                   >
-                     <Card.Header>Finished Orders</Card.Header>
+                     <Card.Header>Completed Orders</Card.Header>
                      <Card.Body className={styles["card-body"]}>
                         <Card.Text className={styles["restaurant-menu-items"]}>
                            {finishedOrders.map((order) => (
