@@ -109,7 +109,6 @@ const Register = () => {
             })
             if (response.ok) {
                 const data = await response.json();
-                console.log(data)
                 setModalText("Registration Successful");
                 setModalShow(true);
             } else {
@@ -130,9 +129,7 @@ const Register = () => {
     const onChange = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
-
-    console.log(values)
-
+    
     return (
         <div className={styles["Register"]}>
             <form onSubmit={handleSubmit}>

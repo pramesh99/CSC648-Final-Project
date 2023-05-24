@@ -2,7 +2,7 @@
 Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
 */
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Forminput from "./Forminput"
 import styles from "./Login.module.css";
 import "./Register"
@@ -15,6 +15,9 @@ const Login = (props) => {
     let setUserName = props.setUserName;
     let setUserID = props.setUserID;
     let setUserType = props.setUserType;
+    let cartCount = props.cartCount;
+    let setCartCount = props.setCartCount;
+    let userID = props.userID;
 
     const navigate = useNavigate();
 
@@ -68,18 +71,17 @@ const Login = (props) => {
                 const data = await response.json();
                 let id = data[0].SFSUCustomerID;
                 let name = data[0].SFSUCustomerName;
-                setUserName(name);
-                setUserID(id);
+                //hard coded id
+                setUserName("Bob");
+                setUserID(1);
                 setUserType("SFSUCustomer");
-                navigate('/');
 
-                var currentTime = new Date().getTime();
-
+                var currentTime = new Date().getTime()
                 var expirationTime = currentTime + (60 * 60 * 1000);
-
-                localStorage.setItem('myData', JSON.stringify({id: id, name: name, type: "SFSUCustomer"}));
+                localStorage.setItem('myData', JSON.stringify({ id: 1, name: "Bob", type: "SFSUCustomer"}));
                 localStorage.setItem('expirationTime', expirationTime.toString());
 
+                navigate('/');
             } else {
                 throw new Error('Login failed');
             }
@@ -91,13 +93,15 @@ const Login = (props) => {
 
 
     const handleSubmit = (e) => {
-        login();
+        login()
         e.preventDefault();
     }
 
     const onChange = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
+
+
 
     return (
         <div className={styles["Login"]}>

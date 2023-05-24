@@ -38,8 +38,9 @@ function Navbar(props) {
       setUserID('');
       setUserType('');
       setRestaurantID(0);
-      navigate("/");
+      setCartCount(0);
       localStorage.clear();
+      navigate("/");
    }
 
    const handleChange = (event) => {
@@ -93,7 +94,7 @@ function Navbar(props) {
                   placeholder="search..."
                   id={styles["search-input"]}
                   name="search"
-                  maxLength="80"
+                  maxLength="40"
                   size="80"
                   onChange={handleChange}
                   value={search}

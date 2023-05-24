@@ -22,7 +22,7 @@ function Order(props) {
    let getOrders = props?.getOrders;
    let setCurrentOrders = props.setCurrentOrders;
    let setFinishedOrders = props.setFinishedOrders;
-
+   let setCartCount = props?.setCartCount;
 
 
    async function deleteOrder(id) {
@@ -46,7 +46,7 @@ function Order(props) {
       })
          .then(response => response.json())
          .then(data => {
-            getOrders(setCurrentOrders, setFinishedOrders, userID);
+            getOrders(setCurrentOrders, setFinishedOrders, userID, setCartCount);
          })
          .catch(error => {
             console.error(error);
@@ -163,7 +163,7 @@ function Order(props) {
       updateOrderStatusToDelivered();
    }
 
-   let test = () => {
+   let deleteUsersOrder = () => {
       deleteUserOrder(id)
    }
 
@@ -206,7 +206,7 @@ function Order(props) {
                <Button onClick={() => driverDashbaordDeleteOrder()} variant="outline-secondary" className={styles["menu-buttons"]}>Cancel</Button>
             }
             {status === "userActive" &&
-               <Button onClick={() => test()} variant="outline-secondary" id={styles["menu-button-deliver"]} className={styles["menu-buttons"]}>Cancel</Button>
+               <Button onClick={() => deleteUsersOrder()} variant="outline-secondary" id={styles["menu-button-deliver"]} className={styles["menu-buttons"]}>Cancel</Button>
             }
          </div>
       </div>

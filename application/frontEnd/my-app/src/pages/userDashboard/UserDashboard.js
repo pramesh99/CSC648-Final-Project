@@ -4,18 +4,15 @@ Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan
 
 import React, { useState, useEffect } from 'react';
 import styles from "./UserDashboard.module.css";
-// import MenuItem from '../../components/menuItem/MenuItem';
-// import SelectedItem from '../../components/selectedItem/SelectedItem';
 import Card from 'react-bootstrap/Card';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Button from 'react-bootstrap/Button';
 import Order from '../../components/order/Order';
-// import Pickup from '../../components/pickup/Pickup';
-// import Delivery from '../../components/delivery/Delivery';
 import { Link } from "react-router-dom";
 
-async function getOrders(setCurrentOrders, setFinishedOrders, customerID) {
+
+async function getOrders(setCurrentOrders, setFinishedOrders, customerID, setCartCount) {
    let resData = [];
 
    await fetch(`http://34.82.124.237:3001/api/order/getOrder/${customerID}`).then((r) => r.json()).then((data) => {
@@ -31,7 +28,7 @@ async function getOrders(setCurrentOrders, setFinishedOrders, customerID) {
                finishedOrders.push(resData[i]);
             }
          }
-
+         setCartCount(currentOrders.length);
          setCurrentOrders(currentOrders);
          setFinishedOrders(finishedOrders);
       }
@@ -67,7 +64,7 @@ function UserDashboard(props) {
       }
   
       if(userID) {
-         getOrders(setCurrentOrders, setFinishedOrders, userID);
+         getOrders(setCurrentOrders, setFinishedOrders, userID, setCartCount);
       }
    }, [userID])
 
@@ -102,6 +99,7 @@ function UserDashboard(props) {
                                  getOrders={getOrders}
                                  status={"userActive"}
                                  userID={userID}
+                                 setCartCount={setCartCount}
                               />
                            ))}
                         </Card.Text>

@@ -17,32 +17,25 @@ import { useParams } from 'react-router-dom';
 
 async function updateCartCount(customerID, setCartCount) {
    let resData = [];
-   const response = await fetch(`http://34.82.124.237:3001/api/order/getOrder/${customerID}`).then((r) => r.json()).then((data) => {
+   await fetch(`http://34.82.124.237:3001/api/order/getOrder/${customerID}`).then((r) => r.json()).then((data) => {
       resData = data;
       let currentOrders = [];
-      if (response.ok) {
-         if (resData.length > 0) {
-            for (let i = 0; i < resData.length; i++) {
-               if (resData[i].OrderStatus === 1) {
-                  currentOrders.push(resData[i]);
-               }
+      if (resData.length > 0) {
+         for (let i = 0; i < resData.length; i++) {
+            if (resData[i].OrderStatus === 1) {
+               currentOrders.push(resData[i]);
             }
-            setCartCount(currentOrders.length);
          }
+         setCartCount(currentOrders.length);
       }
    }
    )
-   setCartCount(0);
 }
-
 
 async function submitOrder(orderPrice, location, restaurantID, userName, setModalShow, selectedItems, userID, setModalText, setCartCount) {
    try {
-      console.log(Object.values(selectedItems).length)
-
-      if (userID && location && selectedItems.length > 0) {
+      if (userID && location && Object.values(selectedItems).length > 0) {
          let resData = [];
-         console.log("submitted order")
          const response = await fetch(`http://34.82.124.237:3001/api/submit/customerOrder`, {
             method: 'POST',
             headers: {
@@ -64,7 +57,7 @@ async function submitOrder(orderPrice, location, restaurantID, userName, setModa
          })
          if (response.ok) {
             setModalText("Order Submitted");
-            // updateCartCount(userID, setCartCount);
+            updateCartCount(userID, setCartCount);
             setModalShow(true);
          } else {
             throw new Error('Order Failed');
@@ -76,8 +69,7 @@ async function submitOrder(orderPrice, location, restaurantID, userName, setModa
       } else if (!location) {
          setModalText("Please set a location");
          setModalShow(true);
-      } else if ( selectedItems.length) {
-         console.log(selectedItems)
+      } else if (!Object.values(selectedItems).length) {
          setModalText("Please add your order");
          setModalShow(true);
       }
