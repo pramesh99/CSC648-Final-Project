@@ -75,6 +75,13 @@ const Login = (props) => {
                 setUserType("RestaurantOwner");
                 setRestaurantID(restID);
                 navigate('/');
+
+                var currentTime = new Date().getTime();
+
+                var expirationTime = currentTime + (60 * 60 * 1000);
+
+                localStorage.setItem('myData', JSON.stringify({id: id, name: name, restID: restID, type: "RestaurantOwner"}));
+                localStorage.setItem('expirationTime', expirationTime.toString());
             } else {
                 throw new Error('Login failed');
             }

@@ -4,18 +4,15 @@ Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan
 
 import React, { useState, useEffect } from 'react';
 import styles from "./UserDashboard.module.css";
-// import MenuItem from '../../components/menuItem/MenuItem';
-// import SelectedItem from '../../components/selectedItem/SelectedItem';
 import Card from 'react-bootstrap/Card';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Button from 'react-bootstrap/Button';
 import Order from '../../components/order/Order';
-// import Pickup from '../../components/pickup/Pickup';
-// import Delivery from '../../components/delivery/Delivery';
 import { Link } from "react-router-dom";
 
-async function getOrders(setCurrentOrders, setFinishedOrders, customerID) {
+
+async function getOrders(setCurrentOrders, setFinishedOrders, customerID, setCartCount) {
    let resData = [];
 
    await fetch(`http://34.82.124.237:3001/api/order/getOrder/${customerID}`).then((r) => r.json()).then((data) => {
@@ -31,6 +28,7 @@ async function getOrders(setCurrentOrders, setFinishedOrders, customerID) {
                finishedOrders.push(resData[i]);
             }
          }
+         setCartCount(currentOrders.length);
          setCurrentOrders(currentOrders);
          setFinishedOrders(finishedOrders);
       }
@@ -44,16 +42,31 @@ function UserDashboard(props) {
    let userName = props.userName;
    let restaurantID = props.RestaurantID;
 
+   let setUserID = props.setUserID;
+   let setUserName = props.setUserName;
+   let setUserType = props.setUserType;
+
+   let cartCount = props.cartCount;
+   let setCartCount = props.setCartCount;
+
    const [currentOrders, setCurrentOrders] = useState([]);
 
    const [finishedOrders, setFinishedOrders] = useState([]);
 
    useEffect(() => {
+      let storedData = localStorage.getItem('myData');
 
-      if(userID) {
-         getOrders(setCurrentOrders, setFinishedOrders, userID);
+      if(storedData) {
+        let myData = JSON.parse(storedData);
+        setUserName(myData.name);
+        setUserID(myData.id);
+        setUserType(myData.type);
       }
-   }, [])
+  
+      if(userID) {
+         getOrders(setCurrentOrders, setFinishedOrders, userID, setCartCount);
+      }
+   }, [userID])
 
    return (
       <div>
@@ -68,7 +81,7 @@ function UserDashboard(props) {
                      style={{ width: '30vw', height: '60vh' }}
                      className="mb-2"
                   >
-                     <Card.Header>Active Orders</Card.Header>
+                     <Card.Header>Orders in progress</Card.Header>
                      <Card.Body className={styles["card-body"]}>
                         <Card.Text className={styles["restaurant-menu-items"]}>
                            {currentOrders.map((order) => (
@@ -84,7 +97,9 @@ function UserDashboard(props) {
                                  address={order.DeliveryAddress}
                                  customerID={order.CustomerID}
                                  getOrders={getOrders}
-                                 
+                                 status={"userActive"}
+                                 userID={userID}
+                                 setCartCount={setCartCount}
                               />
                            ))}
                         </Card.Text>
@@ -99,7 +114,7 @@ function UserDashboard(props) {
                      style={{ width: '30vw', height: '60vh' }}
                      className="mb-2"
                   >
-                     <Card.Header>Finished Orders</Card.Header>
+                     <Card.Header>Completed Orders</Card.Header>
                      <Card.Body className={styles["card-body"]}>
                         <Card.Text className={styles["restaurant-menu-items"]}>
                            {finishedOrders.map((order) => (

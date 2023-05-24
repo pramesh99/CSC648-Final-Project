@@ -90,6 +90,22 @@ async function getSearchRestaurantsByOnlyCategory(category) {
 }
 */
 
+async function updateCartCount(customerID, setCartCount) {
+  let resData = [];
+  await fetch(`http://34.82.124.237:3001/api/order/getOrder/${customerID}`).then((r) => r.json()).then((data) => {
+     resData = data;
+     let currentOrders = [];
+     if (resData.length > 0) {
+        for (let i = 0; i < resData.length; i++) {
+           if (resData[i].OrderStatus === 1) {
+              currentOrders.push(resData[i]);
+           }
+        }
+        setCartCount(currentOrders.length);
+     }
+  }
+  )
+}
 
 function App() {
 
@@ -112,6 +128,8 @@ function App() {
   const [userType, setUserType] = useState('');
   const [RestaurantID, setRestaurantID] = useState(0);
 
+  const [cartCount, setCartCount] = useState(0);
+
   useEffect(() => {
     getAllRestaurants().then((r) => {
       setRestaurants(r);
@@ -124,7 +142,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-  }, [userName]);
+    
+  }, [cartCount]);
 
   // Search Use Effect
   useEffect(() => {
@@ -166,16 +185,32 @@ function App() {
   }, [searchResult, searchResultCategory]);
 
   useEffect(() => {
+    if(userType === "SFSUCustomer") {
+      updateCartCount(userID, setCartCount)
+    }
+}, [userID])
+
+  useEffect(() => {
+    let storedData = localStorage.getItem('myData');
+    if (storedData) {
+      let myData = JSON.parse(storedData);
+      setUserName(myData.name);
+      setUserID(myData.id);
+      setUserType(myData.type);
+      if (myData.restID) {
+        setRestaurantID(myData.restID);
+      }
+    }
+
     let newRestaurants = restaurants;
 
-    // if (restaurantImages) {
     for (let i = 0; i < restaurants.length; i++) {
       newRestaurants[i]["ImgUrl"] = restaurantImages[i]?.urls?.regular ?? 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80';
     }
-    // }
+    
 
     setRestaurants(newRestaurants);
-  }, [restaurantImages, restaurants]);
+  }, [restaurantImages, restaurants, userName]);
 
   return (
     <>
@@ -186,35 +221,37 @@ function App() {
             setSearch={setSearch}
             setSearchResult={setSearchResult}
             setSearchResultCategory={setSearchResultCategory}
-            userName={userName} 
+            userName={userName}
             userID={userID}
             userType={userType}
             setUserName={setUserName}
             setUserID={setUserID}
             setUserType={setUserType}
             setRestaurantID={setRestaurantID}
-            />
+            cartCount={cartCount}
+            setCartCount={setCartCount}
+          />
 
         </header>
       </div>
       <Routes>
         <Route path="/" element={<Home restaurants={restaurants} />} />
-        <Route path="/login" element={<Login setUserName={setUserName} setUserID={setUserID} setUserType={setUserType}> </Login>} />
+        <Route path="/login" element={<Login setUserName={setUserName} userID={userID} setUserID={setUserID} setUserType={setUserType} cartCount={cartCount} setCartCount={setCartCount}> </Login>} />
         <Route path="/register" element={<Register> </Register>} />
         <Route path="/Driver-register" element={<DriverRegister />} />
-        <Route path="/Driver-login" element={<DriverLogin setUserName={setUserName} setUserID={setUserID} setUserType={setUserType}/>} />
-        <Route path="/driverDashboard" element={<DriverDashboard userName={userName} userID={userID} userType={userType}/>} />
+        <Route path="/Driver-login" element={<DriverLogin setUserName={setUserName} setUserID={setUserID} setUserType={setUserType} />} />
+        <Route path="/driverDashboard" element={<DriverDashboard userName={userName} userID={userID} userType={userType} setUserName={setUserName} setUserID={setUserID} setUserType={setUserType} />} />
         <Route path="/Restaurant-register" element={<RestaurantRegister> </RestaurantRegister>} />
-        <Route path="/Restaurant-login" element={<RestaurantLogin setUserName={setUserName} setUserID={setUserID} setUserType={setUserType} setRestaurantID={setRestaurantID}/>} />
+        <Route path="/Restaurant-login" element={<RestaurantLogin setUserName={setUserName} setUserID={setUserID} setUserType={setUserType} setRestaurantID={setRestaurantID} />} />
         <Route path="/restaurantSignup" element={<RestaurantSignup />} />
-        <Route path="/restaurantDashboard" element={<RestaurantDashboard userName={userName} userID={userID} userType={userType} RestaurantID={RestaurantID}/>} />
-        <Route path="/userDashboard" element={<UserDashboard userName={userName} userID={userID} userType={userType}/>} />
+        <Route path="/restaurantDashboard" element={<RestaurantDashboard userName={userName} userID={userID} userType={userType} setUserName={setUserName} setUserID={setUserID} setUserType={setUserType} setRestaurantID={setRestaurantID} RestaurantID={RestaurantID} />} />
+        <Route path="/userDashboard" element={<UserDashboard userName={userName} userID={userID} userType={userType} setUserName={setUserName} setUserID={setUserID} setUserType={setUserType} cartCount={cartCount} setCartCount={setCartCount} />} />
 
         <Route path="/browse" element={<Browse restaurants={restaurants} setSelectedRestaurant={setSelectedRestaurant} />} />
         <Route path="/result" element={<Result restaurants={searchRestaurants} search={searchResult} setSelectedRestaurant={setSelectedRestaurant} />} />
         <Route path="/restaurant" element={<Restaurant restaurant={selectedRestaurant} userName={userName}/>} />
         {restaurants.map((restaurant) => (
-          <Route key={"app.js" + restaurant?.RestaurantName} path={`${restaurant?.RestaurantName}`} element={<Restaurant restaurant={selectedRestaurant} userName={userName} userID={userID}/>} />
+          <Route key={"app.js" + restaurant?.RestaurantName} path={`${restaurant?.RestaurantName}`} element={<Restaurant restaurant={selectedRestaurant} userName={userName} userID={userID}  cartCount={cartCount} setCartCount={setCartCount}/>} />
         ))}
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/aboutUs/Shauhin" element={<Shauhin />} />

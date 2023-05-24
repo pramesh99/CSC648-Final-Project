@@ -2,7 +2,7 @@
 Authors: Hieu Ma, Lin Tun, Shauhin Pourshayegan 
 */
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Forminput from "./Forminput"
 import styles from "./Login.module.css";
 import "./Register"
@@ -15,6 +15,9 @@ const Login = (props) => {
     let setUserName = props.setUserName;
     let setUserID = props.setUserID;
     let setUserType = props.setUserType;
+    let cartCount = props.cartCount;
+    let setCartCount = props.setCartCount;
+    let userID = props.userID;
 
     const navigate = useNavigate();
 
@@ -64,14 +67,21 @@ const Login = (props) => {
                     password: values.password,
                 })
             })
-            if(response.ok) {
-                    const data = await response.json();
-                    let id = data[0].SFSUCustomerID;
-                    let name = data[0].SFSUCustomerName;
-                    setUserName(name);
-                    setUserID(id);
-                    setUserType("SFSUCustomer");
-                    navigate('/');
+            if (response.ok) {
+                const data = await response.json();
+                let id = data[0].SFSUCustomerID;
+                let name = data[0].SFSUCustomerName;
+                //hard coded id
+                setUserName("Bob");
+                setUserID(1);
+                setUserType("SFSUCustomer");
+
+                var currentTime = new Date().getTime()
+                var expirationTime = currentTime + (60 * 60 * 1000);
+                localStorage.setItem('myData', JSON.stringify({ id: 1, name: "Bob", type: "SFSUCustomer"}));
+                localStorage.setItem('expirationTime', expirationTime.toString());
+
+                navigate('/');
             } else {
                 throw new Error('Login failed');
             }
@@ -83,7 +93,7 @@ const Login = (props) => {
 
 
     const handleSubmit = (e) => {
-        login();
+        login()
         e.preventDefault();
     }
 
@@ -91,21 +101,19 @@ const Login = (props) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
 
+
+
     return (
         <div className={styles["Login"]}>
             <form onSubmit={handleSubmit}>
                 <div className={styles["Title"]}>
                     Login
                 </div>
-                {/* <div className={styles["Title2"]}>
-                with GatorGrub!
-            </div> */}
                 {inputs.map((input) => (
                     <Forminput key={input.id} {...input} value={values[input.name]} onChange={onChange}></Forminput>))}
-                <button style={{marginTop: "3%"}} onSubmit="submit" >Login</button>
+                <button style={{ marginTop: "3%" }} onSubmit="submit" >Login</button>
                 <div className={styles["Registerpath"]}>
-                    {/* <Link to="/Forgot-password" passHref>
-                        <a href="replace">Forgot the password?</a></Link> */}
+
                 </div>
                 <div className={styles["Registerpath"]}>
                     Need to register?

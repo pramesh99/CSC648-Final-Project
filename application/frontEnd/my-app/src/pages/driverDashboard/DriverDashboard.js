@@ -23,6 +23,7 @@ async function getOrders(setIncomingOrders, setActiveOrders, setDeliveredOrders,
       let incomingOrders = [];
       let activeOrders = [];
       let deliveredOrders = [];
+      console.log("driver dash", resData)
       if (resData.length > 0) {
          for (let i = 0; i < resData.length; i++) {
             if (resData[i].OrderStatus === 3) {
@@ -49,6 +50,10 @@ function DriverDashboard(props) {
    let userName = props.userName;
    let userType = props.userType;
 
+   let setUserID = props.setUserID;
+   let setUserName = props.setUserName;
+   let setUserType = props.setUserType;
+
    const [incomingOrders, setIncomingOrders] = useState([
       { OrderID: "item_1", OrderPrice: 5, key: "1", status: "incoming" },
       { OrderID: "item_2", OrderPrice: 10, key: "2", status: "incoming" },
@@ -60,10 +65,17 @@ function DriverDashboard(props) {
    const [deliveredOrders, setDeliveredOrders] = useState([]);
 
    useEffect(() => {
+    let storedData = localStorage.getItem('myData');
+    if(storedData) {
+      let myData = JSON.parse(storedData);
+      setUserName(myData.name);
+      setUserID(myData.id);
+      setUserType(myData.type);
+    }
       if(userID) {
          getOrders(setIncomingOrders, setActiveOrders, setDeliveredOrders, userID);
       }
-   }, [])
+   }, [userID])
 
 
    return (

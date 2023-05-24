@@ -13,12 +13,17 @@ function Order(props) {
    let driverID = props.driverID;
    let address = props.address;
    let customerID = props.customerID;
+   let userID = props?.userID
    let price = props.price;
    let setActiveOrders = props.setActiveOrders;
    let setIncomingOrders = props.setIncomingOrders;
    let setDeliveredOrders = props.setDeliveredOrders;
    let status = props.status;
    let getOrders = props?.getOrders;
+   let setCurrentOrders = props.setCurrentOrders;
+   let setFinishedOrders = props.setFinishedOrders;
+   let setCartCount = props?.setCartCount;
+
 
    async function deleteOrder(id) {
       const url = `http://34.82.124.237:3001/api/order/deleteOrder/${id}`;
@@ -28,6 +33,20 @@ function Order(props) {
          .then(response => response.json())
          .then(data => {
             getOrders(setIncomingOrders, setActiveOrders, restaurantID);
+         })
+         .catch(error => {
+            console.error(error);
+         });
+   }
+
+   async function deleteUserOrder(id) {
+      const url = `http://34.82.124.237:3001/api/order/deleteOrder/${id}`;
+      fetch(url, {
+         method: 'POST',
+      })
+         .then(response => response.json())
+         .then(data => {
+            getOrders(setCurrentOrders, setFinishedOrders, userID, setCartCount);
          })
          .catch(error => {
             console.error(error);
@@ -144,7 +163,12 @@ function Order(props) {
       updateOrderStatusToDelivered();
    }
 
+   let deleteUsersOrder = () => {
+      deleteUserOrder(id)
+   }
+
    useEffect(() => {
+
    }, [])
 
    return (
@@ -180,6 +204,9 @@ function Order(props) {
             }
             {status === "delivery" &&
                <Button onClick={() => driverDashbaordDeleteOrder()} variant="outline-secondary" className={styles["menu-buttons"]}>Cancel</Button>
+            }
+            {status === "userActive" &&
+               <Button onClick={() => deleteUsersOrder()} variant="outline-secondary" id={styles["menu-button-deliver"]} className={styles["menu-buttons"]}>Cancel</Button>
             }
          </div>
       </div>

@@ -13,10 +13,28 @@ import Button from 'react-bootstrap/Button';
 import Pickup from '../../components/pickup/Pickup';
 import Delivery from '../../components/delivery/Delivery';
 import LoginRegisterModal from '../../components/loginRegisterModal/LoginRegisterModal';
+import { useParams } from 'react-router-dom';
 
-async function submitOrder(orderPrice, location, restaurantID, userName, setModalShow, selectedItems, userID, setModalText) {
+async function updateCartCount(customerID, setCartCount) {
+   let resData = [];
+   await fetch(`http://34.82.124.237:3001/api/order/getOrder/${customerID}`).then((r) => r.json()).then((data) => {
+      resData = data;
+      let currentOrders = [];
+      if (resData.length > 0) {
+         for (let i = 0; i < resData.length; i++) {
+            if (resData[i].OrderStatus === 1) {
+               currentOrders.push(resData[i]);
+            }
+         }
+         setCartCount(currentOrders.length);
+      }
+   }
+   )
+}
+
+async function submitOrder(orderPrice, location, restaurantID, userName, setModalShow, selectedItems, userID, setModalText, setCartCount) {
    try {
-      if (userName && location && selectedItems.length > 0) {
+      if (userID && location && Object.values(selectedItems).length > 0) {
          let resData = [];
          const response = await fetch(`http://34.82.124.237:3001/api/submit/customerOrder`, {
             method: 'POST',
@@ -37,20 +55,21 @@ async function submitOrder(orderPrice, location, restaurantID, userName, setModa
                OrderStatus: 1,
             })
          })
-         if(response.ok) { 
+         if (response.ok) {
             setModalText("Order Submitted");
+            updateCartCount(userID, setCartCount);
             setModalShow(true);
          } else {
             throw new Error('Order Failed');
          }
          return resData;
-      } else if(!userName){
+      } else if (!userID) {
          setModalText("Please Login To Order");
          setModalShow(true);
-      } else if(!location) {
+      } else if (!location) {
          setModalText("Please set a location");
          setModalShow(true);
-      } else if(!selectedItems.length) {
+      } else if (!Object.values(selectedItems).length) {
          setModalText("Please add your order");
          setModalShow(true);
       }
@@ -74,8 +93,12 @@ async function getSearchRestaurants(id, setMenu) {
 }
 
 function Restaurant(props) {
+
    let userName = props?.userName;
    let userID = props?.userID;
+
+   let cartCount = props?.cartCount;
+   let setCartCount = props?.setCartCount;
 
    const [modalShow, setModalShow] = React.useState(false);
    const [modalText, setModalText] = React.useState('Please login to order');
@@ -102,6 +125,9 @@ function Restaurant(props) {
       let restaurant = props.restaurant;
       if (restaurant.RestaurantName) {
          getSearchRestaurants(restaurant.RestaurantName, setMenu)
+      } else {
+         let searchRestaurant = window.location.pathname;
+         getSearchRestaurants(searchRestaurant.slice(1), setMenu)
       }
    }, [])
 
@@ -218,7 +244,7 @@ function Restaurant(props) {
                      </Card.Text>
                   </Card.Body>
                </Card>
-               <Button variant="secondary" size="sm" onClick={() => submitOrder(total, location, restaurant.RestaurantID, userName, setModalShow, selectedItems, userID, setModalText)}>Order</Button>
+               <Button variant="secondary" size="sm" onClick={() => submitOrder(total, location, restaurant.RestaurantID, userName, setModalShow, selectedItems, userID, setModalText, setCartCount)}>Order</Button>
             </div>
          </div>
          <LoginRegisterModal
