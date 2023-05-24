@@ -1,3 +1,9 @@
+# Starting the front end
+
+cd into frontEnd/my-app
+run 'npm install'
+run 'npm start'
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

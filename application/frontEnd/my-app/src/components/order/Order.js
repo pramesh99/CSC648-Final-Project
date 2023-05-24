@@ -27,7 +27,6 @@ function Order(props) {
       })
          .then(response => response.json())
          .then(data => {
-            console.log(data);
             getOrders(setIncomingOrders, setActiveOrders, restaurantID);
          })
          .catch(error => {
@@ -42,7 +41,6 @@ function Order(props) {
       })
          .then(response => response.json())
          .then(data => {
-            console.log(data);
             getOrders(setIncomingOrders, setActiveOrders, restaurantID);
          })
          .catch(error => {
@@ -57,7 +55,6 @@ function Order(props) {
       })
          .then(response => response.json())
          .then(data => {
-            console.log(data);
             getOrders(setIncomingOrders, setActiveOrders, restaurantID);
          })
          .catch(error => {
@@ -72,7 +69,6 @@ function Order(props) {
       })
          .then(response => response.json())
          .then(data => {
-            console.log(data);
             getOrders(setIncomingOrders, setActiveOrders, setDeliveredOrders, driverID);
          })
          .catch(error => {
@@ -87,7 +83,6 @@ function Order(props) {
       })
          .then(response => response.json())
          .then(data => {
-            console.log(data);
             getOrders(setIncomingOrders, setActiveOrders, setDeliveredOrders, driverID);
          })
          .catch(error => {
@@ -102,7 +97,6 @@ function Order(props) {
       })
          .then(response => response.json())
          .then(data => {
-            console.log(data);
             getOrders(setIncomingOrders, setActiveOrders, setDeliveredOrders, driverID);
          })
          .catch(error => {
@@ -117,7 +111,6 @@ function Order(props) {
       })
          .then(response => response.json())
          .then(data => {
-            console.log(data);
             getOrders(setIncomingOrders, setActiveOrders, setDeliveredOrders, driverID);
          })
          .catch(error => {

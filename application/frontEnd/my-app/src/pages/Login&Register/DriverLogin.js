@@ -75,7 +75,6 @@ const Login = (props) => {
                 throw new Error('Login failed');
             }
         } catch (error) {
-            console.log(error)
             setModalText("Login Unsuccessful");
             setModalShow(true);
         }
@@ -90,8 +89,6 @@ const Login = (props) => {
     const onChange = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
-
-    // console.log(values)
 
     return (
         <div className={styles["Login"]}>

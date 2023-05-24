@@ -42,14 +42,6 @@ function getRestaurantImgs(numOfRestaurants) {
 }
 
 async function getAllRestaurants() {
-  // let req1 = "/restaurants/:cuisine";
-  // let req2 = "/allCuisines";
-  // let req3 = "/allRestaurants";
-  // let req4 = "/restOwners";
-  // const cuisines = await fetch("http://34.82.124.237:3001/api/allCuisines").then((r) => r.json()).then((data) =>
-  //   console.log(data)
-  // )
-
   let resData = [];
   await fetch("http://34.82.124.237:3001/api/allRestaurants").then((r) => r.json()).then((data) =>
     resData = data
@@ -64,7 +56,6 @@ async function getSearchRestaurants(search) {
   }
   await fetch(`http://34.82.124.237:3001/api/searchNoCuisine${search}`).then((r) => r.json()).then((data) => {
     resData = data;
-    console.log("SEARCH HAS BEEN REQUESTED:", resData);
   }
   )
   return resData;
@@ -133,31 +124,23 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log(userName)
-    console.log(userID)
-    console.log(userType)
   }, [userName]);
 
   // Search Use Effect
   useEffect(() => {
-    // console.log("useEffect searchResultCategory", searchResultCategory)
-    // console.log("useEffect searchResult", searchResult)
     if (searchResultCategory !== 'all') {
       let newRestaurants = [];
       getSearchRestaurantsWithCategory(searchResultCategory, searchResult).then((r) => {
-        console.log("with category", searchResultCategory, searchResult);
         for (let i = 0; i < r.length; i++) {
           newRestaurants.push(r[i]);
         }
         for (let i = 0; i < r.length; i++) {
           newRestaurants[i]["ImgUrl"] = restaurantImages[i]?.urls?.regular;
         }
-        // console.log("search restaurants use effect", r)
         setSearchRestaurants(newRestaurants);
       });
     } else if (searchResultCategory === 'all' && searchResult === '') {
       getAllRestaurants().then((r) => {
-        console.log("get all rest", r)
         let newRestaurants = [];
         for (let i = 0; i < r.length; i++) {
           newRestaurants.push(r[i]);
@@ -177,24 +160,10 @@ function App() {
           newRestaurants[i]["ImgUrl"] = restaurantImages[i]?.urls?.regular;
         }
         setSearchRestaurants(newRestaurants);
-        // console.log("getsearches", searchRestaurants);
       });
     }
 
   }, [searchResult, searchResultCategory]);
-
-  // useEffect(() => {
-  //   let newRestaurants = restaurants;
-
-  //   if (restaurantImages) {
-  //     for (let i = 0; i < restaurants.length; i++) {
-  //       console.log(restaurantImages[i]["urls"]["regular"]);
-  //       newRestaurants[i]["ImgUrl"] = restaurantImages[i]["urls"]["regular"];
-  //     }
-  //   }
-
-  //   setRestaurants(newRestaurants);
-  // }, [restaurantImages, restaurants]);
 
   useEffect(() => {
     let newRestaurants = restaurants;

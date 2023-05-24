@@ -19,7 +19,6 @@ const center = {
 
 function Result(props) {
    let search = props.search;
-   console.log("results page", props);
    let restaurants;
    if (props.restaurants) {
       restaurants = props.restaurants.map((restaurant) => (
@@ -28,10 +27,9 @@ function Result(props) {
    }
 
    let markerPositions = [];
-   let markers;
 
    for (let i = 0; i < props.restaurants.length; i++) {
-      let coordinates = props.restaurants[i]?.item?.RestaurantCoordinates;
+      let coordinates = props.restaurants[i]?.RestaurantCoordinates;
       if (coordinates) {
          coordinates = coordinates.split(",");
          coordinates[0] = Number(coordinates[0]);
@@ -43,13 +41,11 @@ function Result(props) {
       }
    }
 
-   if (markerPositions.length > 0) {
-      markers = markerPositions.map((position) => (
+   let markers = markerPositions.map((position) => (
          <Marker
             position={position}
          />
       ))
-   }
 
    // Google Maps Implementation
    const { isLoaded } = useJsApiLoader({
@@ -63,7 +59,6 @@ function Result(props) {
       // This is just an example of getting and using the map instance!!! don't just blindly copy!
       const bounds = new window.google.maps.LatLngBounds(center);
       map.fitBounds(bounds);
-      // console.log("MAP", map)
       map.setZoom = 14;
       setMap(map)
 

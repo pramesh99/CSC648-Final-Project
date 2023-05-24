@@ -7,9 +7,6 @@ import styles from "./RestaurantCard.module.css";
 import { Link } from "react-router-dom";
 
 function RestaurantCard(props) {
-   // console.log(props?.restaurant);
-   // console.log(props);
-
    function setSelectedRestaurant(restaurant) {
       props.setSelectedRestaurant(restaurant)
    }

@@ -31,7 +31,6 @@ async function getOrders(setCurrentOrders, setFinishedOrders, customerID) {
                finishedOrders.push(resData[i]);
             }
          }
-         console.log("currentOrders", currentOrders);
          setCurrentOrders(currentOrders);
          setFinishedOrders(finishedOrders);
       }
@@ -44,7 +43,6 @@ function UserDashboard(props) {
    let userID = props.userID;
    let userName = props.userName;
    let restaurantID = props.RestaurantID;
-   console.log(props);
 
    const [currentOrders, setCurrentOrders] = useState([]);
 

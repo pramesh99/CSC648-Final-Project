@@ -31,7 +31,6 @@ async function getOrders(setIncomingOrders, setActiveOrders, restID) {
                activeOrders.push(resData[i]);
             }
          }
-         console.log("incomingOrders", incomingOrders);
          setIncomingOrders(incomingOrders);
          setActiveOrders(activeOrders);
       }
@@ -45,7 +44,6 @@ function RestaurantDashboard(props) {
    let userName = props.userName;
    let userType = props.userType;
    let restaurantID = props.RestaurantID;
-   console.log(props);
    let orders;
    let renderOrderItems;
 
@@ -54,8 +52,6 @@ function RestaurantDashboard(props) {
    const [activeOrders, setActiveOrders] = useState([]);
 
    useEffect(() => {
-      console.log(props);
-
       if(restaurantID) {
          getOrders(setIncomingOrders, setActiveOrders, restaurantID);
       }

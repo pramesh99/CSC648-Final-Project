@@ -15,11 +15,8 @@ import Delivery from '../../components/delivery/Delivery';
 import LoginRegisterModal from '../../components/loginRegisterModal/LoginRegisterModal';
 
 async function submitOrder(orderPrice, location, restaurantID, userName, setModalShow, selectedItems, userID, setModalText) {
-   console.log("submit order login username", userName)
    try {
       if (userName && location && selectedItems.length > 0) {
-         // console.log("submitted order");
-         console.log(userName, location)
          let resData = [];
          const response = await fetch(`http://34.82.124.237:3001/api/submit/customerOrder`, {
             method: 'POST',
@@ -70,7 +67,6 @@ async function getSearchRestaurants(id, setMenu) {
    }
    await fetch(`http://34.82.124.237:3001/api/restaurantMenu${id}`).then((r) => r.json()).then((data) => {
       resData = data;
-      console.log("MENU: ", resData)
       setMenu(resData);
    }
    )
@@ -78,11 +74,8 @@ async function getSearchRestaurants(id, setMenu) {
 }
 
 function Restaurant(props) {
-   
-   // console.log("selected restaurant", props.restaurant);
    let userName = props?.userName;
    let userID = props?.userID;
-   console.log("restaurant order login username", props)
 
    const [modalShow, setModalShow] = React.useState(false);
    const [modalText, setModalText] = React.useState('Please login to order');
@@ -107,7 +100,6 @@ function Restaurant(props) {
 
    useEffect(() => {
       let restaurant = props.restaurant;
-      console.log("restaurant", restaurant.RestaurantID)
       if (restaurant.RestaurantName) {
          getSearchRestaurants(restaurant.RestaurantName, setMenu)
       }

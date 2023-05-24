@@ -40,13 +40,11 @@ function Navbar(props) {
 
    const handleChange = (event) => {
       setSearch(event.target.value);
-      // console.log(event.target.value)
    };
 
    const handleClick = () => {
       setSearchResult(search);
       setSearchResultCategory(category);
-      console.log(search, category);
       navigate("/result");
    };
 
@@ -54,7 +52,6 @@ function Navbar(props) {
       const response = await fetch("http://34.82.124.237:3001/api/allCuisines")
       if(response.ok) {
          const data = await response.json();
-         console.log("ALL CATEGORIES", data);
          setCategories(data);
       } else {
          setCategories([{CuisineName: 'American'}, {CuisineName: 'Chinese'}, {CuisineName: 'Indian'}, {CuisineName: 'Italian'}])

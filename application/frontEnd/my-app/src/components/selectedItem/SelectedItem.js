@@ -21,8 +21,6 @@ function SelectedItem(props) {
       setAmount(newSelectedItems[props.name].amount);
       setSelectedItems(newSelectedItems);
       updateTotalCost();
-
-      // console.log("INCREMENTED ITEM AMOUNT", newSelectedItems[props.name].amount);
    }
 
    let decrementItem = () => {
@@ -30,8 +28,6 @@ function SelectedItem(props) {
    
       if (props.name in newSelectedItems) {
          newSelectedItems[props.name].amount -= 1;
-         // console.log("DECREMENTED", newSelectedItems[props.name].amount);
-
          if (newSelectedItems[props.name].amount <= 0) {
             removeItem();
          } else {
