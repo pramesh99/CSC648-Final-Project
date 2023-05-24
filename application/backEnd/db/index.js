@@ -163,7 +163,7 @@ DB.RestaurantReg = () => {
 
 DB.getSFSUCustomer = (email) => {
     return new Promise ((resolve, reject) => {
-        pool.query('SELECT SFSUCustomerPassword FROM SFSUCustomer WHERE SFSUCustomerEmail = ?',
+        pool.query('SELECT * FROM SFSUCustomer WHERE SFSUCustomerEmail = ?',
         [email],
         (err, results) => {
             if (err) {
