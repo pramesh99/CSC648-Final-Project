@@ -13,6 +13,7 @@ import Button from 'react-bootstrap/Button';
 import Pickup from '../../components/pickup/Pickup';
 import Delivery from '../../components/delivery/Delivery';
 import LoginRegisterModal from '../../components/loginRegisterModal/LoginRegisterModal';
+import { useParams } from 'react-router-dom';
 
 async function submitOrder(orderPrice, location, restaurantID, userName, setModalShow, selectedItems, userID, setModalText) {
    try {
@@ -74,6 +75,7 @@ async function getSearchRestaurants(id, setMenu) {
 }
 
 function Restaurant(props) {
+
    let userName = props?.userName;
    let userID = props?.userID;
 
@@ -102,6 +104,9 @@ function Restaurant(props) {
       let restaurant = props.restaurant;
       if (restaurant.RestaurantName) {
          getSearchRestaurants(restaurant.RestaurantName, setMenu)
+      } else {
+         let searchRestaurant =  window.location.pathname;
+         getSearchRestaurants(searchRestaurant.slice(1), setMenu)
       }
    }, [])
 
