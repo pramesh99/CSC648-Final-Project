@@ -8,7 +8,6 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 function LoginRegisterModal(props) {
-   console.log(props)
    let text = props?.text;
    return (
       <Modal

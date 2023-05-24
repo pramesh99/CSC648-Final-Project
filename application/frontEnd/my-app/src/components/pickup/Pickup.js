@@ -56,7 +56,11 @@ function Pickup(props) {
                setChavezPickup(false);
                setUPNPickup(false);
                setMashoufPickup(false);
-               setLocation(options[0]);
+               if (!e.target.checked) {
+                  setLocation('');
+               } else {
+                  setLocation(options[0]);
+               }
             }}
          >
             {options[0]}
@@ -73,7 +77,11 @@ function Pickup(props) {
                setChavezPickup(!chavezPickup);
                setUPNPickup(false);
                setMashoufPickup(false);
-               setLocation(options[1]);
+               if (!e.target.checked) {
+                  setLocation('');
+               } else {
+                  setLocation(options[1]);
+               }
             }}
          >
             {options[1]}
@@ -90,7 +98,11 @@ function Pickup(props) {
                setChavezPickup(false);
                setUPNPickup(!upnPickup);
                setMashoufPickup(false);
-               setLocation(options[2]);
+               if (!e.target.checked) {
+                  setLocation('');
+               } else {
+                  setLocation(options[2]);
+               }
             }}
          >
             {options[2]}
@@ -107,7 +119,11 @@ function Pickup(props) {
                setChavezPickup(false);
                setUPNPickup(false);
                setMashoufPickup(!mashoufPickup);
-               setLocation(options[3]);
+               if (!e.target.checked) {
+                  setLocation('');
+               } else {
+                  setLocation(options[3]);
+               }
             }}
          >
             {options[3]}

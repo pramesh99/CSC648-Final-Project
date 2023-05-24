@@ -14,35 +14,48 @@ import Pickup from '../../components/pickup/Pickup';
 import Delivery from '../../components/delivery/Delivery';
 import LoginRegisterModal from '../../components/loginRegisterModal/LoginRegisterModal';
 
-async function submitOrder(orderPrice, location, restaurantID, userName, setModalShow, selectedItems, userID) {
-   console.log("submit order login username", userName)
-   if (userName) {
-      // console.log("submitted order");
-      // console.log(selectedItems)
-      let resData = [];
-      fetch(`http://34.82.124.237:3001/api/submit/customerOrder`, {
-         method: 'POST',
-         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-         },
-         body: JSON.stringify({
-            CustomerID: userID,
-            DriverID: 0,
-            RestaurantID: restaurantID,
-            OrderTime: "5 minutes",
-            DeliveryTime: "5 minutes",
-            DeliveryAddress: location,
-            AdditionalNotes: "none",
-            OrderDiscounts: 0,
-            OrderPrice: Number(orderPrice),
-            OrderStatus: 1,
+async function submitOrder(orderPrice, location, restaurantID, userName, setModalShow, selectedItems, userID, setModalText) {
+   try {
+      if (userName && location && selectedItems.length > 0) {
+         let resData = [];
+         const response = await fetch(`http://34.82.124.237:3001/api/submit/customerOrder`, {
+            method: 'POST',
+            headers: {
+               'Accept': 'application/json',
+               'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+               CustomerID: userID,
+               DriverID: 1,
+               RestaurantID: restaurantID,
+               OrderTime: "5 minutes",
+               DeliveryTime: "5 minutes",
+               DeliveryAddress: location,
+               AdditionalNotes: "none",
+               OrderDiscounts: 0,
+               OrderPrice: Number(orderPrice),
+               OrderStatus: 1,
+            })
          })
-      })
-         .then(response => response.json())
-         .then(response => console.log(JSON.stringify(response)))
-      return resData;
-   } else {
+         if(response.ok) { 
+            setModalText("Order Submitted");
+            setModalShow(true);
+         } else {
+            throw new Error('Order Failed');
+         }
+         return resData;
+      } else if(!userName){
+         setModalText("Please Login To Order");
+         setModalShow(true);
+      } else if(!location) {
+         setModalText("Please set a location");
+         setModalShow(true);
+      } else if(!selectedItems.length) {
+         setModalText("Please add your order");
+         setModalShow(true);
+      }
+   } catch (error) {
+      setModalText("Order Failed To Submit");
       setModalShow(true);
    }
 }
@@ -54,7 +67,6 @@ async function getSearchRestaurants(id, setMenu) {
    }
    await fetch(`http://34.82.124.237:3001/api/restaurantMenu${id}`).then((r) => r.json()).then((data) => {
       resData = data;
-      console.log("MENU: ", resData)
       setMenu(resData);
    }
    )
@@ -62,11 +74,8 @@ async function getSearchRestaurants(id, setMenu) {
 }
 
 function Restaurant(props) {
-   
-   // console.log("selected restaurant", props.restaurant);
    let userName = props?.userName;
    let userID = props?.userID;
-   console.log("restaurant order login username", props)
 
    const [modalShow, setModalShow] = React.useState(false);
    const [modalText, setModalText] = React.useState('Please login to order');
@@ -91,7 +100,6 @@ function Restaurant(props) {
 
    useEffect(() => {
       let restaurant = props.restaurant;
-      console.log("restaurant", restaurant.RestaurantID)
       if (restaurant.RestaurantName) {
          getSearchRestaurants(restaurant.RestaurantName, setMenu)
       }
@@ -210,7 +218,7 @@ function Restaurant(props) {
                      </Card.Text>
                   </Card.Body>
                </Card>
-               <Button variant="secondary" size="sm" onClick={() => submitOrder(total, location, restaurant.RestaurantID, userName, setModalShow, selectedItems, userID)}>Order</Button>
+               <Button variant="secondary" size="sm" onClick={() => submitOrder(total, location, restaurant.RestaurantID, userName, setModalShow, selectedItems, userID, setModalText)}>Order</Button>
             </div>
          </div>
          <LoginRegisterModal

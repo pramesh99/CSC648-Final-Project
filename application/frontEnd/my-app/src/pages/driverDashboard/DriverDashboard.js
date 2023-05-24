@@ -35,7 +35,6 @@ async function getOrders(setIncomingOrders, setActiveOrders, setDeliveredOrders,
                deliveredOrders.push(resData[i]);
             }
          }
-         console.log("incomingOrders", incomingOrders);
          setIncomingOrders(incomingOrders);
          setActiveOrders(activeOrders);
          setDeliveredOrders(deliveredOrders);

@@ -118,7 +118,6 @@ const Register = () => {
             })
             if (response.ok) {
                 const data = await response.json();
-                console.log(data)
                 setModalText("Registration Successful");
                 setModalShow(true);
             } else {

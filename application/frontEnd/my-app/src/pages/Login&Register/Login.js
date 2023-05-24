@@ -91,8 +91,6 @@ const Login = (props) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
 
-    // console.log(values)
-
     return (
         <div className={styles["Login"]}>
             <form onSubmit={handleSubmit}>

@@ -14,7 +14,6 @@ function updateOrderStatus(orderID, statusNum) {
    })
      .then(response => response.json())
      .then(data => {
-       console.log(data);
      })
      .catch(error => {
        console.error(error);
@@ -37,7 +36,6 @@ function MenuItem(props) {
          }
          setSelectedItems(newSelectedItems);
          updateOrderStatus(props.id, 2);
-         // console.log("ADDED NEW ITEM", newSelectedItems)
       }
    }
 
@@ -50,7 +48,6 @@ function MenuItem(props) {
          </div>
          <div id={styles["menu-buttons-container"]}>
             <Button onClick={() => addItem()} variant="outline-secondary" id={styles["menu-buttons-add"]} className={styles["menu-buttons"]}>Add</Button>{' '}
-            {/* <Button onClick={() => removeItem()} variant="outline-secondary" className={styles["menu-buttons"]}>Remove</Button>{' '} */}
          </div>
       </div>
    )
